@@ -44,18 +44,20 @@ public class ListCommand implements BbsCommandImpl {
 		HttpServletRequest req = (HttpServletRequest)paramMap.get("req");
 		
 		
-		
-		
-		//검색어 처리 
-		 String addQueryString = ""; //request내장객체를 통해 폼값을 받아온다. String
-		 searchColumn = req.getParameter("searchColumn"); String searchWord =
-		 req.getParameter("searchWord"); if(searchWord!=null) { //검색어가 있는 경우 쿼리스트링 추가
-		 addQueryString = String.format("searchColumn=%s"+"&searchWord=%s&",
-		 searchColumn, searchWord);
-		  
-		 //DAO로 전달할 데이터를 Map컬렉션에 저장 paramMap.put("Column", searchColumn);
-		 paramMap.put("Word", searchWord); }
-		 
+		//검색어 처리
+		String addQueryString = "";
+		//request내장객체를 통해 폼값을 받아온다.
+		String searchColumn = req.getParameter("searchColumn");
+		String searchWord = req.getParameter("searchWord");
+		if(searchWord!=null)
+		{
+			//검색어가 있는 경우 쿼리스트링 추가
+			addQueryString = String.format("searchColumn=%s"+"&searchWord=%s&", searchColumn, searchWord);
+			
+			//DAO로 전달할 데이터를 Map컬렉션에 저장
+			paramMap.put("Column", searchColumn);
+			paramMap.put("Word", searchWord);
+		}
 		
 		//전체 게시물 수 카운트 하기
 		int totalRecordCount = dao.getTotalCount(paramMap);
@@ -64,11 +66,11 @@ public class ListCommand implements BbsCommandImpl {
 		
 		//Environment객체를 통한 properties파일을 읽어온다.
 		int pageSize = Integer.parseInt(
-				EnvFileReader.getValue("SpringBbsInit.properties",
-						"zipcock.pageSize"));
+				EnvFileReader.getValue("MboardInit.properties",
+						"mboard.pageSize"));
 		int blockPage = Integer.parseInt(
-				EnvFileReader.getValue("SpringBbsInit.properties",
-						"zipcock.blockPage"));
+				EnvFileReader.getValue("MboardInit.properties",
+						"mboard.blockPage"));
 		//전체페이지수를 계산
 		int totalPage = (int)Math.ceil((double)totalRecordCount/pageSize);
 		
@@ -83,7 +85,7 @@ public class ListCommand implements BbsCommandImpl {
 		
 		paramMap.put("start", start);
 		paramMap.put("end", end);
-		 
+		
 		/***********페이징 추가 코드 end******************/
 		
 		//출력할 게시물을 select한 후 반환받음(페이징X)
@@ -91,7 +93,7 @@ public class ListCommand implements BbsCommandImpl {
 		
 		//페이징 적용된 쿼리문을 통한 select(페이징O)
 		ArrayList<MBoardDTO> listRows = dao.listPage(paramMap);
-		 
+		
 		//목록에 출력할 게시물의 가상번호 계산후 부여하기
 		int virtualNum = 0;
 		int countNum = 0;
@@ -111,16 +113,17 @@ public class ListCommand implements BbsCommandImpl {
 		}
 		//위에서 처리한 목록의 모든 처리결과를 Model객체에 저장한다.
 		model.addAttribute("listRows", listRows);
+		 
 		/*********페이징 처리 코드 Start************/
 		String pagingImg = PagingUtil.pagingImg(totalRecordCount,
 				pageSize, blockPage, nowPage,
-				req.getContextPath()+"/MboardList.do?");
-		req.getContextPath()+"/MboardList.do?"+addQueryString);
+				req.getContextPath()+"/MboardList.do?"+addQueryString);
 		
 		model.addAttribute("pagingImg", pagingImg);
 		model.addAttribute("totalPage", totalPage);//전체페이지 수
 		model.addAttribute("nowPage", nowPage);//현제페이지 번호
 		/*********페이징 처리 코드 End************/
+
 		
 		
 		//JDBCTemplate을 사용할때는 자원반납은 하지않는다.

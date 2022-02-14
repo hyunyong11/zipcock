@@ -14,12 +14,12 @@
 	
 	<!-- 검색폼 -->
 	<form method="get">
-	<table border="1" width="90%">
+	<table border="1" width="100%">
 	<tr>
 		<td align="center">
 			<select name="searchColumn">
-				<option value="title">제목</option>
-				<option value="contents">내용</option>
+				<option value="mboard_title">제목</option>
+				<option value="mboard_content">내용</option>
 			</select>
 			<input type="text" name="searchWord" />
 			<input type="submit" value="검색하기" />
@@ -29,17 +29,16 @@
 	</form>
 	
 	<!-- 글쓰기버튼 -->
-	<table border="1" width="90%">
+	<table border="1" width="100%">
 		<tr>
-			<td align="right">
-				<button type="button" 
-				onclick="location.href='./write.do';">글쓰기</button>
+			<td align="center">
+				공지사항
 			</td>
 		</tr>
 	</table>
 	
 	<!-- table>tr*2>td*5 -->
-	<table border="1" width="90%">
+	<table border="1" width="100%">
 		<tr>
 			<th width="10%">번호</th>
 			<th width="*">제목</th>
@@ -63,12 +62,12 @@
 					<tr>
 						<td class="text-center">${row.virtualNum }</td>
 						<td class="text-left">
-							<a href="./view.do?idx=${row.qboard_num}
-								&nowPage=${nowPage}">${row.qboard_title}</a>
+							<a href="./view.do?idx=${row.mboard_num}
+								&nowPage=${nowPage}">${row.mboard_title}</a>
 						</td>
-						<td class="text-center">${row.qboard_name }</td>
-						<td class="text-center">${row.qboard_date }</td>
-						<td class="text-center">${row.qboard_count }</td>
+						<td class="text-center">${row.mboard_id }</td>
+						<td class="text-center">${row.mboard_date }</td>
+						<td class="text-center">${row.mboard_count }</td>
 						<!-- <td class="text-center">--</td> -->
 					</tr>
 					<!-- 리스트반복끝 -->
@@ -76,7 +75,7 @@
 			</c:otherwise>
 		</c:choose>
 	<!-- 페이지 번호 -->
-	<table border="1" width="90%">
+	<table border="1" width="100%">
 		<tr>
 			<td align="center">
 				${pagingImg }

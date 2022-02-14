@@ -77,11 +77,34 @@ public class MBoardDAO extends JDBConnect{
 		return totalCount;
 	}
 	
+	//게시판 리스트 가져오기 (페이지 처리 없음)
+		public ArrayList<MBoardDTO> list(Map<String, Object> map){
+			
+		String sql = " SELECT * FROM mboard ";
+			if(map.get("Word")!=null) {
+				sql +=" WHERE "+map.get("Column")+" "
+					+ " LIKE '%"+map.get("Word")+"%' ";
+			}
+			sql += " ORDER BY mboard_num DESC";
+		
+		/*
+		RowMapper가 select를 통해 얻어온 ResultSet을 DTO객체에
+		저장하고, List컬렉션에 적재하여 반환한다. 그러므로 DAO에서
+		개발자가 반복적으로 하던 작업을 자동으로 처리해 준다.
+		*/
+		return (ArrayList<MBoardDTO>)
+				template.query(sql, new BeanPropertyRowMapper<MBoardDTO>(MBoardDTO.class));
+		}
+	
+	
 	//게시물의 갯수 카운트
 	public int getTotalCount(Map<String, Object> map)
 	{
 		String sql = "SELECT COUNT(*) FROM mboard";
-		
+		if(map.get("Word")!=null) {
+			sql +=" WHERE "+map.get("Column")+" "
+				+ "		Like '%"+map.get("Word")+"%' ";
+		}
 		
 		//쿼리문에서 count(*)을 통해 반환되는 값을 정수형태로 가져온다.
 		return template.queryForObject(sql, Integer.class);

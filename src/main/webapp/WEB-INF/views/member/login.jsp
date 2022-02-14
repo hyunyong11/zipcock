@@ -92,6 +92,7 @@ function validateForm(form) {
 			<!-- 로그인되었을 때의 페이지 출력 -->
 			<%
 			session.setAttribute("UserId", session.getAttribute("siteUserInfo.member_id"));
+			if(!(session.getAttribute("UserStatus").equals(0))){
 			%>
 			
 				<!-- 로그인에 성공할 경우 MemberDTO 객체를 통해 반환 받아 세션영역에
@@ -100,7 +101,7 @@ function validateForm(form) {
 				<h4><b>${sessionScope.siteUserInfo.member_name}</b>님 어서오세요!</h4>
 				<br /><br />
 				<button class="btn btn-success" 
-					onclick="location.href='';">
+					onclick="location.href='myPage.do';">
 					마이페이지</button>
 				<button class="btn btn-danger" 
 					onclick="location.href='logout.do';">
@@ -108,6 +109,27 @@ function validateForm(form) {
 				<button class="btn btn-primary" 
 					onclick="location.href='zipcock.do';">
 					메인으로</button>
+				</div>
+			<%
+			}
+			else if((session.getAttribute("UserStatus").equals(0))){
+			%>
+				<div style="text-align: center;">
+				<h4><b>${sessionScope.siteUserInfo.member_name}</b>님 어서오세요!</h4>
+				<br /><br />
+				<button class="btn btn-success" 
+					onclick="location.href='./resources/adminpage/index.jsp';">
+					관리자모드</button>
+				<button class="btn btn-danger" 
+					onclick="location.href='logout.do';">
+					로그아웃</button>
+				<button class="btn btn-primary" 
+					onclick="location.href='zipcock.do';">
+					메인으로</button>
+				</div>
+			<%
+			}
+			%>
 				</div>
 			</c:otherwise>
 			</c:choose>

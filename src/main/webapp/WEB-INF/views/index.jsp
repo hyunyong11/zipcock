@@ -82,7 +82,7 @@
                         </li>
                         
                         <!-- 로그인 유무에 따른 join logout -->
-                        <c:choose>
+                         <c:choose>
                         <c:when test="${ empty sessionScope.siteUserInfo }">
                         <li>
                             <a class="page-scroll" href="memberLogin.do">Login</a>
@@ -98,6 +98,15 @@
                         <li>
                             <a class="page-scroll" href="memberRegist.do" target="_blank">Join</a>
                         </li>
+                        
+                        <!-- 권한이 어드민일때만 어드민 출력 -->
+                        <c:choose>
+                       	<c:when test="${sessionScope.siteUserInfo.member_status eq 0 }">
+                        <li>
+                            <a class="page-scroll" href="./resources/adminpage/index.jsp" target="_blank">Admin</a>
+                        </li>
+                        </c:when>
+                        </c:choose>
                         
                         <!-- 권한이 어드민일때만 어드민 출력 -->
                         <c:choose>
@@ -786,5 +795,46 @@
 
         });
     </script>
+    <!-- 챗봇 코드 -->
+    <script>
+	  (function() {
+	    var w = window;
+	    if (w.ChannelIO) {
+	      return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
+	    }
+	    var ch = function() {
+	      ch.c(arguments);
+	    };
+	    ch.q = [];
+	    ch.c = function(args) {
+	      ch.q.push(args);
+	    };
+	    w.ChannelIO = ch;
+	    function l() {
+	      if (w.ChannelIOInitialized) {
+	        return;
+	      }
+	      w.ChannelIOInitialized = true;
+	      var s = document.createElement('script');
+	      s.type = 'text/javascript';
+	      s.async = true;
+	      s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
+	      s.charset = 'UTF-8';
+	      var x = document.getElementsByTagName('script')[0];
+	      x.parentNode.insertBefore(s, x);
+	    }
+	    if (document.readyState === 'complete') {
+	      l();
+	    } else if (window.attachEvent) {
+	      window.attachEvent('onload', l);
+	    } else {
+	      window.addEventListener('DOMContentLoaded', l, false);
+	      window.addEventListener('load', l, false);
+	    }
+	  })();
+	  ChannelIO('boot', {
+	    "pluginKey": "9145fc6d-f292-46af-b22a-2e630b92ab68"
+	  });
+	</script>
 </body>
 </html>

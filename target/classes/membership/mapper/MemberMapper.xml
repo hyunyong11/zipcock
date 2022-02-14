@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="membership.MemberImpl">
+	
+	<insert id="member">
+		INSERT INTO member (member_id, member_pass, member_name, member_email,
+				member_age, member_sex, member_phone)
+			VALUES (#{member_id}, #{member_pass}, #{member_name}, #{member_email}, 
+						#{member_age}, #{member_sex}, #{member_phone})
+	</insert>
+	
+	<insert id="helper">
+		INSERT INTO member (member_status, member_id, member_pass, member_name, member_email,
+				member_age, member_sex, member_phone, 
+				member_bank, member_account, member_vehicle,
+				member_introduce
+				<if test="member_ofile != null and member_sfile !=null">
+				, member_ofile, member_sfile
+				</if> 
+				)
+				
+			VALUES (#{member_status}, #{member_id}, #{member_pass}, #{member_name}, #{member_email}, 
+						#{member_age}, #{member_sex}, #{member_phone}, 
+						#{member_bank}, #{member_account}, #{member_vehicle},
+						#{member_introduce}
+						<if test="member_ofile != null and member_sfile !=null">
+						 , #{member_ofile}, #{member_sfile}
+						</if>
+						 )
+	</insert>
+	
+	<select id="idCheck" resultType="boolean">
+		SELECT member_id FROM member WHERE member_id = #{member_id}
+	</select>
+	
+	<select id="login" resultType="membership.MemberDTO">
+		SELECT * FROM member WHERE member_id=#{0} and member_pass=#{1}
+	</select>
+
+	
+</mapper>
+

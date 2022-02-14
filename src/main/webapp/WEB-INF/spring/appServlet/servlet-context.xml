@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<annotation-driven />
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/resources/**" location="/resources/" />
+	
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+	
+	<context:component-scan base-package="com.kosmo.zipcock" />
+	<context:component-scan base-package="autoscan" />
+	<context:component-scan base-package="board" />
+	
+	
+	<!-- 파일 업로드를 위한 빈 생성 -->
+	<beans:bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 업로드할 파일의 최대용량 : 1Mb -->
+		<beans:property name="maxUploadSize" value="52428800"></beans:property>
+		<beans:property name="maxInMemorySize" value="1000000"></beans:property>
+		<beans:property name="defaultEncoding" value="utf-8"></beans:property>
+	</beans:bean>
+	<!-- 파일 다운로드를 위한 빈 생성 -->
+	<beans:bean id="fileDownloadView" class="common.FileDownloadView" />
+	<beans:bean id="fileViewResolver"
+		class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<!-- 업로드할 파일의 최대용량 : 1Mb -->
+		<beans:property name="order" value="0" />
+	</beans:bean>
+	<beans:bean name="template" 
+      class="org.springframework.jdbc.core.JdbcTemplate">
+      <beans:property name="dataSource" ref="dataSource" />
+   </beans:bean>
+	<beans:bean name="dataSource" 
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<beans:property name="driverClassName" value="oracle.jdbc.OracleDriver" />
+		<beans:property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
+		<beans:property name="username" value="zipcock" />
+		<beans:property name="password" value="1234" />
+	</beans:bean>
+	<beans:bean name="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- 데이터 근원지에 대한 빈 -->
+		<beans:property name="dataSource" ref="dataSource" />
+		<!-- Mybatis에서 사용할 Mapper(매퍼) 파일의 경로 설정 -->
+		<beans:property name="mapperLocations" value="classpath:membership/mapper/*.xml" />
+	</beans:bean>
+	<!-- 생성자를 통해 빈 생성. 우리가 최종적으로 사용할 Mybatis 빈. -->
+	<beans:bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<beans:constructor-arg index="0" ref="sqlSessionFactory" />
+	</beans:bean>
+	
+</beans:beans>

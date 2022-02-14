@@ -1,0 +1,169 @@
+create table member (
+    member_name varchar2(50) not null,
+    member_id varchar2(20) primary key,
+    member_pass varchar2(20) not null,
+    member_email varchar2(50) not null,
+    member_age varchar2(10) not null,
+    member_sex number not null,
+    member_phone varchar2(20) not null,
+    member_missionN number,
+    member_status number default 1 not null,
+    member_bank varchar(50),
+    member_account varchar(50),
+    member_vehicle number,
+    member_introduce varchar2(500),
+    member_ofile varchar2(200),
+    member_sfile varchar2(200),
+    member_review number,
+    member_missionC number,
+    member_point number
+);
+drop table member;
+commit;
+
+--어드민
+insert into member (member_name, member_id, member_pass, member_email,
+member_age, member_sex, member_phone, member_status) VALUES ('어드민', 'admin', '1234', 'tigsnor@naver.com',
+'0', '1', '010-1111-2222', '0');
+
+--일반사용자 남 더미 데이터
+insert into member (member_name, member_id, member_pass, member_email,
+member_age, member_sex, member_phone, member_status) VALUES ('홍길동', 'hong', '1234', 'hong@naver.com',
+'0', '1', '01022223333', '1');
+
+--일반사용자 여 더미 데이터
+insert into member (member_name, member_id, member_pass, member_email,
+member_age, member_sex, member_phone, member_status) VALUES ('심청이', 'sim', '1234', 'sim@naver.com',
+'0', '2', '01033334444', '1');
+
+--헬퍼 더미 데이터
+insert into member 
+(member_name, member_id, member_pass, member_email, member_age, member_sex,
+member_phone,member_status, member_bank, member_account, member_vehicle, member_introduce, member_review
+,member_missionC, member_point)
+values ('헬퍼', 'helper', '1234', 'helper@naver.com', '24', '1',
+'01055556666', 2, '국민은행', '12341241242', '0', '열심히하겠습니다.', '4', '10', '2000');
+
+--블랙리스트사용자 더미 데이터
+insert into member (member_name, member_id, member_pass, member_email,
+member_age, member_sex, member_phone, member_status) VALUES ('블랙', 'black', '1234', 'black@naver.com',
+'0', '1', '01066667777', '3');
+
+commit;
+
+select * from member;
+
+------------------------------------------------------------------------------------------------------------
+create table qboard (
+    qboard_num number primary key,
+    qboard_id varchar2(20) not null,
+    qboard_title varchar2(30) not null,
+    qboard_content varchar2(200) not null,
+    qboard_date date default sysdate not null,
+    qboard_count number default 0 not null
+); 
+drop table qboard;
+
+create sequence qboard_seq
+    increment by 1
+    start with 1
+    minvalue 1
+    nomaxvalue
+    nocycle
+    nocache;
+drop sequence qboard_seq;
+
+insert into qboard
+(qboard_num, qboard_id, qboard_title, qboard_content, qboard_date, qboard_count)
+values (qboard_seq.nextval, '관리자', '이건 큐엔에이', '이건 큐엔에이내용이네', sysdate, 0);
+insert into qboard
+(qboard_num, qboard_id, qboard_title, qboard_content, qboard_date, qboard_count)
+values (qboard_seq.nextval, '관리자', '이건 큐엔에이1', '이건 큐엔에이내용이네', sysdate, 0);
+insert into qboard
+(qboard_num, qboard_id, qboard_title, qboard_content, qboard_date, qboard_count)
+values (qboard_seq.nextval, '관리자', '이건 큐엔에이2', '이건 큐엔에이내용이네', sysdate, 0);
+insert into qboard
+(qboard_num, qboard_id, qboard_title, qboard_content, qboard_date, qboard_count)
+values (qboard_seq.nextval, '관리자', '이건 큐엔에이3', '이건 큐엔에이내용이네', sysdate, 0);
+insert into qboard
+(qboard_num, qboard_id, qboard_title, qboard_content, qboard_date, qboard_count)
+values (qboard_seq.nextval, '관리자', '이건 큐엔에이4', '이건 큐엔에이내용이네', sysdate, 0);
+
+commit;
+
+
+
+------------------------------------------------------------------------------------------------------------
+create table mission (
+    mission_num number primary key not null,
+    mission_id varchar2(20) not null,
+    mission_category number not null,
+    mission_name varchar2(50) not null,
+    mission_content varchar2(200) not null,
+    mission_file varchar2(200),
+    mission_sex number,
+    mission_Hid varchar2(20),
+    mission_start varchar2(50) not null,
+    mission_end varchar2(50) not null,
+    mission_waypoint varchar2(50),
+    mission number not null,
+    mission_reservation varchar2(50),
+    mission_time varchar(20) not null,
+    mission_cost number not null,
+    mission_status number not null 
+);
+
+insert into mission 
+(mission_num, mission_id, mission_category, mission_name, mission_content,
+mission_start, mission_end, mission, mission_time, mission_cost, mission_status)
+values ('1', 'test1', '0', '배달', '즉시(10~20)분', '출발좌표', '도착좌표', '1', '1', '4000', '0');
+
+insert into mission 
+(mission_num, mission_id, mission_category, mission_name, mission_content,
+mission_start, mission_end, mission, mission_time, mission_cost, mission_status)
+values ('2', 'test2', '1', '청소', '예약(20~30)', '출발좌표', '도착좌표', '2', '2', '4000', '1');
+
+insert into mission 
+(mission_num, mission_id, mission_category, mission_name, mission_content,
+mission_start, mission_end, mission, mission_time, mission_cost, mission_status)
+values ('3', 'test3', '2', '설치', '즉시(10분이내)', '출발좌표', '도착좌표', '1', '0', '4000', '3');
+
+commit;
+select * from mission;
+
+----------------------------------------------------------------------------------------------
+create table mboard (
+    mboard_num number primary key,
+    mboard_id varchar2(20) not null,
+    mboard_title varchar2(30) not null,
+    mboard_content varchar2(200) not null,
+    mboard_date date default sysdate not null,
+    mboard_count number default 0 not null
+); 
+
+create sequence mboard_seq
+    increment by 1
+    start with 1
+    minvalue 1
+    nomaxvalue
+    nocycle
+    nocache; 
+
+insert into mboard
+(mboard_num, mboard_id, mboard_title, mboard_content, mboard_date, mboard_count)
+values (mboard_seq.nextval, '관리자', '이건 공지사항', '이건공지사항내용이네', sysdate, 0);
+insert into mboard
+(mboard_num, mboard_id, mboard_title, mboard_content, mboard_date, mboard_count)
+values (mboard_seq.nextval, '관리자1', '이건 공지사항1', '이건공지사항내용이네1', sysdate, 0);
+insert into mboard
+(mboard_num, mboard_id, mboard_title, mboard_content, mboard_date, mboard_count)
+values (mboard_seq.nextval, '관리자2', '이건 공지사항2', '이건공지사항내용이네2', sysdate, 0);
+insert into mboard
+(mboard_num, mboard_id, mboard_title, mboard_content, mboard_date, mboard_count)
+values (mboard_seq.nextval, '관리자3', '이건 공지사항3', '이건공지사항내용이네3', sysdate, 0);
+insert into mboard
+(mboard_num, mboard_id, mboard_title, mboard_content, mboard_date, mboard_count)
+values (mboard_seq.nextval, '관리자4', '이건 공지사항4', '이건공지사항내용이네4', sysdate, 0);
+
+commit;
+select * from mboard;

@@ -82,30 +82,35 @@
                         </li>
                         
                         <!-- 로그인 유무에 따른 join logout -->
-                         <c:choose>
+                        <c:choose>
                         <c:when test="${ empty sessionScope.siteUserInfo }">
                         <li>
                             <a class="page-scroll" href="memberLogin.do">Login</a>
+                        </li>
+                         <li>
+                            <a class="page-scroll" href="memberRegist.do">Join</a>
+                        </li>
+                        <!-- 사용자로 로그인시 헬퍼 회원가입 가능하도록 -->
+                        </c:when>
+                       	<c:when test="${sessionScope.siteUserInfo.member_status eq 1 }">
+                       	<li>
+                            <a class="page-scroll" href="memberRegist.do">Join</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="logout.do">Logout</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="myPage.do">MyPage</a>
                         </li>
                         </c:when>
                         <c:otherwise>
                         <li>
                             <a class="page-scroll" href="logout.do">Logout</a>
                         </li>
+                        <li>
+                            <a class="page-scroll" href="myPage.do">MyPage</a>
+                        </li>
                         </c:otherwise>
-                        </c:choose>
-                        
-                        <li>
-                            <a class="page-scroll" href="memberRegist.do" target="_blank">Join</a>
-                        </li>
-                        
-                        <!-- 권한이 어드민일때만 어드민 출력 -->
-                        <c:choose>
-                       	<c:when test="${sessionScope.siteUserInfo.member_status eq 0 }">
-                        <li>
-                            <a class="page-scroll" href="./resources/adminpage/index.jsp" target="_blank">Admin</a>
-                        </li>
-                        </c:when>
                         </c:choose>
                         
                         <!-- 권한이 어드민일때만 어드민 출력 -->

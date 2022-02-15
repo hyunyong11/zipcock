@@ -44,7 +44,7 @@
 		    return false;
 		}
 		form.method = "post";
-		form.action = "FindProcess.do"; 
+		form.action = "findId.do"; 
 		form.submit(); 
     }
 	

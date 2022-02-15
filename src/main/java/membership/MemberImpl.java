@@ -1,5 +1,6 @@
 package membership;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,4 +18,6 @@ public interface MemberImpl {
 	//로그인
 	public MemberDTO login (String id, String pass);
 	
+	//아이디찾기
+	public MemberDTO findId (String name, String email);
 }

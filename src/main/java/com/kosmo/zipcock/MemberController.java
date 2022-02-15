@@ -1,13 +1,16 @@
 package com.kosmo.zipcock;
 
+import java.io.Console;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.servlet.jsp.JspWriter;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +18,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -28,11 +33,9 @@ public class MemberController {
 	
 	private SqlSession sqlSession;
 	
-	
 	@Autowired
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
-		
 	}
 	
 	
@@ -139,5 +142,40 @@ public class MemberController {
 		}
 		return mv;
 	}
+	
+	@RequestMapping("/findId.do")
+	@ResponseBody
+	public String findId(@RequestParam HashMap<String, String> param, HttpServletRequest req, JspWriter out ) {
+		
+		String result = "";
+		
+//		String member_name = req.getParameter("name"); 
+//		String member_email =
+//				req.getParameter("email_1") +"@" + req.getParameter("email_2");
+		 
+		String member_name = param.get("name");
+		String member_email = param.get("email_1")+"@"+param.get("email_2");
+
+		/* result = */
+				MemberDTO dto 
+				 = sqlSession.getMapper(MemberImpl.class).findId(
+						member_name, member_email
+				);
+		
+		System.out.println("dto: "+dto);
+		
+		
+		 if (dto == null) { 
+		 	 // 회원정보가 없는 경우 (정보 불일치 등)
+			 JSFunction.alertBack("회원정보가 없습니다.", out); 
+		 } 
+		 else {
+			 JSFunction.alertLocation("가입된 아이디는 '"+ result +"'입니다.", "memberLogin.do",out); 
+		 }
+		 
+		
+		return result;
+	}
+	
 	
 }

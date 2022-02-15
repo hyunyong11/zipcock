@@ -41,6 +41,10 @@
 		SELECT * FROM member WHERE member_id=#{0} and member_pass=#{1}
 	</select>
 
+	<select id="findId" parameterType="java.util.HashMap" resultType="membership.MemberDTO">
+		SELECT member_id FROM member 
+				WHERE member_name=#{0} and member_email=#{1}
+	</select>
 	
 </mapper>
 

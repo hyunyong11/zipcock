@@ -156,13 +156,14 @@ public class MemberController {
 		String member_name = param.get("name");
 		String member_email = param.get("email_1")+"@"+param.get("email_2");
 
-		/* result = */
+		/* result = */ 
 				MemberDTO dto 
 				 = sqlSession.getMapper(MemberImpl.class).findId(
 						member_name, member_email
 				);
 		
 		System.out.println("dto: "+dto);
+		
 		
 		
 		 if (dto == null) { 

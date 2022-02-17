@@ -1,5 +1,7 @@
 package membership;
 
+import java.util.ArrayList;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
@@ -20,4 +22,13 @@ public interface MemberImpl {
 	
 	//아이디찾기
 	public MemberDTO findId (String name, String email);
+	
+	//회원정보 수정(조회)
+	public ArrayList<MemberDTO> getMemberInfo(String id);
+	
+	//회원정보 수정(헬퍼)
+	public void helperMyPage(MemberDTO memberDTO);
+	
+	//회원정보 수정(사용자)
+	public void userMyPage(MemberDTO memberDTO);
 }

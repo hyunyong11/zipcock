@@ -62,4 +62,11 @@ public class MainController {
 		return "member/find_Idpw";
 	}
 	
+	//회원정보 변경시 알림창
+	@RequestMapping("/changeAlert.do")
+	public String changeAlter() {
+		
+		return "member/changeAlert";
+	}
+	
 }

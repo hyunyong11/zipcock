@@ -33,6 +33,7 @@ function joinValidate(form){
 	    return false;
 	}
 	
+	
 	//숫자랑 영문 이외에는 모든 값을 입력할 수 없음
 	var whatType = form.id.value
 	for(var i=0; i<whatType.length; i++){
@@ -70,8 +71,20 @@ function joinValidate(form){
 	    form.email_check.focus();
 	    return false;
 	}
+	
+	if(form.age_check.value == "1") {
+		alert("나이를 입력하세요");
+		form.age_check.focus();
+		return false;
+	}
+	
+	if(form.gender.value == "9") {
+		alert("성별을 입력하세요");
+		form.gender.focus();
+		return false;
+	}
 
-	if(form.phone.value =="" ){
+	if(form.phone.value == ""){
 	    alert("핸드폰번호를 입력하세요");
 	    form.phone.focus();
 	    return false;
@@ -79,6 +92,18 @@ function joinValidate(form){
 	
 	if(form.idDuplication.value != "idCheck"){
 		alert("아이디 중복체크를 해주세요.");
+		return false;
+	}
+	
+	if((form.bank_check.value == "1")) {
+		alert("은행을 선택해주세요");
+		form.bank_check.focus();
+		return false;
+	}
+	
+	if((form.account.value == '')) {
+		alert("계좌번호를 입력해주세요");
+		form.account.focus();
 		return false;
 	}
 }
@@ -99,6 +124,17 @@ function email_input(form){
     	form.email_2.value = domain; 
     	form.email_2.readOnly = true;
     }
+}
+
+function input_bank(frm) {
+	var bank = frm.bank_check.value;
+	
+	if(bank == "1") {
+		frm.member_account.readOnly = true;
+	}
+	else {
+		frm.member_account.readOnly = false;
+	}
 }
 
 //중복확인
@@ -198,7 +234,7 @@ function id_check_person(form){
 						<label for="email">이메일</label>
 					</h3>
 					<span class="box_email"> 
-						<input type="text" id="email_1" class="join_email" maxlength="20" name="member_email" value="">
+						<input type="text" id="email_1" class="join_email" maxlength="20" name="email_1" value="">
 					</span>
 					&nbsp;@
 					<span class="box_email"> 
@@ -242,7 +278,7 @@ function id_check_person(form){
 						<div id="age">
 							<span class="box"> 
 								<select id="age_check" class="sel" name="member_age">
-										<option>나이</option>
+										<option value="1">나이</option>
 										<option value="10대">10대</option>
 										<option value="20대">20대</option>
 										<option value="30대">30대</option>
@@ -260,7 +296,7 @@ function id_check_person(form){
 						<div id="gender">
                             <span class="box gender_code">
                         		<select id="gender" class="sel" name="member_sex">
-                            		<option>성별</option>
+                            		<option value="9">성별</option>
                             		<option value="0">남자</option>
                            			<option value="1">여자</option>
                         		</select>                            
@@ -294,8 +330,8 @@ function id_check_person(form){
 
 						<div id="bank">
 							<span class="box"> 
-							<select id="bank_check" class="sel" name="member_bank">
-									<option>은행선택</option>
+							<select id="bank_check" class="sel" name="member_bank" onchange="input_bank(this.form)">
+									<option value="1">은행선택</option>
 									<option value="기업은행">기업은행</option>
 									<option value="국민은행">국민은행</option>
 									<option value="우리은행">우리은행</option>
@@ -309,6 +345,7 @@ function id_check_person(form){
 						</div>
 					</div>
 				</div>
+				
 				
 				<!-- account -->
 				<div>

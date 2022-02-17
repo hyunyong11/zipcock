@@ -46,5 +46,33 @@
 				WHERE member_name=#{0} and member_email=#{1}
 	</select>
 	
+	<!-- 정보수정 조회 -->
+	<select id="getMemberInfo" resultType="membership.MemberDTO">
+		SELECT * FROM member WHERE member_id=#{0}
+	</select>
+	
+	<!-- 정보수정 (헬퍼) -->
+	<update id="helperMyPage">
+		UPDATE member
+			SET member_email=#{member_email}, member_age=#{member_age}, member_pass=#{member_pass}, member_phone=#{member_phone},	
+				member_bank=#{member_bank}, member_account=#{member_account}, member_vehicle=#{member_vehicle}, 
+				member_introduce=#{member_introduce}
+				<if test="member_ofile != null and member_sfile !=null">
+					, member_ofile=#{member_ofile}, member_sfile=#{member_sfile}
+				</if>
+			
+				
+			WHERE member_id=#{member_id} AND member_status=#{member_status}
+	</update>
+	
+	<!-- 정보수정 (사용자) -->
+	<update id="userMyPage">
+		UPDATE member
+			SET member_email=#{member_email}, member_pass=#{member_pass}
+				, member_age=#{member_age}, member_phone=#{member_phone}
+			
+			WHERE member_id=#{member_id} AND member_status=#{member_status}
+	</update>
+	
 </mapper>
 

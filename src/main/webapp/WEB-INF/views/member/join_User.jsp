@@ -70,6 +70,18 @@ function joinValidate(form){
 	    form.email_check.focus();
 	    return false;
 	}
+	
+	if(form.age_check.value == "1") {
+		alert("나이를 입력하세요");
+		form.age_check.focus();
+		return false;
+	}
+	
+	if(form.gender.value == "9") {
+		alert("성별을 입력하세요");
+		form.gender.focus();
+		return false;
+	}
 
 	if(form.phone.value =="" ){
 	    alert("핸드폰번호를 입력하세요");
@@ -239,7 +251,7 @@ function id_check_person(form){
 						<div id="age">
 							<span class="box"> 
 								<select id="age_check" class="sel" name="member_age">
-										<option>나이</option>
+										<option value="1">나이</option>
 										<option value="10대">10대</option>
 										<option value="20대">20대</option>
 										<option value="30대">30대</option>
@@ -257,7 +269,7 @@ function id_check_person(form){
 						<div id="gender">
                             <span class="box gender_code">
                         		<select id="gender" class="sel" name="member_sex">
-                            		<option>성별</option>
+                            		<option value="9">성별</option>
                             		<option value="0">남자</option>
                            			<option value="1">여자</option>
                         		</select>                            

@@ -178,5 +178,113 @@ public class MemberController {
 		return result;
 	}
 	
+	//회원정보 수정(입장)
+			@RequestMapping("/myPage.do")
+			public String change(HttpServletRequest req, Model model, HttpSession session) {
+				
+				
+				String id = (String)session.getAttribute("Id");
+				
+				ArrayList<MemberDTO> memberList = sqlSession.getMapper(MemberImpl.class).getMemberInfo(id);
+				
+				for(MemberDTO dto : memberList) {
+					
+					String email = dto.getMember_email();
+					
+					int idx = email.indexOf("@");
+					
+					String email_1 = email.substring(0, idx);
+					String email_2 = email.substring(idx+1);
+					
+					System.out.println(email_1);
+					
+					model.addAttribute("email_1", email_1);
+					model.addAttribute("email_2", email_2);
+				}
+				
+				model.addAttribute("dto", memberList);
+				
+				
+				return "member/memberInfo";
+			}
+
+				
+	//회원정보수정 (헬퍼)
+	@RequestMapping("/myHelperPageAction.do")
+	public String myHelperPageAction(HttpSession session, MultipartHttpServletRequest req, MemberDTO memberDTO, Model model) {
+		
+		String id = (String)session.getAttribute("Id");
+		int status = (Integer)session.getAttribute("UserStatus");
+		
+		//물리적 경로 얻어오기
+		String path = req.getSession().getServletContext().getRealPath("/resources/upload");
+		MultipartFile mfile = null;
+		// 파일정보를 저장한 Map컬렉션을 2개이상 저장하기 위한 용도의 List컬렉션
+		List<Object> resultList = new ArrayList<Object>();
+		
+		try {
+			
+			//업로드폼의 file속성의 필드를 가져온다. (여기서는 2개임)
+			Iterator itr = req.getFileNames();
+			
+			//갯수만큼 반복
+			while(itr.hasNext()) {
+				//전송된 파일명을 읽어온다.
+				mfile = req.getFile(itr.next().toString());
+				
+				//한글깨짐방지 처리 후 전송된 파일명을 가져온다.
+				String originalName = new String(mfile.getOriginalFilename().getBytes(), "UTF-8");
+				
+				//서버로 전송된 파일이 없다면 파일없이 서버에 저장
+				if("".equals(originalName)) continue;
+					
+				String ext = originalName.substring(originalName.lastIndexOf('.'));
+				//UUID를 통해 생성된 문자열과 확장자를 결합해서 파일명을 완성한다.
+				String saveFileName = getUuid()	+ ext;
+				
+				//물리적 경로에 새롭게 생성된 파일명으로 파일 저장
+				mfile.transferTo(new File(path + File.separator + saveFileName));
+				
+				memberDTO.setMember_ofile(originalName);
+				memberDTO.setMember_sfile(saveFileName);
+				
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		memberDTO.setMember_id(id);
+		memberDTO.setMember_status(status);
+		memberDTO.setMember_email(req.getParameter("email_1") + "@" + req.getParameter("email_2"));
+		
+		sqlSession.getMapper(MemberImpl.class).helperMyPage(memberDTO);
+		
+		model.addAttribute("msg", "회원정보 변경완료");
+		
+		return "member/changeAlert";
+		
+	}
+	
+	@RequestMapping("/myUserPageAction.do")
+	public String myUserPageAction(HttpSession session, HttpServletRequest req, MemberDTO memberDTO, Model model) {
+		
+		String id = (String)session.getAttribute("Id");
+		int status = (Integer)session.getAttribute("UserStatus");
+		
+		memberDTO.setMember_id(id);
+		memberDTO.setMember_status(status);
+		memberDTO.setMember_email(req.getParameter("email_1") + "@" + req.getParameter("email_2"));
+		
+		
+		sqlSession.getMapper(MemberImpl.class).userMyPage(memberDTO);
+		
+		model.addAttribute("msg", "회원정보 변경완료");
+		
+		
+		return "member/changeAlert";
+	}
+	
 	
 }

@@ -14,18 +14,6 @@
 <script type="text/javascript">
 function joinValidate(form){
 	
-	if(!form.name.value){
-        alert('이름을 입력하세요');
-        form.name.focus();
-        return false;
-    }
-	
-	if(form.id.value==''){
-		alert('아이디를 입력해주세요'); 
-		form.id.focus(); 
-		return false; 
-	}
-	
 	if( !(form.id.value.length >=4 && form.id.value.length <=12)){ 
 	    alert("4자 이상 12자 이내의 값만 입력하세요");
 	    form.id.value = '';
@@ -46,46 +34,11 @@ function joinValidate(form){
 	    }
 	}
 	
-	if(!form.pass1.value || !form.pass2.value){
-	    alert('패스워드를 입력하세요');
-	    return false;
-	}
-	
 	if(form.pass1.value != form.pass2.value){
 	    alert('입력한 패스워드가 일치하지 않습니다.');
 	    form.pass1.value=""; 
 	    form.pass2.value="";
 	    form.pass1.focus();
-	    return false;
-	}
-	
-	if(form.email_1.value==""){
-	    alert("이메일을 입력하세요");
-	    form.email_1.focus();
-	    return false;
-	}
-	
-	if(form.email_check.value==""){
-	    alert("도메인을 선택하세요");
-	    form.email_check.focus();
-	    return false;
-	}
-	
-	if(form.age_check.value == "1") {
-		alert("나이를 입력하세요");
-		form.age_check.focus();
-		return false;
-	}
-	
-	if(form.gender.value == "9") {
-		alert("성별을 입력하세요");
-		form.gender.focus();
-		return false;
-	}
-
-	if(form.phone.value =="" ){
-	    alert("핸드폰번호를 입력하세요");
-	    form.phone.focus();
 	    return false;
 	}
 	
@@ -160,7 +113,7 @@ function id_check_person(form){
 						<label for="name">이름</label>
 					</h3>
 					<span class="box int_name"> 
-						<input type="text" id="name" class="join_H" maxlength="20" name="member_name"> 
+						<input type="text" id="name" class="join_H" maxlength="20" name="member_name" required> 
 					</span> <span class="error_next_box"></span>
 				</div>
 				
@@ -170,7 +123,7 @@ function id_check_person(form){
 						<label for="id">아이디</label>
 					</h3>
 					<span class="box int_id"> 
-						<input type="text" id="id" class="join_H" maxlength="30" name="member_id"> 
+						<input type="text" id="id" class="join_H" maxlength="30" name="member_id" required> 
 						<button type="button" class="doubleCheck" onclick="id_check_person(this.form);"><img src="/zipcock/resources/img/m_icon_danger.png" alt="중복확인" class="passImg"></button>
 					</span>
 					
@@ -184,7 +137,7 @@ function id_check_person(form){
 						<label for="pass1">비밀번호</label>
 					</h3>
 					<span class="box int_pass"> 
-						<input type="password" id="pass1" class="join_H" maxlength="16" name="member_pass"> 
+						<input type="password" id="pass1" class="join_H" maxlength="16" name="member_pass" required> 
 						<span id="alertTxt">사용불가</span> 
 						<img src="/zipcock/resources/img/m_icon_pass.png" id="pass1_img" class="passImg">
 					</span> <span class="error_next_box"></span>
@@ -196,7 +149,7 @@ function id_check_person(form){
 						<label for="pass2">비밀번호 확인</label>
 					</h3>
 					<span class="box int_pass_check"> 
-						<input type="password" id="pass2" class="join_H" maxlength="16" name="password2">
+						<input type="password" id="pass2" class="join_H" maxlength="16" name="password2" required>
 						<img src="/zipcock/resources/img/m_icon_check_disable.png" id="pass2_img" class="passImg">
 					</span> <span class="error_next_box"></span>
 				</div>
@@ -207,15 +160,15 @@ function id_check_person(form){
 						<label for="email">이메일</label>
 					</h3>
 					<span class="box_email"> 
-						<input type="text" id="email_1" class="join_email" maxlength="20" name="email_1" value="">
+						<input type="text" id="email_1" class="join_email" maxlength="20" name="email_1" value="" required>
 					</span>
 					&nbsp;@
 					<span class="box_email"> 
-						<input type="text" id="email_2" class="join_email" maxlength="20" name="email_2" value="" style="width:20%"readonly> 
+						<input type="text" id="email_2" class="join_email" maxlength="20" name="email_2" value="" style="width:20%"readonly required> 
 					</span>
 					&nbsp;
 					<span class="box_email"> 
-						<select name="email_check" onchange="email_input(this.form);" class="join_email" id="email_check" style="width:20%">
+						<select name="email_check" onchange="email_input(this.form);" class="join_email" id="email_check" style="width:20%" required>
 								<option selected="" value="">-선택-</option>
 								<option value="1" >직접입력</option>
 								<option value="dreamwiz.com" >dreamwiz.com</option>
@@ -250,8 +203,8 @@ function id_check_person(form){
 						
 						<div id="age">
 							<span class="box"> 
-								<select id="age_check" class="sel" name="member_age">
-										<option value="1">나이</option>
+								<select id="age_check" class="sel" name="member_age"  required>
+										<option value="">나이</option>
 										<option value="10대">10대</option>
 										<option value="20대">20대</option>
 										<option value="30대">30대</option>
@@ -268,8 +221,8 @@ function id_check_person(form){
 						<!-- GENDER -->
 						<div id="gender">
                             <span class="box gender_code">
-                        		<select id="gender" class="sel" name="member_sex">
-                            		<option value="9">성별</option>
+                        		<select id="gender" class="sel" name="member_sex" required>
+                            		<option value="">성별</option>
                             		<option value="0">남자</option>
                            			<option value="1">여자</option>
                         		</select>                            
@@ -289,7 +242,7 @@ function id_check_person(form){
 						<label for="phone">휴대전화</label>
 					</h3>
 					<span class="box int_phone"> 
-						<input type="text" id="phone" class="join_H" maxlength="11" placeholder="휴대전화 입력" name="member_phone">
+						<input type="text" id="phone" class="join_H" maxlength="11" placeholder="휴대전화 입력" name="member_phone" required>
 						<span class="step_url">'-' 생략</span>
 					</span> <span class="error_next_box"></span>
 				</div>

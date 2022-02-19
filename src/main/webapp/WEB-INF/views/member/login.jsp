@@ -13,18 +13,6 @@
 </head>
 <body>
 <script>
-function validateForm(form) {
-	if(!form.id.value){ 
-		alert("아이디를 입력하세요.");
-		form.id.focus();
-		return false;
-	}
-	if(form.pass.value ==""){
-		alert("패스워드를 입력하세요.");
-		form.pass.focus();
-		return false;
-	}
-}
 
 <!-- 카카오 스크립트 -->
 
@@ -104,7 +92,7 @@ function kakaoLogout() {
 						<label for="id">아이디</label>
 					</h3>
 					<span class="box int_id"> 
-						<input type="text" id="id" class="join_H" maxlength="30" name="id"> 
+						<input type="text" id="id" class="join_H" maxlength="30" name="id" required> 
 					</span>
 				 	<span class="error_next_box"></span>
 				</div>
@@ -115,7 +103,7 @@ function kakaoLogout() {
 						<label for="pass">비밀번호</label>
 					</h3>
 					<span class="box int_pass"> 
-						<input type="password" id="pass" class="join_H" maxlength="16" name="pass"> 
+						<input type="password" id="pass" class="join_H" maxlength="16" name="pass" required> 
 						<span id="alertTxt">사용불가</span> 
 						<img src="/zipcock/resources/img/m_icon_pass.png" id="pass1_img" class="passImg">
 					</span> <span class="error_next_box"></span>

@@ -117,13 +117,13 @@ public class ListCommand implements BbsCommandImpl {
 		/*********페이징 처리 코드 Start************/
 		String pagingImg = PagingUtil.pagingImg(totalRecordCount,
 				pageSize, blockPage, nowPage,
-				req.getContextPath()+"/MboardList.do?"+addQueryString);
+				req.getContextPath()+"/Notice.do?"+addQueryString);
 		
 		model.addAttribute("pagingImg", pagingImg);
 		model.addAttribute("totalPage", totalPage);//전체페이지 수
 		model.addAttribute("nowPage", nowPage);//현제페이지 번호
 		/*********페이징 처리 코드 End************/
-
+		model.addAttribute("listRows", listRows);
 		
 		
 		//JDBCTemplate을 사용할때는 자원반납은 하지않는다.

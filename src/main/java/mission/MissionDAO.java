@@ -18,6 +18,8 @@ public class MissionDAO extends JDBConnect {
 		   super(drv, url, id, pw);
 	}
 	
+	public MissionDAO() {}
+	
 	public List<MissionDTO> getmission(Map<String, Object> map){
 		List<MissionDTO> bbs = new Vector<MissionDTO>();
 
@@ -32,22 +34,23 @@ public class MissionDAO extends JDBConnect {
 				// 한 행(게시물 하나)의 데이터를 DTO에 저장
 				MissionDTO dto = new MissionDTO();
 				
-				dto.setNum(rs.getInt(1));
-				dto.setId(rs.getString(2));
-	            dto.setCategory(rs.getInt(3));
-	            dto.setName(rs.getString(4));
-	            dto.setContent(rs.getString(5));
-	            dto.setFile(rs.getString(6));
-	            dto.setSex(rs.getInt(7));
-	            dto.setHid(rs.getString(8));
-	            dto.setStart(rs.getString(9));
-	            dto.setEnd(rs.getString(10));
-	            dto.setWaypoint(rs.getInt(11));
-	            dto.setMission(rs.getString(12));
-	            dto.setReservation(rs.getString(13));
-	            dto.setTime(rs.getString(14));
-	            dto.setCost(rs.getInt(15));
-	            dto.setStatus(rs.getInt(16));
+				dto.setMission_num(rs.getInt(1));
+				dto.setMission_id(rs.getString(2));
+	            dto.setMission_category(rs.getString(3));
+	            dto.setMission_name(rs.getString(4));
+	            dto.setMission_content(rs.getString(5));
+	            dto.setMission_ofile(rs.getString(6));
+	            dto.setMission_sfile(rs.getString(7));
+	            dto.setMission_sex(rs.getInt(8));
+	            dto.setMission_Hid(rs.getString(9));
+	            dto.setMission_start(rs.getString(10));
+	            dto.setMission_end(rs.getString(11));
+	            dto.setMission_waypoint(rs.getString(12));
+	            dto.setMission_mission(rs.getInt(13));
+	            dto.setMission_reservation(rs.getString(14));
+	            dto.setMission_time(rs.getString(15));
+	            dto.setMission_cost(rs.getInt(16));
+	            dto.setMission_status(rs.getInt(17));
 				
 				bbs.add(dto);
 			}

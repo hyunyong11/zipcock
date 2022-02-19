@@ -9,6 +9,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="/zipcock/resources/css/joinmember.css">
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 </head>
 <body>
 <script>
@@ -24,6 +25,54 @@ function validateForm(form) {
 		return false;
 	}
 }
+
+<!-- 카카오 스크립트 -->
+
+window.Kakao.init('fd6202fdf742e1c361e44f8a65bdba05'); //발급받은 키 중 javascript키를 사용해준다.
+console.log(Kakao.isInitialized()); // sdk초기화여부판단
+
+//카카오로그인
+function kakaoLogin(){
+	window.Kakao.Auth.login({
+		scope:'profile,account_email,birthday',
+		success: function(authObj){
+			//console.log(authObj);
+			window.Kakao.API.request({
+				url: '/v2/user/me',
+				success: res => {
+					const email = res.kakao_account.email;
+					const name = res.properties.nickname;
+					const birth = res.kakao_account.birthday;
+					
+					console.log(email);
+					console.log(name);
+					console.log(birth);
+					
+					$('#kakaoemail').val(email);
+					$('#kakaoname').val(name);
+					$('#kakaobirth').val(birth);
+					document.login_frm.submit();
+				}
+			});
+			
+		}
+	});
+}
+//카카오로그아웃  
+function kakaoLogout() {
+    if (Kakao.Auth.getAccessToken()) {
+      Kakao.API.request({
+        url: '/logout.do',
+        success: function (response) {
+        	console.log(response)
+        },
+        fail: function (error) {
+          console.log(error)
+        },
+      })
+      Kakao.Auth.setAccessToken(undefined)
+    }
+  }  
 </script>
 <div class="container">
 <!-- 바디 -->
@@ -73,6 +122,8 @@ function validateForm(form) {
 				</div>
 				<!-- 로그인에 실패할 경우 에러메세지 출력 부분 -->
 				<span style="font-size:1.5em; color:red;">${ LoginNG }</span>
+				
+				
 					
 					<!-- Login BTN-->
 					<div class="btn_area">
@@ -83,6 +134,20 @@ function validateForm(form) {
 							onclick="location.href='memberRegist.do';">
 							<span>회원가입</span>
 						</button>
+						<br> <br>
+						<div>-------------------------- 또는 --------------------------</div>
+						<br>
+					     <!-- 카카오 로그인 버튼 -->
+						<div id="kakaologin">
+							<div class="kakaobtn">
+								<input type="hidden" name="kakaoemail" id="kakaoemail" />
+								<input type="hidden" name="kakaoname" id="kakaoname" />
+								<input type="hidden" name="kakaobirth" id="kakaobirth" />
+								<a href="javascript:kakaoLogin();"> 
+									<img src="/zipcock/resources/img/kakao_login_medium_wide.png" style="width: 100%;"/>
+								</a>
+							</div>
+						</div>
 					</div>
 
 				</div>
@@ -101,7 +166,7 @@ function validateForm(form) {
 				<h4><b>${sessionScope.siteUserInfo.member_name}</b>님 어서오세요!</h4>
 				<br /><br />
 				<button class="btn btn-success" 
-					onclick="location.href='myPage.do';">
+					onclick="location.href='mypage.do';">
 					마이페이지</button>
 				<button class="btn btn-danger" 
 					onclick="location.href='logout.do';">

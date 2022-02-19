@@ -53,15 +53,18 @@
 		<beans:property name="username" value="zipcock" />
 		<beans:property name="password" value="1234" />
 	</beans:bean>
+	
 	<beans:bean name="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<!-- 데이터 근원지에 대한 빈 -->
 		<beans:property name="dataSource" ref="dataSource" />
 		<!-- Mybatis에서 사용할 Mapper(매퍼) 파일의 경로 설정 -->
-		<beans:property name="mapperLocations" value="classpath:membership/mapper/*.xml" />
+		<beans:property name="mapperLocations"  value="classpath:mappers/**/*Mapper.xml"/>
 	</beans:bean>
+	
 	<!-- 생성자를 통해 빈 생성. 우리가 최종적으로 사용할 Mybatis 빈. -->
 	<beans:bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<beans:constructor-arg index="0" ref="sqlSessionFactory" />
 	</beans:bean>
+	
 	
 </beans:beans>

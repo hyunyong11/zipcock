@@ -1,16 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%> 
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
-<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>공지사항</title>
+    <title>${viewRow.mboard_title }</title>
     
 
     <!-- =============== Bootstrap Core CSS =============== -->
@@ -218,160 +217,60 @@
 		<div class="container">
 			<h2>공지사항</h2>
 
+    <div class="card-body">
+        <div class="table-responsive">
+		<form name="writeFrm">
+		<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+			<colgroup>
+				<col width="20%" />
+				<col width="30%" />
+				<col width="20%" />
+				<col width="30%" />
+			</colgroup>
 			
-		<table border="1" width="100%">
 			<tr>
-				<td align="center" style="font-weight: bold; background-color: lightgray;">
+				<td colspan="4" align="center" style="background-color: lightgray; font-weight: bold;">	
+				
 					집에서 심부름을 콕! 집콕!
+				
+				</td>
+			</tr>
+			<tr>
+				<th style="background-color: #ffc654">No</th>
+				<td style="text-align: left; color: #FF4C00">${viewRow.mboard_num }</td>
+				<th style="background-color: #ffc654">작성자</th>
+				<td style="text-align: left; color: #FF4C00">${viewRow.mboard_id }</td>			
+			</tr>
+			<tr>
+				<th style="background-color: #ffc654">작성일</th>
+				<td style="text-align: left; color: #FF4C00">${viewRow.mboard_date }</td>			
+				<th style="background-color: #ffc654">조회수</th>
+				<td style="text-align: left; color: #FF4C00">${viewRow.mboard_count }</td>
+			</tr>
+			<tr>
+				<th style="background-color: #ffc654">제목</th>
+				<td colspan="3" style="text-align: left; color: #FF4C00">
+					${viewRow.mboard_title }
+				</td>
+			</tr>
+			<tr>
+				<th style="background-color: #ffc654">내용</th>
+				<td colspan="3" style="height:150px; text-align: left; color: #FF4C00">
+					${viewRow.mboard_content }
+				</td>
+			</tr>		
+			<tr>
+				<td colspan="4" align="center" style="background-color: lightgray">	
+				
+					
+				<button type="button" style="background-color: #ffc654; font-weight: bold"
+					onclick="location.href='./Notice.do?nowPage=${param.nowPage}';">리스트보기</button>
 				</td>
 			</tr>
 		</table>
-		
-		<!-- table>tr*2>td*5 -->
-		<table class="table table-bordered" id="dataTable" width="90%" cellspacing="0" >
-				<tr style="background-color: #ffc654">
-					<th width="10%" style="text-align: center">번호</th>
-					<th width="*" >제목</th>
-					<th width="15%" style="text-align: center">작성자</th>
-					<th width="10%" style="text-align: center">작성일</th>
-					<th width="15%" style="text-align: center">조회수</th>
-				</tr> 
-				<c:choose>
-					<c:when test="${empty listRows }">
-						<tr>
-							<td colspan="6" class="text-center">
-								등록된 게시물이 없습니다 ^^*
-							</td>
-						</tr>
-					</c:when>
-					<c:otherwise>
-						<c:forEach items="${listRows }" var="row" 
-							varStatus="loop">
-							<!-- 리스트반복시작 -->
-							<tr>
-								<td class="text-center" style="background-color: lightgray">${row.virtualNum }</td>
-								<td class="text-left">
-									<a href="./NoticeV.do?num=${row.mboard_num}
-										&nowPage=${nowPage}">${row.mboard_title}</a>
-								</td>
-								<td class="text-center">${row.mboard_id }</td>
-								<td class="text-center">${row.mboard_date }</td>
-								<td class="text-center" style="background-color: lightgray">${row.mboard_count }</td>
-							</tr>
-							<!-- 리스트반복끝 -->
-						</c:forEach>
-					</c:otherwise>
-				</c:choose>
-			
-			<!-- 페이지 번호 -->
-		<table  width="10%" style="margin-left: auto; margin-right: auto" >
-			<tr>
-				<td align="center">
-					${pagingImg }
-				</td>
-			</tr>
-		</table>	
-		<table  width="10%" style="margin-left: auto; margin-right: auto" >
-			<tr>
-				<button type="button" style="background-color: #FFC654; font-weight: bold; "
-					onclick="location.href='zipcock.do';">메인으로 가기</button>
-			</tr>
-		</table>
-		</table>
-		</div>
-			
-		
-        </section>
+		</form>   
         </div>
-        </div>    <!-- =============== container end =============== -->  
-        </section>
-<!-- Footer -->
-    <footer id="footer">
-	<!-- =============== container =============== -->
-    <div class="container">
-			    <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12">
-
-					<ul class="social-links">
-						<li><a class="wow fadeInUp animated" href="index.html#" style="visibility: visible; animation-name: fadeInUp;"><i class="fa fa-facebook"></i></a></li>
-						<li><a data-wow-delay=".1s" class="wow fadeInUp animated" href="index.html#" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;"><i class="fa fa-twitter"></i></a></li>
-						<li><a data-wow-delay=".2s" class="wow fadeInUp animated" href="index.html#" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;"><i class="fa fa-google-plus"></i></a></li>
-						<li><a data-wow-delay=".4s" class="wow fadeInUp animated" href="index.html#" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;"><i class="fa fa-pinterest"></i></a></li>
-						<li><a data-wow-delay=".5s" class="wow fadeInUp animated" href="index.html#" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;"><i class="fa fa-envelope"></i></a></li>
-					</ul>
-
-                    <p class="copyright">
-                        &copy; 2016 Canvas
-					</p>
-
-				</div>
-			</div>
-    </div><!-- =============== container end =============== -->
-	</footer>
-    <!-- =============== jQuery =============== -->
-    <script src="/zipcock/resources/js/jquery.js"></script>
-    <!-- =============== Bootstrap Core JavaScript =============== -->
-    <script src="/zipcock/resources/js/bootstrap.min.js"></script>
-    <!-- =============== Plugin JavaScript =============== -->
-    <script src="/zipcock/resources/js/jquery.easing.min.js"></script>
-    <script src="/zipcock/resources/js/jquery.fittext.js"></script>
-    <script src="/zipcock/resources/js/wow.min.js"></script>
-    <!-- =============== Custom Theme JavaScript =============== -->
-    <script src="/zipcock/resources/js/creative.js"></script>
-    <!-- =============== owl carousel =============== -->
-    <script src="/zipcock/resources/owl-carousel/owl.carousel.js"></script>
-    <script>
-        $(document).ready(function () {
-            $("#owl-demo").owlCarousel({
-                autoPlay: 3000,
-                items: 3,
-                itemsDesktop: [1199, 3],
-                itemsDesktopSmall: [979, 3]
-            });
-
-        });
-    </script>
-    <!-- 챗봇 코드 -->
-    <script>
-	  (function() {
-	    var w = window;
-	    if (w.ChannelIO) {
-	      return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
-	    }
-	    var ch = function() {
-	      ch.c(arguments);
-	    };
-	    ch.q = [];
-	    ch.c = function(args) {
-	      ch.q.push(args);
-	    };
-	    w.ChannelIO = ch;
-	    function l() {
-	      if (w.ChannelIOInitialized) {
-	        return;
-	      }
-	      w.ChannelIOInitialized = true;
-	      var s = document.createElement('script');
-	      s.type = 'text/javascript';
-	      s.async = true;
-	      s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
-	      s.charset = 'UTF-8';
-	      var x = document.getElementsByTagName('script')[0];
-	      x.parentNode.insertBefore(s, x);
-	    }
-	    if (document.readyState === 'complete') {
-	      l();
-	    } else if (window.attachEvent) {
-	      window.attachEvent('onload', l);
-	    } else {
-	      window.addEventListener('DOMContentLoaded', l, false);
-	      window.addEventListener('load', l, false);
-	    }
-	  })();
-	  ChannelIO('boot', {
-	    "pluginKey": "9145fc6d-f292-46af-b22a-2e630b92ab68"
-	  });
-	</script>
+    </div>
+</div>
 </body>
 </html>
-

@@ -72,6 +72,9 @@
                             <a class="page-scroll" href="#how-it-works">How it works</a>
                         </li>
                         <li>
+                            <a class="page-scroll" href="#Notice">Notice</a>
+                        </li>
+                        <li>
                             <a class="page-scroll" href="#Screenshots">Screenshots</a>
                         </li>
                         <li>
@@ -156,6 +159,7 @@
         <div class="container">
             <span class="angle2"></span>
             <span class="angle"></span>
+            <span></span>
             <div class="row">
                 <div class="col-xs-12 col-sm-5 col-md-3 wow fadeInLeft animated" data-wow-delay=".5s">
                     <h1><span>HELLO!</span> '집콕'을 소개합니다.</h2>      
@@ -179,260 +183,196 @@
     <div class="container">
      <span class="angle2"></span>
     <span class="angle"></span>
+ 	<form method="get" action="mission/select.do">
      <div class="row">
-
+	 
        <div class="col-xs-12 col-sm-12 col-md-12 wow bounceIn animated headding" data-wow-delay=".5s">
-           <h2>어플 <span>미리보기?</span></h2>
-           <p>Display your mobile apps awesome features with icon lists and an image carousel of each page. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation.</p>
+           <h2>심부름 <span>요청하기</span></h2>
        </div>
-
+	
       <div class="col-xs-12 col-sm-4 col-md-4">
          <div class="row">     
           <div class="col-xs-10 col-sm-10 col-md-10 wow fadeInLeft animated textright" data-wow-delay=".5s">
-            <h3>사용자</h3>
-              <p>Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum.</p>     
+            <h3>배달, 장보기</h3>
+              <p></p>     
           </div>
             <div class="col-xs-2 col-sm-2 col-md-2 wow fadeInRight animated" data-wow-delay=".5s">
-                <i class="fa fa-apple iconfont"></i>
+                <button type="submit" name="flag" value="배달,장보기"> <img alt="배달,장보기" src="/zipcock/resources/img/1.delivery.png"> </button>
+                <!-- <input type="image" name="delivery" src="/zipcock/resources/img/1.delivery.png"> -->
           </div>    
         </div>
         <div class="row"> 
          <div class="col-xs-10 col-sm-10 col-md-10 wow fadeInLeft animated textright" data-wow-delay=".6s">
-            <h3>헬퍼</h3>
-              <p>Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum.</p>     
+            <h3>청소, 집안일</h3>
+              <p></p>     
+          </div>
+           <div class="col-xs-2 col-sm-2 col-md-2 wow fadeInRight animated" data-wow-delay=".6s">
+                <button type="submit" name="flag" value="청소,집안일"> <img alt="청소,집안일" src="/zipcock/resources/img/2.clean.png"> </button>
+          </div>     
+        </div>
+        <div class="row"> 
+         <div class="col-xs-10 col-sm-10 col-md-10 wow fadeInLeft animated textright" data-wow-delay=".6s">
+            <h3>설치, 운반</h3>
+              <p></p>     
           </div>
             <div class="col-xs-2 col-sm-2 col-md-2 wow fadeInRight animated" data-wow-delay=".6s">
-                <i class="fa fa-rocket iconfont"></i>
+                <button type="submit" name="flag" value="설치,운반"> <img alt="설치,운반" src="/zipcock/resources/img/3.installation.png"> </button>
           </div>     
         </div>
         <div class="row">            
          <div class="col-xs-10 col-sm-10 col-md-10 wow fadeInLeft animated textright" data-wow-delay=".7s">
-            <h3>심부름리스트</h3>
-              <p>Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum.</p>     
+            <h3>동행, 돌봄</h3>
+              <p></p>     
           </div>
           <div class="col-xs-2 col-sm-2 col-md-2 wow fadeInRight animated" data-wow-delay=".7s">
-                <i class="fa fa-film iconfont"></i>
+                <button type="submit" name="flag" value="동행,돌봄"> <img alt="동행,돌봄" src="/zipcock/resources/img/4.together.png"> </button>
           </div>         
            
         </div>        
       </div>
 
       <div class="col-xs-12 col-sm-4 col-md-4 wow bounceIn animated textcenter" data-wow-delay=".4s">
+      <!-- 핸드폰이미지 -->
        <img src="/zipcock/resources/img/slide-bg.png" alt="slide-bg" />
       </div>  
          
       <div class="col-xs-12 col-sm-4 col-md-4">
-         <div class="row">         
+         <div class="row" style="height: 90px;" >         
           <div class="col-xs-2 col-sm-2 col-md-2 wow fadeInLeft animated" data-wow-delay=".5s">
-                <i class="fa fa-android iconfont2"></i>
+                <button type="submit" name="flag" value="벌레,쥐잡기"> <img alt="벌레,쥐잡기" src="/zipcock/resources/img/5.bug.png"> </button>
           </div>    
           <div class="col-xs-10 col-sm-10 col-md-10 wow fadeInRight animated textleft" data-wow-delay=".5s">
-            <h3>지도(혹은 진행상황)</h3>
-              <p>Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum.</p>     
+            <h3>&nbsp;&nbsp;벌레, 쥐잡기</h3>
+              <p></p>    
           </div>
            
         </div>
-        <div class="row">    
+        <div class="row" style="height: 90px;">   
         <div class="col-xs-2 col-sm-2 col-md-2 wow fadeInLeft animated" data-wow-delay=".6s">
-                <i class="fa fa-css3 iconfont2"></i>
+                <button type="submit" name="flag" value="역할대행"> <img alt="역할대행" src="/zipcock/resources/img/6.role.png"> </button>
           </div>          
           <div class="col-xs-10 col-sm-10 col-md-10 wow fadeInRight animated textleft" data-wow-delay=".6s">
-            <h3>팁</h3>
-              <p>Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum.</p>     
+            <h3>&nbsp;&nbsp;역할대행</h3>
+              <p></p>     
           </div>
           
         </div>
-        <div class="row">    
+        <div class="row" style="height: 90px;">   
+        <div class="col-xs-2 col-sm-2 col-md-2 wow fadeInLeft animated" data-wow-delay=".6s">
+                <button type="submit" name="flag" value="과외,알바"> <img alt="과외,알바" src="/zipcock/resources/img/7.lesson.png"> </button>
+          </div>          
+          <div class="col-xs-10 col-sm-10 col-md-10 wow fadeInRight animated textleft" data-wow-delay=".6s">
+            <h3>&nbsp;&nbsp;과외, 알바</h3>
+              <p></p>     
+          </div>
+          
+        </div>
+        <div class="row" style="height: 90px;">    
         <div class="col-xs-2 col-sm-2 col-md-2 wow fadeInLeft animated" data-wow-delay=".7s">
-                <i class="fa fa-users iconfont2"></i>
+               <button type="submit" name="flag" value="기타"> <img alt="기타" src="/zipcock/resources/img/8.etc.png"> </button>
           </div>          
           <div class="col-xs-10 col-sm-10 col-md-10 wow fadeInRight animated textleft" data-wow-delay=".7s">
-            <h3>챗봇</h3>
-              <p>Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum.</p>     
+            <h3>&nbsp;&nbsp;기타</h3>
+              <p></p>     
           </div>
            
         </div>        
       </div>
     </div>
+   </form>
     </div>   
 	<!-- =============== container end =============== -->	
     </section>
     
     
-     <!-- =============== Price =============== -->
+    <!-- =============== Price =============== -->
     <section id="Notice" class="">
 	<!-- =============== container =============== -->
-        <div class="container">
-        <span class="angle2"></span>
-        <span class="angle"></span>
+     <div class="container">
+     <span class="angle2"></span>
+     <span></span>
 
-         <div class="row">
+      <div class="row">
 
-            <div class="col-xs-12 col-sm-12 col-md-12 wow zoomIn animated headding" data-wow-delay=".1s">
-               <h2>공지사항 <span></span></h2>
-               <p>Display your mobile apps awesome features with icon lists and an image carousel of each page. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation.</p>
-           </div>
-           
-				<style>
-				.cusMainNoticeList {
-					position: relative;
-		            display: block;
-		            overflow: hidden;
-		            margin: 0;
-				    padding: 0;
-				}
-				article, aside, canvas, details, figcaption, figure, footer, header, hgroup, nav, menu, nav, section, main {
-				    display: block;
-				}
-				.subTitle4C{
-				    text-align: center;
-				}
-				.cusMainNoticeList .list {
-					overflow: hidden;
-					border: 1px solid #222;
-				}
-				.cusMainNoticeList .list ul {
-					margin: -1px;
-					display: block;
-				    list-style-type: disc;
-				    margin-block-start: 1em;
-				    margin-block-end: 1em;
-				    margin-inline-start: 0px;
-				    margin-inline-end: 0px;
-				    padding-inline-start: 40px;
-			     	padding-left: 0px;
-				}
-				.cusMainNoticeList .list ul:after {content: ""; display: block; clear: both;}
-				.cusMainNoticeList .list li {
-					position: relative;
-					float: left;
-					width: 20%; height: 184px;
-				    list-style: none;
-				    display: list-item;
-		  				text-align: -webkit-match-parent;
-				}
-				.cusMainNoticeList .list a {
-					position: absolute;
-					top: 0; right: 0; bottom: 0; left: 0;
-					padding: 90px 32px 0;
-					color: #222;
-					transition: all .3s;
-				    font-family: inherit;
-				    font-size: inherit;
-				    line-height: inherit;
-				    letter-spacing: inherit;
-				    color: inherit;
-				    text-decoration: none;
-				    outline: none;
-				}
-				.cusMainNoticeList .list a:after {
-					content: "";
-					position: absolute;
-					top: 0; right: 0; bottom: -1px; left: -1px;
-					border: 1px solid #dcdcdc;
-					transition: all .3s;
-				}
-				.cusMainNoticeList .list a:hover {
-					background: #104138;
-					color: #fff;
-					z-index: 2;
-				}
-				.cusMainNoticeList .list a:hover:after {border-color: #104138;}
-				.cusMainNoticeList .list .num {
-					position: absolute;
-					top: 40px; left: 32px;
-					font: 30px/1.2 'roboR';
-				}
-				.cusMainNoticeList .list .txt {
-					display: block;
-					display: -webkit-box;
-					max-height: 70px;
-					overflow: hidden;
-					-webkit-line-clamp: 3;
-					-webkit-box-orient: vertical;
-				}
-				.cusMainNoticeList .more {
-					position: absolute;
-					top: 15px; right: 10px;
-					padding-right: 9px;
-					font-size: 14px;
-					background: url('../images/common/arw_btn_more.png') no-repeat 100% 50%;
-				}
-				
-		   </style>
-          <div class="col-xs-12 col-sm-12 col-md-12 wow zoomIn animated headding" data-wow-delay=".1s">
-          <section class="cusMainFaqList">
-          <h3 class="subTitle4C">FAQ</h3>
-		<div class="list">
-			<h2>공지사항 게시판</h2>
+         <div class="col-xs-12 col-sm-12 col-md-12 wow zoomIn animated headding" data-wow-delay=".1s">
+        </div>
 
+       <div class="col-xs-12 col-sm-12 col-md-12 wow zoomIn animated headding" data-wow-delay=".1s">
+       <section class="cusMainFaqList">
+       	<h3 class="subTitle4C">&nbsp;&nbsp;&nbsp;&nbsp;NOTICE</h3>
+		<div class="container">
+		<h2>공지사항</h2>
+
+			
+		<table border="1" width="100%">
+			<tr>
+				<td align="center" style="background-color: lightgray;">
+					집에서 심부름을 콕! 집콕!
+				</td>
+			</tr>
+		</table>
 		
-			
-			
-			
-			
-			<!-- table>tr*2>td*5 -->
-			<table border="1" width="100%" >
-				<tr style="background-color: #ff996d">
-					<th width="10%">번호</th>
-					<th width="*">제목</th>
-					<th width="15%">작성자</th>
-					<th width="10%">조회수</th>
-					<th width="15%">작성일</th>
-					<!-- <th width="5%">첨부</th> -->
-				</tr> 
-				<c:choose>
-					<c:when test="${empty listRows }">
-						<tr>
-							<td colspan="6" class="text-center">
-								등록된 게시물이 없습니다 ^^*
-							</td>
-						</tr>
-					</c:when>
-					<c:otherwise>
-						<c:forEach items="${listRows }" var="row" 
-							varStatus="loop">
-							<!-- 리스트반복시작 -->
-							<tr>
-								<td class="text-center">${row.virtualNum }</td>
-								<td class="text-left">
-									<a href="./view.do?idx=${row.idx}
-										&nowPage=${nowPage}">${row.title}</a>
-								</td>
-								<td class="text-center">${row.name }</td>
-								<td class="text-center">${row.postdate }</td>
-								<td class="text-center">${row.hits }</td>
-								<!-- <td class="text-center">--</td> -->
-							</tr>
-							<!-- 리스트반복끝 -->
-						</c:forEach>
-					</c:otherwise>
-				</c:choose>
-			<!-- 페이지 번호 -->
-			<table border="1" width="90%">
+		<!-- table>tr*2>td*5 -->
+		<table class="table table-bordered" id="dataTable" width="90%" cellspacing="0" >
+			<tr style="background-color: #ffc654">
+				<th width="10%" style="text-align: center">번호</th>
+				<th width="*" >제목</th>
+				<th width="15%" style="text-align: center">작성자</th>
+				<th width="10%" style="text-align: center">작성일</th>
+				<th width="15%" style="text-align: center">조회수</th>
+			</tr> 
+			<c:choose>
+				<c:when test="${empty listRows }">
+					<tr>
+						<td colspan="6" class="text-center">
+							등록된 게시물이 없습니다 ^^*
+						</td>
+					</tr>
+				</c:when>
+			<c:otherwise>
+				<c:forEach items="${listRows }" var="row" 
+					varStatus="loop">
+					<!-- 리스트반복시작 -->
+					<tr>
+						<td class="text-center">${row.virtualNum }</td>
+						<td class="text-left">
+							<a href="./NoticeV.do?num=${row.mboard_num}
+								&nowPage=${nowPage}">${row.mboard_title}</a>
+						</td>
+						<td class="text-center">${row.mboard_id }</td>
+						<td class="text-center">${row.mboard_date }</td>
+						<td class="text-center">${row.mboard_count }</td>
+					</tr>
+					
+					<!-- 리스트반복끝 -->
+				</c:forEach>
+			</c:otherwise>
+			</c:choose>
+			<table border="1" width="100%">
+				<tr>
+					<td align="center" style="background-color: lightgray;">
+						집에서 심부름을 콕! 집콕!
+					</td>
+				</tr>
+			</table>
+		<!-- 페이지 번호 -->
+			<table border="0" width="100%">
 				<tr>
 					<td align="center">
-						${pagingImg }
+					<button type="button" style="background-color: #ffc654; font-weight: bold"
+						onclick="location.href='Notice.do'">더 보기</button>
 					</td>
 				</tr>	
 			</table>
-			</table>
+		</table>
 		</div>
 			
-		<a href="MboardList.do" class="more">전체보기</a>
+		<a href="Notice.do" class="more">전체보기</a>
         </section>
         </div>
         </div>    <!-- =============== container end =============== -->  
         </section>
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     <!-- =============== Screenshots =============== -->
     <section id="Screenshots" class="">
 	<!-- =============== container =============== -->
@@ -607,7 +547,7 @@
 					top: 15px; right: 10px;
 					padding-right: 9px;
 					font-size: 14px;
-					background: url('../images/common/arw_btn_more.png') no-repeat 100% 50%;
+					/* background: url('../images/common/arw_btn_more.png') no-repeat 100% 50%; */
 				}
 				
 		   </style>
@@ -770,7 +710,7 @@
 					</ul>
 
                     <p class="copyright">
-                        &copy; 2016 Canvas
+                        &copy; 2021 Zipcock
 					</p>
 
 				</div>

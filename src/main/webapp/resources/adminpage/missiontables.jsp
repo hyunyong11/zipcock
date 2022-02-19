@@ -1,5 +1,5 @@
-<%@page import="mission.MissionDTO"%>
-<%@page import="mission.MissionDAO"%>
+<%@page import="membership.MissionDTO"%>
+<%@page import="membership.MissionDAO"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.List"%>

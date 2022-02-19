@@ -1,7 +1,9 @@
 package com.kosmo.zipcock;
 
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class MainController {
@@ -35,10 +37,10 @@ public class MainController {
 	}
 	
 	//회원가입시 alert
-	@RequestMapping("/message.do")
+	@RequestMapping("/welcomAlert.do")
 	public String insertMember() {
 		
-		return "member/message";
+		return "member/welcomAlert";
 	}
 	
 	//로그인
@@ -62,6 +64,20 @@ public class MainController {
 		return "member/find_Idpw";
 	}
 	
+	//마이페이지
+	@RequestMapping("/mypage.do")
+	public String mypage() {
+	
+		return "member/mypage";
+	}
+	
+	//심부름 페이지 이동
+	@RequestMapping(value="/mission/select.do", method=RequestMethod.GET)
+	public String missionSelect()  {
+		
+		return "mission/registration";
+	}
+	
 	//회원정보 변경시 알림창
 	@RequestMapping("/changeAlert.do")
 	public String changeAlter() {
@@ -69,4 +85,5 @@ public class MainController {
 		return "member/changeAlert";
 	}
 	
+
 }

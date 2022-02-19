@@ -29,7 +29,7 @@ public class BoardController {
 	
 	
 	
-	@RequestMapping("/MboardList.do")
+	@RequestMapping("/Notice.do")
 	public String list(Model model, HttpServletRequest req) {
 		/*
 		사용자로부터 받은 모든 요청은 request객체에 저장되고, 이를
@@ -46,9 +46,11 @@ public class BoardController {
 	
 	
 	
-	@RequestMapping("/Mboardview.do")
+	@RequestMapping("/NoticeV.do")
 	public String view(Model model, HttpServletRequest req, MBoardDTO MBoardDTO)
 	{
+		
+//		model.addAttribute("num", req.getParameter("num"));
 		//사용자의 요청을 저장한 request객체를 Model객체에 저장한 후 전달한다.
 		model.addAttribute("req", req);
 		model.addAttribute("MBoardDTO", MBoardDTO);

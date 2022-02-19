@@ -1,16 +1,13 @@
 package com.kosmo.zipcock;
 
-import java.io.Console;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.servlet.jsp.JspWriter;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,24 +15,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import membership.MemberDTO;
 import membership.MemberImpl;
-import utils.JSFunction;
 
 @Controller
 public class MemberController {
 	
 	private SqlSession sqlSession;
 	
+	
 	@Autowired
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
+		
 	}
 	
 	
@@ -45,7 +41,7 @@ public class MemberController {
 		memberDTO.setMember_email(req.getParameter("email_1") + "@" + req.getParameter("email_2"));
 		sqlSession.getMapper(MemberImpl.class).member(memberDTO);
 
-		return "redirect:message.do";
+		return "redirect:welcomAlert.do";
 	}
 	
 	//헬퍼 회원가입(이미지업로드)
@@ -94,7 +90,7 @@ public class MemberController {
 		memberDTO.setMember_email(req.getParameter("email_1") + "@" + req.getParameter("email_2"));
 		sqlSession.getMapper(MemberImpl.class).helper(memberDTO);
 		
-		return "redirect:message.do";
+		return "redirect:welcomAlert.do";
 	}
 	
 	//서버 업로드를 위한 메소드
@@ -143,70 +139,35 @@ public class MemberController {
 		return mv;
 	}
 	
-	@RequestMapping("/findId.do")
-	@ResponseBody
-	public String findId(@RequestParam HashMap<String, String> param, HttpServletRequest req, JspWriter out ) {
-		
-		String result = "";
-		
-//		String member_name = req.getParameter("name"); 
-//		String member_email =
-//				req.getParameter("email_1") +"@" + req.getParameter("email_2");
-		 
-		String member_name = param.get("name");
-		String member_email = param.get("email_1")+"@"+param.get("email_2");
-
-		/* result = */ 
-				MemberDTO dto 
-				 = sqlSession.getMapper(MemberImpl.class).findId(
-						member_name, member_email
-				);
-		
-		System.out.println("dto: "+dto);
-		
-		
-		
-		 if (dto == null) { 
-		 	 // 회원정보가 없는 경우 (정보 불일치 등)
-			 JSFunction.alertBack("회원정보가 없습니다.", out); 
-		 } 
-		 else {
-			 JSFunction.alertLocation("가입된 아이디는 '"+ result +"'입니다.", "memberLogin.do",out); 
-		 }
-		 
-		
-		return result;
-	}
-	
 	//회원정보 수정(입장)
-			@RequestMapping("/myPage.do")
-			public String change(HttpServletRequest req, Model model, HttpSession session) {
-				
-				
-				String id = (String)session.getAttribute("Id");
-				
-				ArrayList<MemberDTO> memberList = sqlSession.getMapper(MemberImpl.class).getMemberInfo(id);
-				
-				for(MemberDTO dto : memberList) {
-					
-					String email = dto.getMember_email();
-					
-					int idx = email.indexOf("@");
-					
-					String email_1 = email.substring(0, idx);
-					String email_2 = email.substring(idx+1);
-					
-					System.out.println(email_1);
-					
-					model.addAttribute("email_1", email_1);
-					model.addAttribute("email_2", email_2);
-				}
-				
-				model.addAttribute("dto", memberList);
-				
-				
-				return "member/memberInfo";
-			}
+	@RequestMapping("/myPage.do")
+	public String change(HttpServletRequest req, Model model, HttpSession session) {
+		
+		
+		String id = (String)session.getAttribute("Id");
+		
+		ArrayList<MemberDTO> memberList = sqlSession.getMapper(MemberImpl.class).getMemberInfo(id);
+		
+		for(MemberDTO dto : memberList) {
+			
+			String email = dto.getMember_email();
+			
+			int idx = email.indexOf("@");
+			
+			String email_1 = email.substring(0, idx);
+			String email_2 = email.substring(idx+1);
+			
+			System.out.println(email_1);
+			
+			model.addAttribute("email_1", email_1);
+			model.addAttribute("email_2", email_2);
+		}
+		
+		model.addAttribute("dto", memberList);
+		
+		
+		return "member/memberInfo";
+	}
 
 				
 	//회원정보수정 (헬퍼)
@@ -287,4 +248,42 @@ public class MemberController {
 	}
 	
 	
+	//카카오 로그인(작업중)
+	/*
+	@RequestMapping("/kakaoLogin.do")
+	public String kakaoLogin(HttpServletRequest request, HttpSession session) {
+		
+		System.out.println("카카오로그인");
+		System.out.println(request.getParameter("kakaoemail"));
+		System.out.println(request.getParameter("kakaoname"));
+		System.out.println(request.getParameter("kakaobirth"));
+		
+		// kakaoemail을 kakaoid에 저장
+		String kakaoid = request.getParameter("kakaoemail");
+		
+		MemberDTO memberDTO = new MemberDTO();
+		
+		// kakaoid를 to의 id로 세팅
+		memberDTO.setMember_id(kakaoid);
+		
+		// 카카오계정으로 로그인한 적이 있는지 없는지 
+		int isFirst;  //카카오메일과 일치하는 메일이 있는지 메서드만들기
+		
+		if (isFirst == 0) { // 회원이 아닌경우 (카카오 계정으로 처음 방문한 경우) 카카오 회원정보 설정 창으로 이동
+			System.out.println("카카오 회원 정보 설정");
+			
+			request.setAttribute("kakaoid",request.getParameter("kakaoemail"));
+			request.setAttribute("kakaoname",request.getParameter("kakaoname"));
+			request.setAttribute("kakaobirth",request.getParameter("kakaobirth"));
+			request.setAttribute("kakaoemail",request.getParameter("kakaoemail"));
+			
+			// 회원가입창으로 이동
+			return "user/kakaoLogin_editForm";
+			
+		} else { // 이미 카카오로 로그인한 적이 있을 때 (최초 1회 로그인때 회원가입된 상태)
+			
+
+		}
+	}
+	*/
 }

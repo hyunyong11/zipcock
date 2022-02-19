@@ -77,15 +77,15 @@ public class MBoardDAO extends JDBConnect{
 		return totalCount;
 	}
 	
-	//게시판 리스트 가져오기 (페이지 처리 없음)
-		public ArrayList<MBoardDTO> list(Map<String, Object> map){
-			
-		String sql = " SELECT * FROM mboard ";
-			if(map.get("Word")!=null) {
-				sql +=" WHERE "+map.get("Column")+" "
-					+ " LIKE '%"+map.get("Word")+"%' ";
-			}
-			sql += " ORDER BY mboard_num DESC";
+	//게시판 리스트 가져오기 (페이지 처리 없음)-스프링
+	public ArrayList<MBoardDTO> list(Map<String, Object> map){
+		
+	String sql = " SELECT * FROM mboard ";
+		if(map.get("Word")!=null) {
+			sql +=" WHERE "+map.get("Column")+" "
+				+ " LIKE '%"+map.get("Word")+"%' ";
+		}
+		sql += " ORDER BY mboard_num DESC";
 		
 		/*
 		RowMapper가 select를 통해 얻어온 ResultSet을 DTO객체에
@@ -96,8 +96,10 @@ public class MBoardDAO extends JDBConnect{
 				template.query(sql, new BeanPropertyRowMapper<MBoardDTO>(MBoardDTO.class));
 		}
 	
+
+		
 	
-	//게시물의 갯수 카운트
+	//게시물의 갯수 카운트-스프링
 	public int getTotalCount(Map<String, Object> map)
 	{
 		String sql = "SELECT COUNT(*) FROM mboard";
@@ -109,7 +111,7 @@ public class MBoardDAO extends JDBConnect{
 		//쿼리문에서 count(*)을 통해 반환되는 값을 정수형태로 가져온다.
 		return template.queryForObject(sql, Integer.class);
 	}
-
+	//게시물의 페이징-스프링
 	public ArrayList<MBoardDTO> listPage(
 			Map<String, Object> map){
 
@@ -131,6 +133,54 @@ public class MBoardDAO extends JDBConnect{
 						MBoardDTO.class));
 	}
 
+	//게시물 조회수 증가
+	public void updateCount(final String num)
+	{
+		//쿼리문 작성
+		String sql = "UPDATE mboard SET "
+				+ " mboard_count=mboard_count+1 "
+				+ " WHERE mboard_num=? ";
+		
+		/*
+		행의 변화를 주는 쿼리문 실행이므로 update메서드를 사용한다.
+		첫번째 인자는 쿼리문, 두번째 인자는 익명클래스를 통해 인파라미터를 설정한다.
+		*/
+		template.update(sql, new PreparedStatementSetter() {
+			
+			@Override
+			public void setValues(PreparedStatement ps) throws SQLException {
+				ps.setInt(1, Integer.parseInt(num));
+			}
+		});
+	}
+	
+	public MBoardDTO view(String num)
+	{
+		//조회수 증가 위한 메서드 호출
+		updateCount(num);
+		
+		MBoardDTO dto = new MBoardDTO();
+		String sql = "SELECT * FROM mboard "
+				+ " WHERE mboard_num="+num;
+		try {
+			/*
+			queryForObject() 메서드는 쿼리문을 실행한 후 반드시 하나의 결과를
+			반환해야 한다. 그렇지 않으면 에러가 발생하게 되므로 예외처리를 하는것이
+			좋다.
+			*/
+			dto = template.queryForObject(sql, new BeanPropertyRowMapper<MBoardDTO>(MBoardDTO.class));
+			/*
+			BeanPropertyRowMapper 클래스는 쿼리의 실행결과를  DTO에 저장해주는 역할을
+			한다.이떄 테이블의 컬럼명과 DTO의 멤버변수명은 일치해야 한다.
+			*/
+		}
+		catch (Exception e) {
+			System.out.println("View() 실행시 예외발생");
+		}
+		return dto; 
+	}
+	
+	
 	
 	/*
 	목록에 출력할 게시물을 오라클로부터 추출하기 위한 쿼리문 실행 (페이지처리 없음) 
@@ -207,8 +257,7 @@ public class MBoardDAO extends JDBConnect{
 		
 		return result;
 	}
-
-	
+	//상세보기
 	public MBoardDTO selectView(String num) {
 		MBoardDTO dto = new MBoardDTO();
 		
@@ -308,50 +357,5 @@ public class MBoardDAO extends JDBConnect{
 	}
 	
 	
-	//게시물 조회수 증가
-		public void updateCount(final int num)
-		{
-			//쿼리문 작성
-			String sql = "UPDATE mboard SET "
-					+ " mboard_count=mboard_count+1 "
-					+ " WHERE mboard_num=? ";
-			
-			/*
-			행의 변화를 주는 쿼리문 실행이므로 update메서드를 사용한다.
-			첫번째 인자는 쿼리문, 두번째 인자는 익명클래스를 통해 인파라미터를 설정한다.
-			*/
-			template.update(sql, new PreparedStatementSetter() {
-				
-				@Override
-				public void setValues(PreparedStatement ps) throws SQLException {
-					ps.setInt(1, num);
-				}
-			});
-		}
-		
-		public MBoardDTO view(int num)
-		{
-			//조회수 증가 위한 메서드 호출
-			updateCount(num);
-			
-			MBoardDTO dto = new MBoardDTO();
-			String sql = "SELECT * FROM mboard "
-					+ " WHERE mboard_num="+num;
-			try {
-				/*
-				queryForObject() 메서드는 쿼리문을 실행한 후 반드시 하나의 결과를
-				반환해야 한다. 그렇지 않으면 에러가 발생하게 되므로 예외처리를 하는것이
-				좋다.
-				*/
-				dto = template.queryForObject(sql, new BeanPropertyRowMapper<MBoardDTO>(MBoardDTO.class));
-				/*
-				BeanPropertyRowMapper 클래스는 쿼리의 실행결과를  DTO에 저장해주는 역할을
-				한다.이떄 테이블의 컬럼명과 DTO의 멤버변수명은 일치해야 한다.
-				*/
-			}
-			catch (Exception e) {
-				System.out.println("View() 실행시 예외발생");
-			}
-			return dto; 
-		}
+	
 }

@@ -114,7 +114,7 @@ function setDisplay(){
       <div id="content">
 
          <!-- form in -->
-         <form name ="miss_regiForm" method="post" onsubmit="return validateForm(this)" enctype="multipart/form-data" action='<c:url value="/mission/regist.do"/>'>
+         <form name ="miss_regiForm" method="post" onsubmit="return validateForm(this)" enctype="multipart/form-data" action='<c:url value="/mission_regist.do"/>'>
             <input type="hid-den" name="mission_id" value="<%= id %>">
             <input type="hid-den" name="mission_status" value="1">
             <input type="hid-den" name="mission_Hid" value="">

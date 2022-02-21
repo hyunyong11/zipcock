@@ -63,6 +63,16 @@
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
 
+				<div class="dropdown">
+				  <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+				    Dropdown button
+				  </button>
+				  <ul class="dropdown-menu">
+				    <li><a class="dropdown-item" href="#">Link 1</a></li>
+				    <li><a class="dropdown-item" href="#">Link 2</a></li>
+				    <li><a class="dropdown-item" href="#">Link 3</a></li>
+				  </ul>
+				</div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <li>

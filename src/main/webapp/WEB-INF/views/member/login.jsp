@@ -9,6 +9,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="/zipcock/resources/css/joinmember.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 </head>
 <body>
@@ -22,24 +23,21 @@ console.log(Kakao.isInitialized()); // sdk초기화여부판단
 //카카오로그인
 function kakaoLogin(){
 	window.Kakao.Auth.login({
-		scope:'profile,account_email,birthday',
+		scope:'profile_nickname, account_email',
 		success: function(authObj){
-			//console.log(authObj);
+			console.log(authObj);
 			window.Kakao.API.request({
 				url: '/v2/user/me',
 				success: res => {
 					const email = res.kakao_account.email;
 					const name = res.properties.nickname;
-					const birth = res.kakao_account.birthday;
 					
 					console.log(email);
 					console.log(name);
-					console.log(birth);
 					
 					$('#kakaoemail').val(email);
 					$('#kakaoname').val(name);
-					$('#kakaobirth').val(birth);
-					document.login_frm.submit();
+					document.loginForm.submit();
 				}
 			});
 			
@@ -83,6 +81,7 @@ function kakaoLogout() {
 			<!-- 로그인되지 않았을 때 페이지 출력 -->
 			<form name="loginForm" method="post" action="./memberLoginAction.do" 
 				onsubmit="return validateForm(this);">
+			<input type="hidden" name="login_ok" value="1"/>
 			<!-- 로그인에 성공할 경우 돌아갈 페이지 경로 -->
 			<input type="hidden" name="backUrl" value="${ param.backUrl }"/>
 				<div>
@@ -130,7 +129,6 @@ function kakaoLogout() {
 							<div class="kakaobtn">
 								<input type="hidden" name="kakaoemail" id="kakaoemail" />
 								<input type="hidden" name="kakaoname" id="kakaoname" />
-								<input type="hidden" name="kakaobirth" id="kakaobirth" />
 								<a href="javascript:kakaoLogin();"> 
 									<img src="/zipcock/resources/img/kakao_login_medium_wide.png" style="width: 100%;"/>
 								</a>

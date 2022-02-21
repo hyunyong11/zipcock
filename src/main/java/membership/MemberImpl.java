@@ -29,5 +29,7 @@ public interface MemberImpl {
 	//회원정보 수정(사용자)
 	public void userMyPage(MemberDTO memberDTO);
 	
+	//카카오 로그인
+	public MemberDTO kakaoLogin(String id);
 	
 }

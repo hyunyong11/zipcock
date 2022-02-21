@@ -64,12 +64,14 @@ public class MainController {
 		return "member/find_Idpw";
 	}
 	
+	/*
 	//마이페이지
 	@RequestMapping("/mypage.do")
 	public String mypage() {
 	
 		return "member/mypage";
 	}
+	*/
 	
 	//심부름 페이지 이동
 	@RequestMapping(value="/mission/select.do", method=RequestMethod.GET)

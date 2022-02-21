@@ -229,7 +229,7 @@ if(!(session.getAttribute("Id") == null) && session.getAttribute("UserStatus").e
 				<!-- age -->
 				<div>
 					<h3 class="join_title">
-						<label for="age">나이 / 성별</label>
+						<label for="age">나이</label>
 					</h3>
 					<div id="age_wrap">
 						
@@ -373,7 +373,7 @@ if(!(session.getAttribute("Id") == null) && session.getAttribute("UserStatus").e
 	
 </div>
 <%
-} else if(!(session.getAttribute("Id") == null) && session.getAttribute("UserStatus").equals(1)) {
+} else if(!(session.getAttribute("Id") == null) && session.getAttribute("UserStatus").equals(1) || session.getAttribute("UserStatus").equals(0)) {
 %>
 	
 <div class="container">

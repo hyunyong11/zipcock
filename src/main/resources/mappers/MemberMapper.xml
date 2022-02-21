@@ -68,6 +68,10 @@
 			
 			WHERE member_id=#{member_id} AND member_status=#{member_status}
 	</update>
+	
+	<select id="kakaoLogin" resultType="membership.MemberDTO">
+		SELECT * FROM member WHERE member_id=#{0}
+	</select>
 
 </mapper>
 

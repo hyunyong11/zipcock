@@ -38,7 +38,7 @@ public class MissionController {
 	
 	///mission/regist.do
 	//심부름 등록 요청(이미지업로드)
-	@RequestMapping(value="/mission/regist.do", method=RequestMethod.POST)
+	@RequestMapping(value="/mission_regist.do", method=RequestMethod.POST)
 	public String missonRegist(MissionDTO missionDTO, MultipartHttpServletRequest req, Model model) throws Exception {
 		
 		

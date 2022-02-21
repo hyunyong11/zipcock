@@ -63,16 +63,6 @@
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
 
-				<div class="dropdown">
-				  <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
-				    Dropdown button
-				  </button>
-				  <ul class="dropdown-menu">
-				    <li><a class="dropdown-item" href="#">Link 1</a></li>
-				    <li><a class="dropdown-item" href="#">Link 2</a></li>
-				    <li><a class="dropdown-item" href="#">Link 3</a></li>
-				  </ul>
-				</div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
@@ -710,14 +700,6 @@
     <div class="container">
 			    <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12">
-
-					<ul class="social-links">
-						<li><a class="wow fadeInUp animated" href="index.html#" style="visibility: visible; animation-name: fadeInUp;"><i class="fa fa-facebook"></i></a></li>
-						<li><a data-wow-delay=".1s" class="wow fadeInUp animated" href="index.html#" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;"><i class="fa fa-twitter"></i></a></li>
-						<li><a data-wow-delay=".2s" class="wow fadeInUp animated" href="index.html#" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;"><i class="fa fa-google-plus"></i></a></li>
-						<li><a data-wow-delay=".4s" class="wow fadeInUp animated" href="index.html#" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;"><i class="fa fa-pinterest"></i></a></li>
-						<li><a data-wow-delay=".5s" class="wow fadeInUp animated" href="index.html#" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;"><i class="fa fa-envelope"></i></a></li>
-					</ul>
 
                     <p class="copyright">
                         &copy; 2021 Zipcock

@@ -11,8 +11,11 @@
 <link rel="stylesheet" href="/zipcock/resources/css/joinmember.css">
 <style>
 body{
-  padding: 0;
-  margin: 0;
+	position: absolute;
+	left: 50%;
+	width: 700px;
+	transform: translate(-50%);
+	padding-top: 100px;
 }
 div{
   box-sizing: border-box;

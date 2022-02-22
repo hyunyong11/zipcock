@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+	해당 xml파일이 mapper역할을 하기 위해 반드시 필요한 Doctype이다. 
+	공식문서URL : https://mybatis.org/mybatis-3/configuration.html
+-->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<!--  
+	Mapper의 namespace속성
+	: 해당 매퍼파일을 호출하기 위해 정의한 인터페이스의 
+	패키지를 포함한 풀 경로를 기술한다. 해당 인터페이스는
+	컨트롤러와 Mapper(DAO) 사이에서 중재자 역할을 하는
+	서비스 객체로 사용된다. 
+--> 
+<mapper namespace="mybatis.MybatisDAOImpl">
+
+	<!-- ### 방명록 1차 버전에서 사용 ### -->
+	<!-- 게시물의 갯수를 카운트 한 후 정수타입으로 반환한다.  -->
+	<select id="getTotalCount" resultType="int">
+		SELECT COUNT(*) from review
+	</select>
+	
+	<!-- 목록에 출력할 게시물을 select한 후 결과는 ArrayList<MyBoardDTO> 
+	타입으로 반환하다. Mybatis는 레코드 인출을 위한 select계열의 쿼리문을 
+	실행할 경우 무조건 ArrayList<T> 으로 결과를 반환한다.  -->
+	<!-- 인터페이스에 정의된 listPage(int s, int e) 메서드 호출시 전달된 파라미터
+	s, e는 아래와 같이 param1, param2로 전달되어 사용된다. 즉, 인파라미터 설정시
+	별도의 메서드가 존재하지 않는다.  -->
+	<select id="listPage" resultType="mybatis.MyBoardDTO">			
+		SELECT * FROM (
+		    SELECT Tb.*, rownum rNum FROM (
+		        SELECT * FROM review ORDER BY review_num DESC
+		    ) Tb
+		)
+		WHERE rNum BETWEEN #{param1} AND #{param2}
+	</select>
+	
+	<!--  
+	@Param 어노테이션에서 지정한 별칭을 사용하여 인파라미터를 처리한다. 
+	일련번호는 기존과 동일하게 시퀀스를 통해 입력한다. 
+	-->
+	<insert id="write">
+		INSERT INTO review (review_num, review_id, review_point, review_content ,mission_num)
+		VALUES
+		( review_seq.nextval, #{_review_id}, #{_review_point},#{_review_content},#{_mission_category} ) 
+	</insert>
+	
+	<!--  
+	파라미터는 DTO객체에 저장한 후 Mapper로 전달하므로 parameterType 속성에
+	해당 DTO객체의 타입을 명시한다. EL에서 멤버변수명 만으로 값에 접근할 수 
+	있듯, Mapper에서도 동일하게 접근할 수 있다. 즉, getter()를 사용한다. 
+	조회된 결과는 MyBoardDTO객체에 저장한 후 반환한다. 
+	-->
+	<select id="view" resultType="mybatis.MyBoardDTO" 
+		parameterType="mybatis.ParameterDTO">
+		SELECT * FROM review WHERE review_num=#{review_num} AND review_id=#{review_id}
+	</select>	
+	 
+	<!-- 
+	수정처리. 전송된 폼값은 커맨드객체를 통해 한꺼번에 전달 받음으로
+	각 멤버변수의 getter()를 통해 인파라미터를 처리할 수 있다.  
+	-->
+		<update id="modify" parameterType="mybatis.MyBoardDTO">
+		UPDATE review 
+			SET	review_id=#{review_id}, review_content=#{review_content}
+			WHERE review_num=#{review_num} AND review_id=#{review_id}
+	</update>
+	<!-- 
+	삭제처리. 전달되는 파라미터 순으로 param1, 2형태로 인파라미터 처리함.
+	 -->
+	<delete id="delete">
+		DELETE FROM review WHERE review_num=#{param1}	AND review_id=#{param2}
+	</delete>	
+	
+	
+	
+</mapper>

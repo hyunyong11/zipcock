@@ -120,68 +120,13 @@ public class MemberController {
 			mv.setViewName("member/login");
 			return mv;
 		}
-		else if(dto != null){
+		else {
 			// 로그인에 성공한 경우 세션 영역에 MemberDTO객체를 저장한다.
 			session.setAttribute("siteUserInfo", dto); 
 			session.setAttribute("Id", dto.getMember_id());
 			session.setAttribute("UserName", dto.getMember_name());
 			session.setAttribute("UserStatus", dto.getMember_status());
 		}
-		/*
-		else if (req.getParameter("login_ok").equals("1") && !req.getParameter("kakaoemail").equals("")) {
-			// ==================== 카카오 로그인 ========================
-				
-			System.out.println("카카오로그인");
-			System.out.println(request.getParameter("kakaoemail"));
-			System.out.println(request.getParameter("kakaoname"));
-			System.out.println(request.getParameter("kakaobirth"));
-			
-			// kakaoemail을 kakaoid에 저장
-			String kakaoid = request.getParameter("kakaoemail");
-
-			UserTO userTo = new UserTO();
-
-			// kakaoid를 to의 id로 세팅
-			userTo.setId(kakaoid);
-
-			// 카카오계정으로 로그인한 적이 있는지 없는지 
-			int result_lookup = userDao.loginLookup(userTo);
-
-			if (result_lookup == 0) { // 회원이 아닌경우 (카카오 계정으로 처음 방문한 경우) 카카오 회원정보 설정 창으로 이동
-				System.out.println("카카오 회원 정보 설정");
-
-				request.setAttribute("kakaoid",request.getParameter("kakaoemail"));
-				request.setAttribute("kakaoname",request.getParameter("kakaoname"));
-				request.setAttribute("kakaobirth",request.getParameter("kakaobirth"));
-				request.setAttribute("kakaoemail",request.getParameter("kakaoemail"));
-				
-				// 회원가입창으로 이동
-				return "user/kakaoLogin_editForm";
-
-			} else { // 이미 카카오로 로그인한 적이 있을 때 (최초 1회 로그인때 회원가입된 상태)
-				// id, nick, profile을 가져와서
-				userTo = userDao.loginOkNick(userTo);
-				// id를 세션에 저장
-				session.setAttribute("kakaoid", userTo.getId());
-				// nick을 세션에 저장
-				session.setAttribute("nick", userTo.getNick());
-				// 프로필 사진 (profile)을 세션에 저장
-				session.setAttribute("profile", userTo.getProfile());
-				
-				request.setAttribute("flag", 0);
-				
-				System.out.println("kakaoid : " + userTo.getId());
-				System.out.println("nick : " + userTo.getNick());
-				System.out.println("profile : " + userTo.getProfile());
-			}
-
-		}
-
-		return "user/loginForm";
-	}*/
-		
-		
-		
 		
 		// 글쓰기 페이지로의 진입에 실패한 경우라면 backUrl을 통해 글쓰기 페이지로 이동시킨다.
 		String backUrl = req.getParameter("backUrl");
@@ -305,9 +250,8 @@ public class MemberController {
 	
 	
 	//카카오 로그인(작업중)
-	
 	@RequestMapping("/kakaoLogin.do")
-	public ModelAndView kakaoLogin(HttpServletRequest req, HttpSession session) {
+	public String kakaoLogin(HttpServletRequest req, HttpSession session) {
 		
 		System.out.println("카카오로그인");
 		System.out.println(req.getParameter("kakaoemail"));
@@ -318,7 +262,6 @@ public class MemberController {
 		//String kakaoname = req.getParameter("kakaoname");
 		
 		MemberDTO dto = sqlSession.getMapper(MemberImpl.class).kakaoLogin( req.getParameter("kakaoemail"));
-		ModelAndView mv = new ModelAndView();
 		
 		if (dto == null) { // 회원이 아닌경우 (카카오 계정으로 처음 방문한 경우) 카카오 회원정보 설정 창으로 이동
 			System.out.println("카카오 회원 정보 설정");
@@ -327,8 +270,8 @@ public class MemberController {
 			req.setAttribute("member_name",req.getParameter("kakaoname"));
 			
 			// 회원가입창으로 이동
-			mv.setViewName("member/memberInfo");
-			return mv;
+			
+			return "member/join_Kakao";
 			
 		} else { // 이미 카카오로 로그인한 적이 있을 때 (최초 1회 로그인때 회원가입된 상태)
 			
@@ -343,7 +286,54 @@ public class MemberController {
 
 		}
 		
-		return mv;
+		return "redirect:zipcock.do";
 	}
 	
+	
+	/*
+	 
+		else if (req.getParameter("login_ok").equals("1") && !req.getParameter("kakaoemail").equals("")) {
+			// ==================== 카카오 로그인 ========================
+				
+			System.out.println("카카오로그인");
+			System.out.println(req.getParameter("kakaoemail"));
+			System.out.println(req.getParameter("kakaoname"));
+			
+			// kakaoemail을 kakaoid에 저장
+			String kakaoid = req.getParameter("kakaoemail");
+
+			MemberDTO memberDTO = new MemberDTO();
+
+			// kakaoid를 to의 id로 세팅
+			memberDTO.setMember_id(kakaoid);
+
+			// 카카오계정으로 로그인한 적이 있는지 없는지 
+			MemberDTO result = sqlSession.getMapper(MemberImpl.class).kakaoLogin(
+					req.getParameter("id"));
+
+			if (result == null) { // 회원이 아닌경우 (카카오 계정으로 처음 방문한 경우) 카카오 회원정보 설정 창으로 이동
+				System.out.println("카카오 회원 정보 설정");
+
+				req.setAttribute("kakaoid",req.getParameter("kakaoemail"));
+				req.setAttribute("kakaoname",req.getParameter("kakaoname"));
+				
+				mv.setViewName("member/memberInfo");
+
+			} else { // 이미 카카오로 로그인한 적이 있을 때 (최초 1회 로그인때 회원가입된 상태)
+				// id, nick, profile을 가져와서
+				// id를 세션에 저장
+				session.setAttribute("member_id", result.getMember_id());
+				// nick을 세션에 저장
+				session.setAttribute("member_name", result.getMember_name());
+				
+				
+				System.out.println("kakaoid : " + result.getMember_id());
+				System.out.println("nick : " + result.getMember_name());
+			}
+
+		}
+		
+		
+	 
+	 */
 }

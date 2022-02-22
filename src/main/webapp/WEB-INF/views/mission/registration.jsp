@@ -18,7 +18,7 @@ if(session.getAttribute("Id") == null)  {
 %>
 <script>
 	alert('로그인 후 신청가능합니다.');
-	location.href="../memberLogin.do";
+	location.href="./memberLogin.do";
 </script>
 <%
 }

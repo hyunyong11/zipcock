@@ -21,34 +21,40 @@ window.Kakao.init('fd6202fdf742e1c361e44f8a65bdba05'); //발급받은 키 중 ja
 console.log(Kakao.isInitialized()); // sdk초기화여부판단
 
 //카카오로그인
-function kakaoLogin(){
-	window.Kakao.Auth.login({
-		scope:'profile_nickname, account_email',
-		success: function(authObj){
-			console.log(authObj);
-			window.Kakao.API.request({
-				url: '/v2/user/me',
-				success: res => {
-					const email = res.kakao_account.email;
-					const name = res.properties.nickname;
-					
-					console.log(email);
-					console.log(name);
-					
-					$('#kakaoemail').val(email);
-					$('#kakaoname').val(name);
-					document.loginForm.submit();
-				}
-			});
-			
-		}
-	});
-}
+function kakaoLogin() {
+    Kakao.Auth.login({
+      success: function (response) {
+        Kakao.API.request({
+          url: '/v2/user/me',
+          success: function (response) {
+        	  console.log(response)
+	       	  const email = response.kakao_account.email;
+			  const name = response.properties.nickname;
+			  
+			  console.log(email);
+			  console.log(name);
+			  
+			 /*  $('#kakaoemail').val(email);
+			  $('#kakaoname').val(name); */
+			  $('input[name=kakaoemail]').attr('value',email);
+			  $('input[name=kakaoname]').attr('value',name);
+			  location.href='kakaoLogin.do';
+          },
+          fail: function (error) {
+            console.log(error)
+          },
+        })
+      },
+      fail: function (error) {
+        console.log(error)
+      },
+    })
+  }
 //카카오로그아웃  
 function kakaoLogout() {
     if (Kakao.Auth.getAccessToken()) {
       Kakao.API.request({
-        url: '/logout.do',
+        url: '/v1/user/unlink',
         success: function (response) {
         	console.log(response)
         },
@@ -58,7 +64,7 @@ function kakaoLogout() {
       })
       Kakao.Auth.setAccessToken(undefined)
     }
-  }  
+  }
 </script>
 <div class="container">
 <!-- 바디 -->
@@ -127,8 +133,8 @@ function kakaoLogout() {
 					     <!-- 카카오 로그인 버튼 -->
 						<div id="kakaologin">
 							<div class="kakaobtn">
-								<input type="hidden" name="kakaoemail" id="kakaoemail" />
-								<input type="hidden" name="kakaoname" id="kakaoname" />
+								<input type="hid-den" name="kakaoemail" id="kakaoemail" value=""/>
+								<input type="hid-den" name="kakaoname" id="kakaoname" value=""/>
 								<a href="javascript:kakaoLogin();"> 
 									<img src="/zipcock/resources/img/kakao_login_medium_wide.png" style="width: 100%;"/>
 								</a>

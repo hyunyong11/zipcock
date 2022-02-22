@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -17,8 +18,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import board.util.PagingUtil;
+import membership.MemberDTO;
 import mission.MissionDTO;
 import mission.MissionImpl;
+import mission.ParameterDTO;
+
 
 
 @Controller
@@ -34,13 +39,85 @@ public class MissionController {
 		
 	}
 	
+	
+	/*
+	 방명록리스트 Ver02
+	 : 페이징 기능과 검색 기능을 동시에 구현(기존 Ver01을 업그레이드)
+	 */
+	@RequestMapping("HList.do")
+	public String listSearch(Model model, HttpServletRequest req) {
+		
+		// Mapper로 전달할 파라미터를 저장할 DTO객체 생성
+		ParameterDTO parameterDTO = new ParameterDTO();
+		// 검색어가 있을 경우 저장
+		parameterDTO.setSearchField(req.getParameter("searchField"));
+		parameterDTO.setSearchTxt(req.getParameter("searchTxt"));
+		System.out.println("검색어: "+ parameterDTO.getSearchTxt());
+		
+		// 게시물 카운트(DTO객체를 인수로 전달)
+		int totalRecordCount =
+				sqlSession.getMapper(MissionImpl.class)
+					.getTotalCountSearch(parameterDTO);
+		System.out.println("totalRecordCount= "+ totalRecordCount);
+		
+		int pageSize = 4; 
+		int blockPage = 2;
+		int totalPage =
+				(int)Math.ceil((double)totalRecordCount/pageSize);
+		
+		int nowPage = (req.getParameter("nowPage")==null || req.getParameter("nowPage").equals("")) 
+				? 1 : Integer.parseInt(req.getParameter("nowPage"));
+		
+		int start = (nowPage-1) * pageSize + 1;
+		int end = nowPage * pageSize;
+		
+		// 게시물의 구간을 DTO에 저장
+		parameterDTO.setStart(start);
+		parameterDTO.setEnd(end);
+		
+		// 출력할 게시물 select(DTO객체를 인수로 전달)
+		ArrayList<MissionDTO> lists = 
+				sqlSession.getMapper(MissionImpl.class)
+					.listPageSearch(parameterDTO);
+		
+		String pagingImg =
+				PagingUtil.pagingImg(
+						totalRecordCount,
+						pageSize, blockPage, nowPage,
+						req.getContextPath()
+							+"/HList.do?");
+		model.addAttribute("pagingImg", pagingImg);
+		
+		for(MissionDTO dto : lists) {
+			
+			String temp =
+					dto.getMission_content().replace("\r\n", "<br/>");
+			dto.setMission_content(temp);
+			
+			String mStart = dto.getMission_start();
+			String mEnd = dto.getMission_end();
+			
+			String Addr =
+					mStart.substring(0, mStart.lastIndexOf("|")+1);
+					
+			String Addr2 =
+					mEnd.substring(0, mEnd.lastIndexOf("|")+1);
+			
+			dto.setMission_start(Addr);
+			dto.setMission_end(Addr2);
+		}
+		model.addAttribute("lists", lists);
+		
+		// 검색기능이 추가된 View를 반환
+		return "mission/HList";
+		
+	}
 
 	
 	///mission/regist.do
 	//심부름 등록 요청(이미지업로드)
 	@RequestMapping(value="/mission_regist.do", method=RequestMethod.POST)
-	public String missonRegist(MissionDTO missionDTO, MultipartHttpServletRequest req, Model model) throws Exception {
-		
+	public String missonRegist(MissionDTO missionDTO, MultipartHttpServletRequest req, Model model,  HttpSession session) throws Exception {
 		
 		//물리적 경로 얻어오기
 		String path = req.getSession().getServletContext().getRealPath("/resources/upload");

@@ -65,11 +65,25 @@
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
+                    	<!-- <li class="nav-item dropdown">
+				          <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				            Cock Service
+				          </a>
+				          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+				            <li><a class="dropdown-item" href="HList.do">List</a></li>
+				            <li><a class="dropdown-item" href="#">Another action</a></li>
+				            <li><a class="dropdown-item" href="#">Something else here</a></li>
+				          </ul>
+				        </li> -->
+                    
                         <li>
                             <a class="page-scroll" href="#about">About</a>
                         </li>
                         <li>
                             <a class="page-scroll" href="#how-it-works">How it works</a>
+                        </li>
+                      <li>
+                            <a class="page-scroll" href="HList.do">Cock</a>
                         </li>
                         <li>
                             <a class="page-scroll" href="#Notice">Notice</a>
@@ -103,7 +117,7 @@
                             <a class="page-scroll" href="logout.do">Logout</a>
                         </li>
                         <li>
-                            <a class="page-scroll" href="myPage.do">MyPage</a>
+                            <a class="page-scroll" href="mypage.do">MyPage</a>
                         </li>
                         </c:when>
                         <c:otherwise>
@@ -111,7 +125,7 @@
                             <a class="page-scroll" href="logout.do">Logout</a>
                         </li>
                         <li>
-                            <a class="page-scroll" href="myPage.do">MyPage</a>
+                            <a class="page-scroll" href="mypage.do">MyPage</a>
                         </li>
                         </c:otherwise>
                         </c:choose>
@@ -183,7 +197,7 @@
     <div class="container">
      <span class="angle2"></span>
     <span class="angle"></span>
- 	<form method="get" action="mission/select.do">
+ 	<form method="get" action="mission_select.do">
      <div class="row">
 	 
        <div class="col-xs-12 col-sm-12 col-md-12 wow bounceIn animated headding" data-wow-delay=".5s">

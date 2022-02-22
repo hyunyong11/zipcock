@@ -43,6 +43,13 @@ public class MainController {
 		return "member/welcomAlert";
 	}
 	
+	//회원정보 변경시 알림창
+	@RequestMapping("/changeAlert.do")
+	public String changeAlter() {
+		
+		return "member/changeAlert";
+	}
+	
 	//로그인
 	@RequestMapping("/memberLogin.do")
 	public String memberLogin() {
@@ -64,28 +71,30 @@ public class MainController {
 		return "member/find_Idpw";
 	}
 	
-	/*
+	
 	//마이페이지
 	@RequestMapping("/mypage.do")
 	public String mypage() {
 	
 		return "member/mypage";
 	}
-	*/
 	
-	//심부름 페이지 이동
-	@RequestMapping(value="/mission/select.do", method=RequestMethod.GET)
+	
+	//심부름 요청 페이지 이동
+	@RequestMapping(value="/mission_select.do", method=RequestMethod.GET)
 	public String missionSelect()  {
 		
 		return "mission/registration";
 	}
 	
-	//회원정보 변경시 알림창
-	@RequestMapping("/changeAlert.do")
-	public String changeAlter() {
-		
-		return "member/changeAlert";
-	}
+//	//심부름 리스트
+//	@RequestMapping("/HList.do")
+//	public String HList() {
+//	
+//		return "mission/HList";
+//	}
+	
+	
 	
 
 }

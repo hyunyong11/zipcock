@@ -80,7 +80,7 @@
                             <a class="page-scroll" href="#about">About</a>
                         </li>
                         <li>
-                            <a class="page-scroll" href="#Cock">Cock</a>
+                            <a class="page-scroll" href="HList.do">Cock</a>
                         </li>
                         <li>
                             <a class="page-scroll" href="#Notice">Notice</a>
@@ -91,7 +91,10 @@
                         <li>
                             <a class="page-scroll" href="#contact">Contact</a>
                         </li>
-                        
+                         <!-- <li>
+                            <a href="webSocket.do" target="_blank">웹소켓</a>
+                        </li>
+                         -->
                         <!-- 로그인 유무에 따른 join logout -->
                         <c:choose>
                         <c:when test="${ empty sessionScope.siteUserInfo }">
@@ -193,6 +196,11 @@
     <div class="container">
      <span class="angle2"></span>
     <span class="angle"></span>
+    <style>
+    button img{
+        margin-top: 40px;
+    }
+    </style>
     <form method="get" action="mission_select.do">
      <div class="row">
     

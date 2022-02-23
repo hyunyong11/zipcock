@@ -9,10 +9,15 @@
 
 <link rel="stylesheet" href="/zipcock/resources/css/errandform.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
 </head>
 <%
 String flag = request.getParameter("flag");
 String id = (String)session.getAttribute("Id");
+String email = (String)session.getAttribute("Email");
+String name = (String)session.getAttribute("UserName");
+String tel = (String)session.getAttribute("Phone");
  
 if(session.getAttribute("Id") == null)  {
 %>
@@ -26,7 +31,7 @@ else if((session.getAttribute("UserStatus").equals(3))){
 %>	
 <script>
 	alert('현재 심부름 신청이 불가능합니다.');
-	location.href="../zipcock.do";
+	location.href="./zipcock.do";
 </script>
 <%
 }
@@ -42,11 +47,12 @@ $(document).ready(function() {
 <!-- 우편번호 API -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
+
 /* 출발지 */
 function startZipFind(){
     new daum.Postcode({
         oncomplete: function(data) {
-            var form = document.miss_regiForm;
+            var form = document.form1;
             form.mission_start1.value = data.address; //기본주소
             form.mission_start2.focus() //상세주소
         }
@@ -56,7 +62,7 @@ function startZipFind(){
 function wayZipFind(){
     new daum.Postcode({
         oncomplete: function(data) {
-            var form = document.miss_regiForm;
+            var form = document.form1;
             form.mission_waypoint1.value = data.address; //기본주소
             form.mission_waypoint2.focus();//상세주소
         }
@@ -66,13 +72,14 @@ function wayZipFind(){
 function endZipFind(){
     new daum.Postcode({
         oncomplete: function(data) {
-            var form = document.miss_regiForm;
+            var form = document.form1;
             form.mission_end1.value = data.address; //기본주소
             form.mission_end2.focus();//상세주소
         }
     }).open();
 }
 /* 최소 심부름 금액 */
+
 function validateForm(form) {
 	if(form.mission_cost.value < 3000){ 
 	    alert("최소 심부름 금액은 3,000원 입니다.");
@@ -81,6 +88,8 @@ function validateForm(form) {
 	    return false;
 	}
 }
+
+
 /* 즉시, 예약 */
 function setDisplay(){
     if($('input:radio[id=imm]').is(':checked')){
@@ -89,6 +98,9 @@ function setDisplay(){
         $('#selectBox1').show();
     }
 }
+
+
+
 
 </script>
 
@@ -114,10 +126,13 @@ function setDisplay(){
       <div id="content">
 
          <!-- form in -->
-         <form name ="miss_regiForm" method="post" onsubmit="return validateForm(this)" enctype="multipart/form-data" action='<c:url value="/mission_regist.do"/>'>
-            <input type="hid-den" name="mission_id" value="<%= id %>">
-            <input type="hid-den" name="mission_status" value="1">
-            <input type="hid-den" name="mission_Hid" value="">
+         <form name="form1" id="form1" method="post" onsubmit="return validateForm(this);" enctype="multipart/form-data" action='<c:url value="/mission_pay.do"/>'>
+            <input type="hidden" name="mission_id" value="<%= id %>">
+            <input type="hidden" name="buyer_emaill" value="<%= email %>">
+            <input type="hidden" name="buyer_name" value="<%= name %>">
+            <input type="hidden" name="buyer_tel" value="<%= tel %>">
+            <input type="hidden" name="mission_status" value="1">
+            <input type="hidden" name="mission_Hid" value="">
             <!-- <input type="hid-den" name="mission_category" value="del"> -->
 
             <!-- 가격/심부름 종류 -->
@@ -276,8 +291,7 @@ function setDisplay(){
                <button type="submit" id="btnJoin">
                   <span>등록하기</span>
                </button>
-            </div>
-
+            </div> 
          </form> 
          <!-- form out -->
 

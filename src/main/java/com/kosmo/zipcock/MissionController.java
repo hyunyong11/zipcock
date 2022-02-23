@@ -320,6 +320,13 @@ public class MissionController {
 		
 	}
 	
+	//심부름 결제 API
+	@RequestMapping(value="/mission_pay.do", method=RequestMethod.POST)
+    public String pay(Model model, HttpServletRequest request)  {
+        String referer = request.getHeader("referer");
+        model.addAttribute("referer", referer);
+        return "mission/pay";
+    }
 	
 	
 }

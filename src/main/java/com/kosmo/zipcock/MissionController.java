@@ -179,5 +179,147 @@ public class MissionController {
 		return uuid;
 	}
 	
+	//헬퍼 마이페이지 요청내역
+	@RequestMapping("/HInfoAll.do")
+	public String hInfoAll(Model model, HttpServletRequest req) {
+		
+		
+		int totalRecordCount =
+			sqlSession.getMapper(MissionImpl.class).getTotalCount();
+		
+		//페이지 처리를 위한 설정값
+		int pageSize = 4;//한 페이지당 출력할 게시물의 갯수
+		int blockPage = 2;//한 블럭당 출력할 페이지번호의 갯수
+		//전체 페이지 수 계산
+		int totalPage = (int)Math.ceil((double)totalRecordCount/pageSize);
+		//현제페이지 번호 설정
+		/*
+		방명록URL?nowPage=		-> 이경우 페이지번호는 빈값
+		방명록URL?nowPage=10	-> 10으로 설정
+		방명록URL				-> null로 판단
+		*/
+		//페이지번호가 null이거나 빈값인 경우 1페이지로 설정한다. 
+		int nowPage = (req.getParameter("nowPage")==null || req.getParameter("nowPage").equals("")) 
+			? 1 : Integer.parseInt(req.getParameter("nowPage"));
+		
+		//해당 페이지에 출력할 게시물의 구간을 계산한다. 
+		int start = (nowPage-1) * pageSize + 1;
+		int end = nowPage * pageSize;
+		
+		/*
+		서비스 역할의 인터페이스의 추상메서드를 호출하면 mapper가 동작됨
+		전달된 파라미터는 #{param1}과 같이 순서대로 사용한다. 
+		 */
+		ArrayList<MissionDTO> lists =
+			sqlSession.getMapper(MissionImpl.class).listPage(start, end);
+				
+		String pagingImg =
+			PagingUtil.pagingImg(totalRecordCount, pageSize, blockPage, nowPage,
+				req.getContextPath()+"/hInfoAll.do?");
+		model.addAttribute("pagingImg", pagingImg);
+		
+		//내용에 대한 줄바꿈 처리
+		for(MissionDTO dto : lists){
+			String temp = dto.getMission_id().replace("\r\n","<br/>");
+			
+			dto.setMission_id(temp);
+		}
+		model.addAttribute("lists", lists);
+		
+		
+		return "/member/hInfoAll";
+	}
+	
+	//마이페이지 사용자 사용내역
+	@RequestMapping("/CInfoAll.do")
+	public String cInfoAll(Model model, HttpServletRequest req) {
+		
+		//방명록 테이블의 게시물의 갯수 카운트
+		/*
+		컨트롤러에서 Service객체 역할을 하는 interface에 정의된 추상메서드를 
+		호출한다. 그러면 mapper에 정의된 쿼리문이 실행되는 형식으로 동작한다. 
+		동작방식] 컨트롤러에서 메서드 호출 -> interface의 추상메서드 호출
+			-> namespace에 해당 interface를 namespace로 지정된 매퍼 선택
+			-> 추상메서드와 동일한 이름의 id속성을 가진 엘리먼트 선택
+			-> 쿼리문 실행 및 결과 반환
+		 */
+		int totalRecordCount =
+			sqlSession.getMapper(MissionImpl.class).getTotalCount();
+		
+		//페이지 처리를 위한 설정값
+		int pageSize = 4;//한 페이지당 출력할 게시물의 갯수
+		int blockPage = 2;//한 블럭당 출력할 페이지번호의 갯수
+		//전체 페이지 수 계산
+		int totalPage = (int)Math.ceil((double)totalRecordCount/pageSize);
+		//현제페이지 번호 설정
+		/*
+		방명록URL?nowPage=		-> 이경우 페이지번호는 빈값
+		방명록URL?nowPage=10	-> 10으로 설정
+		방명록URL				-> null로 판단
+		*/
+		//페이지번호가 null이거나 빈값인 경우 1페이지로 설정한다. 
+		int nowPage = (req.getParameter("nowPage")==null || req.getParameter("nowPage").equals("")) 
+			? 1 : Integer.parseInt(req.getParameter("nowPage"));
+		
+		//해당 페이지에 출력할 게시물의 구간을 계산한다. 
+		int start = (nowPage-1) * pageSize + 1;
+		int end = nowPage * pageSize;
+		
+		/*
+		서비스 역할의 인터페이스의 추상메서드를 호출하면 mapper가 동작됨
+		전달된 파라미터는 #{param1}과 같이 순서대로 사용한다. 
+		 */
+		ArrayList<MissionDTO> lists =
+			sqlSession.getMapper(MissionImpl.class).listPage(start, end);
+				
+		String pagingImg =
+			PagingUtil.pagingImg(totalRecordCount, pageSize, blockPage, nowPage,
+				req.getContextPath()+"/cInfoAll.do?");
+		model.addAttribute("pagingImg", pagingImg);
+		
+		//내용에 대한 줄바꿈 처리
+		for(MissionDTO dto : lists){
+			String temp = dto.getMission_id().replace("\r\n","<br/>");
+			
+			dto.setMission_id(temp);
+		}
+		model.addAttribute("lists", lists);
+		
+		
+		return "/member/cInfoAll";
+	}
+	
+	//마이페이지 사용자 사용내역 자세히 보기
+	@RequestMapping("/missionCDetail.do")
+	public String missionCDetail(Model model, HttpServletRequest req) {
+			
+			int mission_num = Integer.parseInt(req.getParameter("mission_num"));
+
+			ArrayList<MissionDTO> lists =
+				sqlSession.getMapper(MissionImpl.class).missionCDetail(mission_num);
+					
+		model.addAttribute("lists", lists);
+		
+		return "/member/missionCDetail";
+		
+	}
+	
+	//마이페이지 헬퍼 요청내역 자세히 보기
+	@RequestMapping("/missionHDetail.do")
+	public String missionHDetail(Model model, HttpServletRequest req) {
+		
+		
+		int  mission_num = Integer.parseInt(req.getParameter("mission_num"));
+
+		ArrayList<MissionDTO> lists =
+			sqlSession.getMapper(MissionImpl.class).missionHDetail(mission_num);
+				
+		model.addAttribute("lists", lists);
+		
+		return "/member/missionHDetail";
+		
+	}
+	
+	
 	
 }

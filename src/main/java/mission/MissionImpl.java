@@ -40,4 +40,13 @@ public interface MissionImpl {
 	
 	// 기존 게시물의 내용을 읽어오기 위한 메서드
 	public MissionDTO view(ParameterDTO parameterDTO);
+	
+	//사용자 상세보기
+	public ArrayList<MissionDTO> missionCDetail(int idx);
+	
+	//헬퍼 상세보기
+	public ArrayList<MissionDTO> missionHDetail(int idx);
+	
+	
+	
 }

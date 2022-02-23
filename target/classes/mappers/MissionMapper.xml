@@ -24,6 +24,25 @@
 						</if>
 						 )
 	</insert>
+	
+	<select id="listPage" resultType="mission.MissionDTO">
+		SELECT * FROM mission
+	</select>
+	
+	<select id="missionCDetail" resultType="mission.MissionDTO">
+		SELECT * FROM mission WHERE mission_num = #{mission_num}
+	</select>
+	
+	<select id="missionHDetail" resultType="mission.MissionDTO">
+		SELECT * FROM mission WHERE mission_num = #{mission_num}
+	</select>
+	
+	<select id="getTotalCount" resultType="int">
+		SELECT COUNT(*) from mission
+	</select>
+	
+	
+	
 
 	
 </mapper>

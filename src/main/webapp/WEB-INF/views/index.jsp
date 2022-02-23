@@ -3,9 +3,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <!--
-	Canvas by TEMPLATE STOCK
-	templatestock.co @templatestock
-	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+   Canvas by TEMPLATE STOCK
+   templatestock.co @templatestock
+   Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
 -->
 <html lang="en">
 <head>  
@@ -22,7 +22,7 @@
     <!-- =============== Google fonts =============== -->
     <link href='https://fonts.googleapis.com/css?family=Oswald:400,300' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
-	<!-- =============== fonts awesome =============== -->
+   <!-- =============== fonts awesome =============== -->
     <link rel="stylesheet" href="/zipcock/resources/css/font-awesome.min.css" type="text/css">
     <!-- =============== Plugin CSS =============== -->
     <link rel="stylesheet" href="/zipcock/resources/css/animate.min.css" type="text/css">
@@ -65,34 +65,28 @@
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
-                    	<!-- <li class="nav-item dropdown">
-				          <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				            Cock Service
-				          </a>
-				          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-				            <li><a class="dropdown-item" href="HList.do">List</a></li>
-				            <li><a class="dropdown-item" href="#">Another action</a></li>
-				            <li><a class="dropdown-item" href="#">Something else here</a></li>
-				          </ul>
-				        </li> -->
+                       <!-- <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Cock Service
+                      </a>
+                      <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                        <li><a class="dropdown-item" href="HList.do">List</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                      </ul>
+                    </li> -->
                     
                         <li>
                             <a class="page-scroll" href="#about">About</a>
                         </li>
                         <li>
-                            <a class="page-scroll" href="#how-it-works">How it works</a>
-                        </li>
-                      <li>
-                            <a class="page-scroll" href="HList.do">Cock</a>
+                            <a class="page-scroll" href="#Cock">Cock</a>
                         </li>
                         <li>
                             <a class="page-scroll" href="#Notice">Notice</a>
                         </li>
                         <li>
                             <a class="page-scroll" href="#Screenshots">Screenshots</a>
-                        </li>
-                        <li>
-                            <a class="page-scroll" href="#Price">Price</a>
                         </li>
                         <li>
                             <a class="page-scroll" href="#contact">Contact</a>
@@ -109,8 +103,8 @@
                         </li>
                         <!-- 사용자로 로그인시 헬퍼 회원가입 가능하도록 -->
                         </c:when>
-                       	<c:when test="${sessionScope.siteUserInfo.member_status eq 1 }">
-                       	<li>
+                          <c:when test="${sessionScope.siteUserInfo.member_status eq 1 }">
+                          <li>
                             <a class="page-scroll" href="memberRegist.do">Join</a>
                         </li>
                         <li>
@@ -132,7 +126,7 @@
                         
                         <!-- 권한이 어드민일때만 어드민 출력 -->
                         <c:choose>
-                       	<c:when test="${sessionScope.siteUserInfo.member_status eq 0 }">
+                          <c:when test="${sessionScope.siteUserInfo.member_status eq 0 }">
                         <li>
                             <a class="page-scroll" href="./resources/adminpage/index.jsp" target="_blank">Admin</a>
                         </li>
@@ -148,7 +142,7 @@
     </nav>
     <!-- =============== header =============== -->
     <header>
-		<!-- =============== container =============== -->
+      <!-- =============== container =============== -->
         <div class="container">
             <div class="header-content row">
                 <div class="col-xs-12 col-sm-5 col-md-5">
@@ -165,45 +159,50 @@
                 </div>
             </div>
         </div>
-		<!-- =============== container end =============== -->
+      <!-- =============== container end =============== -->
     </header>
     <!-- =============== About =============== -->
     <section id="about" class="">
-		<!-- =============== container =============== -->
+      <!-- =============== container =============== -->
         <div class="container">
             <span class="angle2"></span>
             <span class="angle"></span>
             <span></span>
             <div class="row">
-                <div class="col-xs-12 col-sm-5 col-md-3 wow fadeInLeft animated" data-wow-delay=".5s">
+                <div class="col-xs-12 col-sm-5 col-md-3 wow fadeInLeft animated"  data-wow-delay=".5s">
                     <h1><span>HELLO!</span> '집콕'을 소개합니다.</h2>      
                   </div>
-                  <div class="col-xs-12 col-sm-7 col-md-9 wow fadeInRight animated" data-wow-delay=".5s">
-                  <h2>집콕서비스를 소개합니다.</h2>
-                  <p>집콕서비스는 매우매우 좋음</P>
-
-                     <p>소개글쓰기</p>
-
-                    <p>짱좋음</p>     
-					<p>핵좋음</p>
-                  </div>     
+                  
+                  <div class="col-xs-12 col-sm-7 col-md-9 wow fadeInRight animated" style="padding-left: 130px" data-wow-delay=".5s">
+                  <h2 style="color: #ff4c00">최근 3년 연속 국내 배달앱 시장 중</h2>
+                  <h2 style="color: #ff4c00">주문상품 대비 고객 포인트 적립율 1위!</h2>
+                  <br />
+                  <h4>우리집 안방 10km 내 유통된 모든 물건을 집앞까지 콕!!!</h4>
+                  <br />
+                     <h4>배달의 시작과 끝을 책임지는 실시간 위치 서비스로 한눈에 콕!!!</h4>
+                  <br />
+                    <h4>심부름꾼 후기 열람 기능을 통한 선순환 배달 안전 서비스 보장 콕!!!</h4>     
+                  </div>  
             </div>
         </div>   
-		<!-- =============== container end =============== -->		
+      <!-- =============== container end =============== -->      
     </section>
     <!-- =============== how it works =============== -->
-    <section id="how-it-works" class="parallax">
-	<!-- =============== container =============== -->
+    <section id="Cock" class="parallax">
+   <!-- =============== container =============== -->
     <div class="container">
      <span class="angle2"></span>
     <span class="angle"></span>
- 	<form method="get" action="mission_select.do">
+    <form method="get" action="mission_select.do">
      <div class="row">
-	 
+    
        <div class="col-xs-12 col-sm-12 col-md-12 wow bounceIn animated headding" data-wow-delay=".5s">
+           <br /><br />
            <h2>심부름 <span>요청하기</span></h2>
+           <br /><br /><br />
        </div>
-	
+       
+   
       <div class="col-xs-12 col-sm-4 col-md-4">
          <div class="row">     
           <div class="col-xs-10 col-sm-10 col-md-10 wow fadeInLeft animated textright" data-wow-delay=".5s">
@@ -288,100 +287,98 @@
           <div class="col-xs-10 col-sm-10 col-md-10 wow fadeInRight animated textleft" data-wow-delay=".7s">
             <h3>&nbsp;&nbsp;기타</h3>
               <p></p>     
+              
           </div>
-           
+         
         </div>        
       </div>
     </div>
    </form>
     </div>   
-	<!-- =============== container end =============== -->	
+   <!-- =============== container end =============== -->   
     </section>
     
     
     <!-- =============== Price =============== -->
     <section id="Notice" class="">
-	<!-- =============== container =============== -->
+   <!-- =============== container =============== -->
      <div class="container">
      <span class="angle2"></span>
-     <span></span>
+     <div class="row">
 
-      <div class="row">
 
-         <div class="col-xs-12 col-sm-12 col-md-12 wow zoomIn animated headding" data-wow-delay=".1s">
-        </div>
 
        <div class="col-xs-12 col-sm-12 col-md-12 wow zoomIn animated headding" data-wow-delay=".1s">
        <section class="cusMainFaqList">
-       	<h3 class="subTitle4C">&nbsp;&nbsp;&nbsp;&nbsp;NOTICE</h3>
-		<div class="container">
-		<h2>공지사항</h2>
+          <h3 class="subTitle4C">&nbsp;&nbsp;&nbsp;&nbsp;NOTICE</h3>
+      <div class="container">
+      <h2>공지사항</h2>
 
-			
-		<table border="1" width="100%">
-			<tr>
-				<td align="center" style="background-color: lightgray;">
-					집에서 심부름을 콕! 집콕!
-				</td>
-			</tr>
-		</table>
-		
-		<!-- table>tr*2>td*5 -->
-		<table class="table table-bordered" id="dataTable" width="90%" cellspacing="0" >
-			<tr style="background-color: #ffc654">
-				<th width="10%" style="text-align: center">번호</th>
-				<th width="*" >제목</th>
-				<th width="15%" style="text-align: center">작성자</th>
-				<th width="10%" style="text-align: center">작성일</th>
-				<th width="15%" style="text-align: center">조회수</th>
-			</tr> 
-			<c:choose>
-				<c:when test="${empty listRows }">
-					<tr>
-						<td colspan="6" class="text-center">
-							등록된 게시물이 없습니다 ^^*
-						</td>
-					</tr>
-				</c:when>
-			<c:otherwise>
-				<c:forEach items="${listRows }" var="row" 
-					varStatus="loop">
-					<!-- 리스트반복시작 -->
-					<tr>
-						<td class="text-center">${row.virtualNum }</td>
-						<td class="text-left">
-							<a href="./NoticeV.do?num=${row.mboard_num}
-								&nowPage=${nowPage}">${row.mboard_title}</a>
-						</td>
-						<td class="text-center">${row.mboard_id }</td>
-						<td class="text-center">${row.mboard_date }</td>
-						<td class="text-center">${row.mboard_count }</td>
-					</tr>
-					
-					<!-- 리스트반복끝 -->
-				</c:forEach>
-			</c:otherwise>
-			</c:choose>
-			<table border="1" width="100%">
-				<tr>
-					<td align="center" style="background-color: lightgray;">
-						집에서 심부름을 콕! 집콕!
-					</td>
-				</tr>
-			</table>
-		<!-- 페이지 번호 -->
-			<table border="0" width="100%">
-				<tr>
-					<td align="center">
-					<button type="button" style="background-color: #ffc654; font-weight: bold"
-						onclick="location.href='Notice.do'">더 보기</button>
-					</td>
-				</tr>	
-			</table>
-		</table>
-		</div>
-			
-		<a href="Notice.do" class="more">전체보기</a>
+         
+      <table border="1" width="100%">
+         <tr>
+            <td align="center" style="background-color: lightgray;">
+               집에서 심부름을 콕! 집콕!
+            </td>
+         </tr>
+      </table>
+      
+      <!-- table>tr*2>td*5 -->
+      <table class="table table-bordered" id="dataTable" width="90%" cellspacing="0" >
+         <tr style="background-color: #ffc654">
+            <th width="10%" style="text-align: center">번호</th>
+            <th width="*" >제목</th>
+            <th width="15%" style="text-align: center">작성자</th>
+            <th width="10%" style="text-align: center">작성일</th>
+            <th width="15%" style="text-align: center">조회수</th>
+         </tr> 
+         <c:choose>
+            <c:when test="${empty listRows }">
+               <tr>
+                  <td colspan="6" class="text-center">
+                     등록된 게시물이 없습니다 ^^*
+                  </td>
+               </tr>
+            </c:when>
+         <c:otherwise>
+            <c:forEach items="${listRows }" var="row" 
+               varStatus="loop">
+               <!-- 리스트반복시작 -->
+               <tr>
+                  <td class="text-center">${row.virtualNum }</td>
+                  <td class="text-left">
+                     <a href="./NoticeV.do?num=${row.mboard_num}
+                        &nowPage=${nowPage}">${row.mboard_title}</a>
+                  </td>
+                  <td class="text-center">${row.mboard_id }</td>
+                  <td class="text-center">${row.mboard_date }</td>
+                  <td class="text-center">${row.mboard_count }</td>
+               </tr>
+               
+               <!-- 리스트반복끝 -->
+            </c:forEach>
+         </c:otherwise>
+         </c:choose>
+         <table border="1" width="100%">
+            <tr>
+               <td align="center" style="background-color: lightgray;">
+                  집에서 심부름을 콕! 집콕!
+               </td>
+            </tr>
+         </table>
+      <!-- 페이지 번호 -->
+         <table border="0" width="100%">
+            <tr>
+               <td align="center">
+               <button type="button" style="background-color: #ffc654; font-weight: bold"
+                  onclick="location.href='Notice.do'">더 보기</button>
+               </td>
+            </tr>
+            <br />
+         </table>
+      </table>
+      </div>
+         
         </section>
         </div>
         </div>    <!-- =============== container end =============== -->  
@@ -389,10 +386,9 @@
 
     <!-- =============== Screenshots =============== -->
     <section id="Screenshots" class="">
-	<!-- =============== container =============== -->
+   <!-- =============== container =============== -->
     <div class="container">
     <span class="angle2"></span>
-    <span class="angle"></span>
      <div class="row">
 
        <div class="col-xs-12 col-sm-12 col-md-12 wow bounceIn animated headding" data-wow-delay=".1s">
@@ -457,272 +453,87 @@
             <img src="/zipcock/resources/img/owl4.jpg" alt="Owl Image">
           </div>
          </div>
-		 <!-- =============== popup large image end =============== -->
+       <!-- =============== popup large image end =============== -->
       </div>
       
     </div>
     </div>      
-	</div><!-- =============== container end =============== -->
+   </div><!-- =============== container end =============== -->
     </section>
-    <!-- =============== Price =============== -->
-    <section id="Price" class="">
-	<!-- =============== container =============== -->
-        <div class="container">
-        <span class="angle2"></span>
-        <span class="angle"></span>
-
-         <div class="row">
-
-            <div class="col-xs-12 col-sm-12 col-md-12 wow zoomIn animated headding" data-wow-delay=".1s">
-               <h2>자주하는 질문 <span></span></h2>
-               <p>Display your mobile apps awesome features with icon lists and an image carousel of each page. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation.</p>
-           </div>
-           
-				<style>
-				.cusMainFaqList {
-					position: relative;
-		            display: block;
-		            overflow: hidden;
-		            margin: 0;
-				    padding: 0;
-				}
-				article, aside, canvas, details, figcaption, figure, footer, header, hgroup, nav, menu, nav, section, main {
-				    display: block;
-				}
-				.subTitle4C{
-				    text-align: center;
-				}
-				.cusMainFaqList .list {
-					overflow: hidden;
-					border: 1px solid #222;
-				}
-				.cusMainFaqList .list ul {
-					margin: -1px;
-					display: block;
-				    list-style-type: disc;
-				    margin-block-start: 1em;
-				    margin-block-end: 1em;
-				    margin-inline-start: 0px;
-				    margin-inline-end: 0px;
-				    padding-inline-start: 40px;
-			     	padding-left: 0px;
-				}
-				.cusMainFaqList .list ul:after {content: ""; display: block; clear: both;}
-				.cusMainFaqList .list li {
-					position: relative;
-					float: left;
-					width: 20%; height: 184px;
-				    list-style: none;
-				    display: list-item;
-		  				text-align: -webkit-match-parent;
-				}
-				.cusMainFaqList .list a {
-					position: absolute;
-					top: 0; right: 0; bottom: 0; left: 0;
-					padding: 90px 32px 0;
-					color: #222;
-					transition: all .3s;
-				    font-family: inherit;
-				    font-size: inherit;
-				    line-height: inherit;
-				    letter-spacing: inherit;
-				    color: inherit;
-				    text-decoration: none;
-				    outline: none;
-				}
-				.cusMainFaqList .list a:after {
-					content: "";
-					position: absolute;
-					top: 0; right: 0; bottom: -1px; left: -1px;
-					border: 1px solid #dcdcdc;
-					transition: all .3s;
-				}
-				.cusMainFaqList .list a:hover {
-					background: #104138;
-					color: #fff;
-					z-index: 2;
-				}
-				.cusMainFaqList .list a:hover:after {border-color: #104138;}
-				.cusMainFaqList .list .num {
-					position: absolute;
-					top: 40px; left: 32px;
-					font: 30px/1.2 'roboR';
-				}
-				.cusMainFaqList .list .txt {
-					display: block;
-					display: -webkit-box;
-					max-height: 70px;
-					overflow: hidden;
-					-webkit-line-clamp: 3;
-					-webkit-box-orient: vertical;
-				}
-				.cusMainFaqList .more {
-					position: absolute;
-					top: 15px; right: 10px;
-					padding-right: 9px;
-					font-size: 14px;
-					/* background: url('../images/common/arw_btn_more.png') no-repeat 100% 50%; */
-				}
-				
-		   </style>
-          <div class="col-xs-12 col-sm-12 col-md-12 wow zoomIn animated headding" data-wow-delay=".1s">
-          <section class="cusMainFaqList">
-          <h3 class="subTitle4C">FAQ</h3>
-
-			<div class="list">
-			<ul>
-				<li>
-					<!-- <a href="https://www.innisfree.com/kr/ko/FaqList.do?seq=1"> -->
-					<a href="#">
-						<span class="num">1</span>
-						<span class="txt">질문1</span>
-					</a>
-				</li>
-			
-				<li>
-					<a href="#">
-						<span class="num">2</span>
-						<span class="txt">질문2</span>
-					</a>
-				</li>
-			
-				<li>
-					<a href="#">
-						<span class="num">3</span>
-						<span class="txt">질문3</span>
-					</a>
-				</li>
-			
-				<li>
-					<a href="#">
-						<span class="num">4</span>
-						<span class="txt">질문4</span>
-					</a>
-				</li>
-			
-				<li>
-					<a href="#">
-						<span class="num">5</span>
-						<span class="txt">질문5</span>
-					</a>
-				</li>
-			
-				<li>
-					<a href="#">
-						<span class="num">6</span>
-						<span class="txt">질문6</span>
-					</a>
-				</li>
-			
-				<li>
-					<a href="#">
-						<span class="num">7</span>
-						<span class="txt">질문7</span>
-					</a>
-				</li>
-			
-				<li>
-					<a href="#">
-						<span class="num">8</span>
-						<span class="txt">질문8</span>
-					</a>
-				</li>
-			
-				<li>
-					<a href="#">
-						<span class="num">9</span>
-						<span class="txt">질문9</span>
-					</a>
-				</li>
-			
-				<li>
-					<a href="#">
-						<span class="num">10</span>
-						<span class="txt">질문10</span>
-					</a>
-				</li>
-			
-			
-			</ul>
-		</div>
-		<a href="#" class="more">전체보기</a>
-        </section>
-        </div>
-        </div>    <!-- =============== container end =============== -->  
-        </section>
+   
     <!-- =============== Contact =============== -->
     <section id="contact">
-	<!-- =============== container =============== -->
-		<div class="container">
-			    <div class="row">
+   <!-- =============== container =============== -->
+      <div class="container">
+             <div class="row">
                  <div class="col-xs-12 col-sm-12 col-md-12 wow bounceIn animated headding" data-wow-delay=".1s">
                    <h2>Contact <span>Us</span></h2>
                    <p>Display your mobile apps awesome features with icon lists and an image carousel of each page. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation.</p>
                </div>
 
 
-			</div>
+         </div>
 
-			<div class="row">
+         <div class="row">
 
-				<div class="col-xs-12 col-sm-4 col-md-4 wow bounceIn animated" data-wow-delay=".1s">
+            <div class="col-xs-12 col-sm-4 col-md-4 wow bounceIn animated" data-wow-delay=".1s">
 
-					<form>
-						<div class="ajax-hidden">
-							<div class="form-group wow fadeInUp animated">
-								<label for="c_name" class="sr-only">Name</label>
-								<input type="text" placeholder="Name" name="c_name" class="form-control" id="c_name">
-							</div>
+               <form>
+                  <div class="ajax-hidden">
+                     <div class="form-group wow fadeInUp animated">
+                        <label for="c_name" class="sr-only">Name</label>
+                        <input type="text" placeholder="Name" name="c_name" class="form-control" id="c_name">
+                     </div>
 
-							<div data-wow-delay=".1s" class="form-group wow fadeInUp animated">
-								<label for="c_email" class="sr-only">Email</label>
-								<input type="email" placeholder="E-mail" name="c_email" class="form-control" id="c_email">
-							</div>
+                     <div data-wow-delay=".1s" class="form-group wow fadeInUp animated">
+                        <label for="c_email" class="sr-only">Email</label>
+                        <input type="email" placeholder="E-mail" name="c_email" class="form-control" id="c_email">
+                     </div>
 
-							<div data-wow-delay=".2s" class="form-group wow fadeInUp animated">
-								<textarea placeholder="Message" rows="7" name="c_message" id="c_message" class="form-control"></textarea>
-							</div>
+                     <div data-wow-delay=".2s" class="form-group wow fadeInUp animated">
+                        <textarea placeholder="Message" rows="7" name="c_message" id="c_message" class="form-control"></textarea>
+                     </div>
 
-							<button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit">Send Message</button>
-						</div>
-						<div class="ajax-response"></div>
-					</form>
+                     <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit">Send Message</button>
+                  </div>
+                  <div class="ajax-response"></div>
+               </form>
 
-				</div>
+            </div>
                 <div class="col-xs-12 col-sm-4 col-md-4 wow bounceIn animated map" data-wow-delay=".5s">
 
-					  <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d6508922.473104964!2d-123.76275651635396!3d37.19583981824279!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sCalifornia%2C+United+States!5e0!3m2!1sen!2sin!4v1450994260631" width="100%" height="250" frameborder="0" style="border:0" allowfullscreen></iframe>
+                 <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d6508922.473104964!2d-123.76275651635396!3d37.19583981824279!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sCalifornia%2C+United+States!5e0!3m2!1sen!2sin!4v1450994260631" width="100%" height="250" frameborder="0" style="border:0" allowfullscreen></iframe>
 
-				</div>
+            </div>
                  <div class="col-xs-12 col-sm-4 col-md-4 wow bounceIn animated" data-wow-delay=".6s">
 
-					  <section id="text-15" class="widget widget_text">
+                 <section id="text-15" class="widget widget_text">
                          <h3 class="widget-title">California, United States</h3> <div class="textwidget">785, Firs Avenue, place Mall,<br>
                         <p>Tel: 01 234-56786<br>
                         Mobile: 01 234-56786<br>
                         E-mail: <a href="#">info@templatestock.com</a></p>
-                        <a href="#">Get directions on the map</a> â</div>
+                        <a href="#">Get directions on the map</a> â  </div>
                     </section>
 
-				</div>                
-			</div>
-		</div><!-- =============== container end =============== -->
-	</section>
+            </div>                
+         </div>
+      </div><!-- =============== container end =============== -->
+   </section>
     <!-- Footer -->
     <footer id="footer">
-	<!-- =============== container =============== -->
+   <!-- =============== container =============== -->
     <div class="container">
-			    <div class="row">
+             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12">
 
                     <p class="copyright">
                         &copy; 2021 Zipcock
-					</p>
+               </p>
 
-				</div>
-			</div>
+            </div>
+         </div>
     </div><!-- =============== container end =============== -->
-	</footer>
+   </footer>
     <!-- =============== jQuery =============== -->
     <script src="/zipcock/resources/js/jquery.js"></script>
     <!-- =============== Bootstrap Core JavaScript =============== -->
@@ -748,44 +559,44 @@
     </script>
     <!-- 챗봇 코드 -->
     <script>
-	  (function() {
-	    var w = window;
-	    if (w.ChannelIO) {
-	      return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
-	    }
-	    var ch = function() {
-	      ch.c(arguments);
-	    };
-	    ch.q = [];
-	    ch.c = function(args) {
-	      ch.q.push(args);
-	    };
-	    w.ChannelIO = ch;
-	    function l() {
-	      if (w.ChannelIOInitialized) {
-	        return;
-	      }
-	      w.ChannelIOInitialized = true;
-	      var s = document.createElement('script');
-	      s.type = 'text/javascript';
-	      s.async = true;
-	      s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
-	      s.charset = 'UTF-8';
-	      var x = document.getElementsByTagName('script')[0];
-	      x.parentNode.insertBefore(s, x);
-	    }
-	    if (document.readyState === 'complete') {
-	      l();
-	    } else if (window.attachEvent) {
-	      window.attachEvent('onload', l);
-	    } else {
-	      window.addEventListener('DOMContentLoaded', l, false);
-	      window.addEventListener('load', l, false);
-	    }
-	  })();
-	  ChannelIO('boot', {
-	    "pluginKey": "9145fc6d-f292-46af-b22a-2e630b92ab68"
-	  });
-	</script>
+     (function() {
+       var w = window;
+       if (w.ChannelIO) {
+         return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
+       }
+       var ch = function() {
+         ch.c(arguments);
+       };
+       ch.q = [];
+       ch.c = function(args) {
+         ch.q.push(args);
+       };
+       w.ChannelIO = ch;
+       function l() {
+         if (w.ChannelIOInitialized) {
+           return;
+         }
+         w.ChannelIOInitialized = true;
+         var s = document.createElement('script');
+         s.type = 'text/javascript';
+         s.async = true;
+         s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
+         s.charset = 'UTF-8';
+         var x = document.getElementsByTagName('script')[0];
+         x.parentNode.insertBefore(s, x);
+       }
+       if (document.readyState === 'complete') {
+         l();
+       } else if (window.attachEvent) {
+         window.attachEvent('onload', l);
+       } else {
+         window.addEventListener('DOMContentLoaded', l, false);
+         window.addEventListener('load', l, false);
+       }
+     })();
+     ChannelIO('boot', {
+       "pluginKey": "9145fc6d-f292-46af-b22a-2e630b92ab68"
+     });
+   </script>
 </body>
 </html>

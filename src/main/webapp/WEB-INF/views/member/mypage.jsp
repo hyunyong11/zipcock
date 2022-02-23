@@ -1,21 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    pageEncoding="UTF-8"%> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
 <!DOCTYPE html>
 <html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>로그인</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-<link rel="stylesheet" href="/zipcock/resources/css/joinmember.css">
+<style>
 <style>
 body{
-	position: absolute;
-	left: 50%;
-	width: 700px;
-	transform: translate(-50%);
-	padding-top: 100px;
+  padding: 0;
+  margin: 0;
 }
 div{
   box-sizing: border-box;
@@ -62,11 +56,11 @@ div{
 
 /* 단골상점 , 상품후기 , 적립금 박스 */
 .summaryContainer{
-  background-color: white;  
+  background-color: lightgray;  
   display: flex;  
   padding: 21px 16px;  
-  height: 90px;
-  margin-bottom: 10px;
+  height: 170px;
+  boder: 1px solid black;
 }
 /* 단골상점 , 상품후기 , 적립금 */
 .summaryContainer .item{
@@ -142,6 +136,7 @@ div{
   text-decoration: none;  
   height: 56px;
   box-sizing: border-box;
+ 
 }
 .listContainer .icon{  
   margin-right: 14px;
@@ -204,86 +199,389 @@ div{
 /*   background-color: #f8f8f8; */
 }
 </style>
+</style>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>공지사항</title>
+    
+
+    <!-- =============== Bootstrap Core CSS =============== -->
+    <link rel="stylesheet" href="/zipcock/resources/css/bootstrap.min.css" type="text/css">
+    <!-- =============== Google fonts =============== -->
+    <link href='https://fonts.googleapis.com/css?family=Oswald:400,300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+   <!-- =============== fonts awesome =============== -->
+    <link rel="stylesheet" href="/zipcock/resources/css/font-awesome.min.css" type="text/css">
+    <!-- =============== Plugin CSS =============== -->
+    <link rel="stylesheet" href="/zipcock/resources/css/animate.min.css" type="text/css">
+    <!-- =============== Custom CSS =============== -->
+    <link rel="stylesheet" href="/zipcock/resources/css/style.css" type="text/css">
+    <!-- =============== Owl Carousel Assets =============== -->
+    <link href="/zipcock/resources/owl-carousel/owl.carousel.css" rel="stylesheet">
+    <link href="/zipcock/resources/owl-carousel/owl.theme.css" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
 <body>
-<div class="wrap">
-  <div class="greenContainer">
-    <div>
-      <div class="grade"><h2>마이 페이지</h2></div>
-      
-    </div>      
-  </div>
-  <div class="summaryContainer">
-    <div class="item">
-        <div class="number">${sessionScope.siteUserInfo.member_name }</div>
-        <div>니이름</div>
+<!-- =============== Preloader =============== -->
+    <!-- <div id="preloader">
+        <div id="loading">
+        </div>
+    </div> -->
+    <!-- =============== nav =============== -->
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top" style="background-color: black">
+        <div class="container">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="zipcock.do"><img src="/zipcock/resources/img/logo.png" alt="Logo">
+                    </a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                       
+                        
+                        <!-- 로그인 유무에 따른 join logout -->
+                        <c:choose>
+                        <c:when test="${ empty sessionScope.siteUserInfo }">
+                        <li>
+                            <a class="page-scroll" href="memberLogin.do">Login</a>
+                        </li>
+                         <li>
+                            <a class="page-scroll" href="memberRegist.do">Join</a>
+                        </li>
+                        <!-- 사용자로 로그인시 헬퍼 회원가입 가능하도록 -->
+                        </c:when>
+                          <c:when test="${sessionScope.siteUserInfo.member_status eq 1 }">
+                          <li>
+                            <a class="page-scroll" href="memberRegist.do">Join</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="logout.do">Logout</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="myPage.do">MyPage</a>
+                        </li>
+                        <li>
+                           <a href="Notice.do" class="item">Notice</a>  
+                   </li>  
+                   <li>
+                      <a href="serviceCenter.do" class="item">Q&A</a> 
+                   </li>   
+                        </c:when>
+                        <c:otherwise>
+                        <li>
+                            <a class="page-scroll" href="logout.do">Logout</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="myPage.do">MyPage</a>
+                        </li>
+                        <li>
+                           <a href="Notice.do" class="item">Notice</a>  
+                   </li>  
+                    <li>
+                      <a href="serviceCenter.do" class="item">Q&A</a> 
+                   </li> 
+                        </c:otherwise>
+                        </c:choose>
+                        
+                        <!-- 권한이 어드민일때만 어드민 출력 -->
+                        <c:choose>
+                          <c:when test="${sessionScope.siteUserInfo.member_status eq 0 }">
+                        <li>
+                            <a class="page-scroll" href="./resources/adminpage/index.jsp" target="_blank">Admin</a>
+                        </li>
+                        </c:when>
+                        </c:choose>
+                    </ul>
+                </div>
+                <!-- =============== navbar-collapse =============== -->
+
+            </div>
+        </div>
+        <!-- =============== container-fluid =============== -->
+    </nav>
+
+<div class="container">
+   
+    <!-- =============== Price =============== -->
+    <section id="" class="">
+   <!-- =============== container =============== -->
+        <div class="container">
+        <span class="angle2"></span>
+        <span class="angle"></span>
+
+         <div class="row">
+   
+          <div class="col-xs-12 col-sm-12 col-md-12 wow zoomIn animated headding" data-wow-delay=".1s">
+          <section class="cusMainFaqList">
+             <br /><br /><br /><br /><br /><br /><br />
+          <div class="col-xs-12 col-sm-12 col-md-12 wow bounceIn animated headding" data-wow-delay=".1s">
+                   <h2>My <span>Page</span></h2>
+               </div>
+          
+          
+          <div class="summaryContainer" style="border:0px solid red;margin-top:50px;">
+
+
+
+    <div class="item" style=" background-color: #fc6b32;" >
+        <div style="font-size:30px; border:1px solid black;  ">이름
+        </div>
+        <div style="font-size:30px; border:1px solid black;  ">
+        <br />${sessionScope.siteUserInfo.member_name }</div>
+ 
       </div>
-      <c:choose>
-          <c:when test="${sessionScope.siteUserInfo.member_status eq 1 }">
-         <div class="item">
-           <div class="number">나는 사용자 내 요청사항</div>
-           <div><a href="CInfoAll.do">아직 구현못함 ㅠ</a></div>
-         </div>
-         </c:when>
-         <c:when test="${sessionScope.siteUserInfo.member_status eq 2 }">
-         <div class="item">
-           <div class="number">나는 헬퍼 내가 한 심부름들</div>
-           <div><a href="HInfoAll.do">아직 구현못함 ㅠ</a></div>
-         </div>
-         </c:when>
-         <c:otherwise>
-         <div class="item">
-           <div class="number">그외</div>
-           <div>아직 구현못함 ㅠ</div>
-         </div>
-         </c:otherwise>
-      </c:choose>
-      <div class="item">
-        <div class="number">${sessionScope.siteUserInfo.member_point }</div>
-        <div>보유포인트</div>
+      
+      
+      
+      <div class="item" style=" background-color: #fc6b32;">
+        <div style="font-size:30px; border:1px solid black;  ">보유포인트
+        </div>
+        <div style="font-size:30px; border:1px solid black;  ">
+        <br />${sessionScope.siteUserInfo.member_point }</div>
       </div>
   </div>  
     
   </div>  
-  <div class="listContainer">
-    <a href="myPage.do" class="item">
-        <div class="icon">ii</div>
-        <div class="text">회원정보수정<span class="circle"></span></div>
-        <div class="right"> > </div>
-    </a>
-    <a href="#" class="item">
-        <div class="icon">ii</div>
-        <div class="text">회원탈퇴</div>
-        <div class="right"> > </div>
-    </a>
-    <c:choose>
-       <c:when test="${sessionScope.siteUserInfo.member_status eq 1 }">
-          <a href="CInfo.do" class="item">
-              <div class="icon">ii</div>
-              <div class="text">정보</div>
-              <div class="right"> > </div>
-            </a>
-       </c:when>
-       <c:when test="${sessionScope.siteUserInfo.member_status eq 2 }">
-          <a href="review.do" class="item">
-              <div class="icon">ii</div>
-              <div class="text">리뷰보기</div>
-              <div class="right"> > </div>
-            </a>
-       </c:when>
-    </c:choose>
-  </div>
   <div class="infoContainer">
-    <a href="notice.do" class="item">
-      <div>공지사항</div>
-    </a>    
-    <a href="serviceCenter.do" class="item">
-      <div>FAQ</div>
-    </a>    
-    <a href="download.do" class="item">
-      <div>앱 다운로드</div>
-    </a>
+    
   </div>
 </div>
+         
+      
+        </section>
+        </div>
+        </div>    <!-- =============== container end =============== -->  
+        </section>
+         <div class="container">
+        <span class="angle2"></span>
+        <span class="angle"></span>
+
+         <div class="row">
+
+            
+           
+            <style>
+            .cusMainFaqList {
+               position: relative;
+                  display: block;
+                  overflow: hidden;
+                  margin: 0;
+                padding: 0;
+            }
+            article, aside, canvas, details, figcaption, figure, footer, header, hgroup, nav, menu, nav, section, main {
+                display: block;
+            }
+            .subTitle4C{
+                text-align: center;
+            }
+            .cusMainFaqList .list {
+                  overflow: hidden;
+                  padding-left: 20%;
+                  
+               }
+            .cusMainFaqList .list ul {
+               margin: -1px;
+               display: block;
+                list-style-type: disc;
+                margin-block-start: 1em;
+                margin-block-end: 1em;
+                margin-inline-start: 0px;
+                margin-inline-end: 0px;
+                padding-inline-start: 40px;
+                 padding-left: 0px;
+            }
+            .cusMainFaqList .list ul:after {content: ""; display: block; clear: both;}
+            .cusMainFaqList .list li {
+               position: relative;
+               float: left;
+               width: 20%; height: 184px;
+                list-style: none;
+                display: list-item;
+                    text-align: -webkit-match-parent;
+            }
+            .cusMainFaqList .list a {
+               position: absolute;
+               top: 0; right: 0; bottom: 0; left: 0;
+               padding: 90px 32px 0;
+               color: #222;
+               transition: all .3s;
+                font-family: inherit;
+                font-size: inherit;
+                line-height: inherit;
+                letter-spacing: inherit;
+                color: inherit;
+                text-decoration: none;
+                outline: none;
+            }
+            .cusMainFaqList .list a:after {
+               content: "";
+               position: absolute;
+               top: 0; right: 0; bottom: -1px; left: -1px;
+               border: 1px solid #dcdcdc;
+               transition: all .3s;
+            }
+            .cusMainFaqList .list a:hover {
+               background: #ff4c00;
+               color: #fff;
+               z-index: 2;
+            }
+            .cusMainFaqList .list a:hover:after {border-color: #104138;}
+            .cusMainFaqList .list .num {
+               position: absolute;
+               top: 40px; left: 32px;
+               font: 30px/1.2 'roboR';
+            }
+            .cusMainFaqList .list .txt {
+               display: block;
+               display: -webkit-box;
+               max-height: 70px;
+               overflow: hidden;
+               -webkit-line-clamp: 3;
+               -webkit-box-orient: vertical;
+            }
+            .cusMainFaqList .more {
+               position: absolute;
+               top: 15px; right: 10px;
+               padding-right: 9px;
+               font-size: 14px;
+               /* background: url('../images/common/arw_btn_more.png') no-repeat 100% 50%; */
+            }
+            
+         </style>
+         
+         
+          <div class="col-xs-12 col-sm-12 col-md-12 wow zoomIn animated headding" data-wow-delay=".1s">
+              <br /><br /><section class="cusMainFaqList">
+
+         <div class="list" style="width:100%;">
+         <ul style="margin-left: auto; margin-right: auto;">
+         <li style="background-color: lightgray;">
+            <!-- <a href="https://www.innisfree.com/kr/ko/FaqList.do?seq=1"> -->
+            <a href="myPage.do">
+                   <div class="text" style="font-size:1.3em">회원정보수정</div></span>
+            </a>
+         </li>
+      
+         
+         <li style="background-color: lightgray; ">
+            <a href="#">
+               <a href="review.do" class="item">
+                         <div class="text" style="font-size:1.5em">리뷰보기</div>
+                    </a>
+            </a>
+         </li>
+         
+         <li style="background-color: lightgray;">
+            <a href="#">
+            <c:choose>
+                   <c:when test="${sessionScope.siteUserInfo.member_status eq 1 }">
+            
+                    <a href="CInfoAll.do" class="item">
+                       <div class="text" style="font-size:1.5em">요청내용</div>
+                       <div class="text" style="font-size:1.5em">보기</div>
+                   </a>
+                  </c:when>
+                  <c:when test="${sessionScope.siteUserInfo.member_status eq 2 }">
+                    <a href="HInfoAll.do" class="item">
+                       <div class="text" style="font-size:1.5em">수행내용</div>
+                       <div class="text" style="font-size:1.5em">보기</div>
+                    </a>
+                   </c:when>
+               </c:choose>
+            </a>
+         </li>
+         <li style="background-color: lightgray;">
+            <a href="#" class="item">
+                 <div class="text" style="font-size:1.5em">회원탈퇴</div>
+             </a>
+         </li>   
+         </ul>
+      </div>
+      
+        </section>
+        </div>
+        </div>    <!-- =============== container end =============== --> 
+    <!-- =============== jQuery =============== -->
+    <script src="/zipcock/resources/js/jquery.js"></script>
+    <!-- =============== Bootstrap Core JavaScript =============== -->
+    <script src="/zipcock/resources/js/bootstrap.min.js"></script>
+    <!-- =============== Plugin JavaScript =============== -->
+    <script src="/zipcock/resources/js/jquery.easing.min.js"></script>
+    <script src="/zipcock/resources/js/jquery.fittext.js"></script>
+    <script src="/zipcock/resources/js/wow.min.js"></script>
+    <!-- =============== Custom Theme JavaScript =============== -->
+    <script src="/zipcock/resources/js/creative.js"></script>
+    <!-- =============== owl carousel =============== -->
+    <script src="/zipcock/resources/owl-carousel/owl.carousel.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#owl-demo").owlCarousel({
+                autoPlay: 3000,
+                items: 3,
+                itemsDesktop: [1199, 3],
+                itemsDesktopSmall: [979, 3]
+            });
+
+        });
+    </script>
+    <!-- 챗봇 코드 -->
+    <script>
+     (function() {
+       var w = window;
+       if (w.ChannelIO) {
+         return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
+       }
+       var ch = function() {
+         ch.c(arguments);
+       };
+       ch.q = [];
+       ch.c = function(args) {
+         ch.q.push(args);
+       };
+       w.ChannelIO = ch;
+       function l() {
+         if (w.ChannelIOInitialized) {
+           return;
+         }
+         w.ChannelIOInitialized = true;
+         var s = document.createElement('script');
+         s.type = 'text/javascript';
+         s.async = true;
+         s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
+         s.charset = 'UTF-8';
+         var x = document.getElementsByTagName('script')[0];
+         x.parentNode.insertBefore(s, x);
+       }
+       if (document.readyState === 'complete') {
+         l();
+       } else if (window.attachEvent) {
+         window.attachEvent('onload', l);
+       } else {
+         window.addEventListener('DOMContentLoaded', l, false);
+         window.addEventListener('load', l, false);
+       }
+     })();
+     ChannelIO('boot', {
+       "pluginKey": "9145fc6d-f292-46af-b22a-2e630b92ab68"
+     });
+   </script>
 </body>
 </html>

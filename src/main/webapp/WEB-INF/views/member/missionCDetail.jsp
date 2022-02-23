@@ -123,9 +123,9 @@
           <section class="cusMainFaqList">
           <br /><br /><br /><br /><br /><br /><br />
           
-          <h3 class="subTitle4C">&nbsp;&nbsp;&nbsp;&nbsp;NOTICE</h3>
+          <h3 class="subTitle4C">&nbsp;&nbsp;&nbsp;&nbsp;My Page</h3>
 		<div class="container">
-			<h2>공지사항</h2>
+			<h2>요청내역</h2>
 
     <div class="card-body">
         <div class="table-responsive">

@@ -275,9 +275,7 @@ div{
                         <li>
                             <a class="page-scroll" href="logout.do">Logout</a>
                         </li>
-                        <li>
-                            <a class="page-scroll" href="myPage.do">MyPage</a>
-                        </li>
+                        
                         <li>
                            <a href="Notice.do" class="item">Notice</a>  
                    </li>  
@@ -289,9 +287,7 @@ div{
                         <li>
                             <a class="page-scroll" href="logout.do">Logout</a>
                         </li>
-                        <li>
-                            <a class="page-scroll" href="myPage.do">MyPage</a>
-                        </li>
+                      
                         <li>
                            <a href="Notice.do" class="item">Notice</a>  
                    </li>  

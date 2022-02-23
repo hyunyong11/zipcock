@@ -34,11 +34,10 @@ function kakaoLogin() {
 			  console.log(email);
 			  console.log(name);
 			  
-			 /*  $('#kakaoemail').val(email);
-			  $('#kakaoname').val(name); */
-			  $('input[name=kakaoemail]').attr('value',email);
-			  $('input[name=kakaoname]').attr('value',name);
-			  location.href='kakaoLogin.do';
+			  $('#kakaoemail').val(email);
+			  $('#kakaoname').val(name);
+			  //location.href='kakaoLogin.do';
+			  document.loginForm.submit();
           },
           fail: function (error) {
             console.log(error)

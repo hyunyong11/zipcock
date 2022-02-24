@@ -94,17 +94,20 @@ public class MissionController {
 					dto.getMission_content().replace("\r\n", "<br/>");
 			dto.setMission_content(temp);
 			
-			String mStart = dto.getMission_start();
+			String mWay = dto.getMission_waypoint();
+			
+			if (mWay != null) {
+				String Addr =
+					mWay.substring(0, mWay.lastIndexOf("|")+1);
+				dto.setMission_waypoint(Addr);
+			}
+			
 			String mEnd = dto.getMission_end();
+			String Addr2[] =
+					mEnd.split("|");
+//					mEnd.substring(0, mEnd.lastIndexOf("|")+1);
 			
-			String Addr =
-					mStart.substring(0, mStart.lastIndexOf("|")+1);
-					
-			String Addr2 =
-					mEnd.substring(0, mEnd.lastIndexOf("|")+1);
-			
-			dto.setMission_start(Addr);
-			dto.setMission_end(Addr2);
+			dto.setMission_end(Addr2[2]);
 		}
 		model.addAttribute("lists", lists);
 		

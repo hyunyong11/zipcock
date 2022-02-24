@@ -1,3 +1,13 @@
+/****************************
+    zipcock 서비스
+*****************************/
+
+-- System계정에서 생성
+create user zipcock identified by 1234;
+grant connect, resource to zipcock;
+
+-- 여기부터 zipcock으로 진행
+-- 멤버 테이블 생성
 create table member (
     member_name varchar2(50) not null,
     member_id varchar2(20) primary key,
@@ -95,38 +105,50 @@ commit;
 
 ------------------------------------------------------------------------------------------------------------
 create table mission (
-    mission_num number primary key not null,
+    mission_num number primary key,
     mission_id varchar2(20) not null,
-    mission_category number not null,
+    mission_category varchar(50) not null,
     mission_name varchar2(50) not null,
-    mission_content varchar2(200) not null,
-    mission_file varchar2(200),
-    mission_sex number,
+    mission_content varchar2(300) not null,
+    mission_ofile varchar2(200),
+    mission_sfile varchar2(200),
+    mission_sex number default 1 not null,
     mission_Hid varchar2(20),
-    mission_start varchar2(50) not null,
-    mission_end varchar2(50) not null,
-    mission_waypoint varchar2(50),
-    mission number not null,
+    mission_start varchar2(200),
+    mission_waypoint varchar2(200),
+    mission_end varchar2(200) not null,
+    mission_mission number not null,
     mission_reservation varchar2(50),
     mission_time varchar(20) not null,
     mission_cost number not null,
-    mission_status number not null 
+    mission_status number default 1 not null 
 );
 
-insert into mission 
-(mission_num, mission_id, mission_category, mission_name, mission_content,
-mission_start, mission_end, mission, mission_time, mission_cost, mission_status)
-values ('1', 'test1', '0', '배달', '즉시(10~20)분', '출발좌표', '도착좌표', '1', '1', '4000', '0');
+drop table mission;
+
+create sequence mission_seq
+    increment by 1
+    start with 1
+    minvalue 1
+    nomaxvalue
+    nocycle
+    nocache;
+drop sequence mission_seq;
 
 insert into mission 
 (mission_num, mission_id, mission_category, mission_name, mission_content,
-mission_start, mission_end, mission, mission_time, mission_cost, mission_status)
-values ('2', 'test2', '1', '청소', '예약(20~30)', '출발좌표', '도착좌표', '2', '2', '4000', '1');
+mission_start, mission_end, mission_mission, mission_time, mission_cost, mission_status)
+values (mission_seq.nextval, 'test1', '배달,장보기', '배달해주세요', '떡볶이 배달해주세요~~', '출발좌표', '도착좌표', '1', '1', '4000', '1');
 
 insert into mission 
 (mission_num, mission_id, mission_category, mission_name, mission_content,
-mission_start, mission_end, mission, mission_time, mission_cost, mission_status)
-values ('3', 'test3', '2', '설치', '즉시(10분이내)', '출발좌표', '도착좌표', '1', '0', '4000', '3');
+mission_start, mission_end, mission_mission, mission_reservation, mission_time, mission_cost, mission_status)
+values (mission_seq.nextval, 'hong', '청소,집안일', '청소요청!', '깨끗하게 청소부탁해요^^', '출발좌표', '도착좌표', '2', '2022-02-20', '4', '10000', '2');
+
+insert into mission 
+(mission_num, mission_id, mission_category, mission_name, mission_content, mission_sex,
+mission_start, mission_end, mission_mission, mission_time, mission_cost, mission_status)
+values (mission_seq.nextval, 'sim', '역할대행', '역할대행', '마법사 역할이요', '2', '출발좌표', '도착좌표', '1', '5', '30000', '3');
 
 commit;
 select * from mission;

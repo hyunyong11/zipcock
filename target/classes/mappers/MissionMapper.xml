@@ -25,6 +25,46 @@
 						 )
 	</insert>
 	
+	
+	
+	<!-- ### 방명록 2차 버전에서 사용 ### -->
+	<!-- 1차 버전에서 사용했던 <select>를 그대로 복사한 후 if문을 추가하여 조건부 쿼리문을 작성한다. 또한 컨트롤러가 
+		전달한 파라미터가 DTO객체에 저장되어 있으므로, parameterType을 추가해야 한다. -->
+	<select id="getTotalCountSearch" resultType="int"
+		parameterType="mission.ParameterDTO">
+		SELECT COUNT(*) from mission
+		<!-- 검색어가 null이 아니면서 빈값이 아닐 때만 동적으로 where절을 추가한다. -->
+		<!-- $: 양쪽으로 '(싱글쿼테이션)을 붙이지 않는다. #: 양쪽에 '을 붙인다. -->
+		<if test="searchTxt!=null and !searchTxt.equals('')">
+			<!-- ||은 concat이라서 ... -->
+			WHERE ${searchField} like '%'||#{searchTxt}||'%'
+		</if>
+		
+		
+	</select>
+
+	<!-- 목록에 출력할 게시물을 select한 후 결과는 ArrayList<MyBoardDTO> 타입으로 반환한다. Mybatis는 
+		레코드 인출을 위한 select계열의 쿼리문을 실행할 경우 무조건 ArrayList<T>로 결과를 반환한다. -->
+	<!-- 인터페이스에 정의된 listPage(int s, int e) 메서드 호출 시 전달된 파라미터 s, e는 아래와 같이 param1, 
+		param2로 전달되어 사용된다. 즉, 인파라미터 설정 시 별도의 메서드가 존재하지 않는다. -->
+	<select id="listPageSearch" resultType="mission.MissionDTO"
+		parameterType="mission.ParameterDTO">
+		SELECT * FROM (
+			SELECT Tb.*, rownum rNum FROM (
+				SELECT * FROM mission
+				<if test="searchTxt!=null and !searchTxt.equals('')">
+					WHERE ${searchField} like '%'||#{searchTxt}||'%'
+				</if>
+				ORDER BY mission_num DESC
+			) Tb
+		)
+		WHERE rNum <![CDATA[>=]]> #{start} AND rNum <![CDATA[<=]]> #{end}
+		
+		
+	</select>
+	<!-- CDATA: Unparsed Chracter Data. 파싱되지 않는 문자데이터. Mapper에서는 꺽쇄로 시작되는 모든 
+		문자열을 엘리먼트로 판단하기 때문에 쿼리문 사이에 비교연산자를 사용할 때는 반드시 위와 같이 처리해야 한다. -->
+	
 	<select id="listPage" resultType="mission.MissionDTO">
 		SELECT * FROM mission
 	</select>

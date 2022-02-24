@@ -65,4 +65,16 @@ public class HomeController {
 		return "index";
 	}
 	
+	//웹소켓 연결
+	@RequestMapping(value="/webSocket.do", method=RequestMethod.GET)
+	public String webSocket() {
+		return "mission/webSocket";
+	}
+	
+	//1:1챗연결
+	@RequestMapping(value="/webChat.do", method=RequestMethod.GET)
+	public String webChat() {
+		return "mission/webChat";
+	}
+	
 }

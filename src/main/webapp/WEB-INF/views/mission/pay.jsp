@@ -4,14 +4,15 @@
 <%@ page session="false" %>
 <% request.setCharacterEncoding("euc-kr");
 String id = request.getParameter("mission_id");
+int mission = Integer.parseInt(request.getParameter("mission_mission"));
 String hid = request.getParameter("mission_Hid");
 String category = request.getParameter("mission_category");
 String name = request.getParameter("mission_name");
 String sex = request.getParameter("mission_sex");
-String start1 = request.getParameter("mission_start1");
-String start2 = request.getParameter("mission_start2");
+String way0 = request.getParameter("mission_waypoint0");
 String way1 = request.getParameter("mission_waypoint1");
 String way2 = request.getParameter("mission_waypoint2");
+String end0 = request.getParameter("mission_end0");
 String end1 = request.getParameter("mission_end1");
 String end2 = request.getParameter("mission_end2");
 String reservation = request.getParameter("mission_reservation");
@@ -83,22 +84,22 @@ $(document).ready(function(){
 <body>
 <form name="form1" id="form1">
      <input type="hidden" name="mission_name" value="<%= name %>">
+     <input type="hidden" name="mission_mission" value="<%= mission %>">
      <input type="hidden" name="mission_category" value="<%= category %>">
      <input type="hidden" name="mission_id" value="<%= id %>">
      <input type="hidden" name="mission_Hid" value="<%= hid %>">
      <input type="hidden" name="mission_sex" value="<%= sex %>">
-     <input type="hidden" name="mission_start1" value="<%= start1 %>">
-     <input type="hidden" name="mission_start2" value="<%= start2 %>">
+     <input type="hidden" name="mission_waypoint0" value="<%= way0 %>">
      <input type="hidden" name="mission_waypoint1" value="<%= way1 %>">
      <input type="hidden" name="mission_waypoint2" value="<%= way2 %>">
+     <input type="hidden" name="mission_end0" value="<%= end0 %>">
      <input type="hidden" name="mission_end1" value="<%= end1 %>">
-     <input type="hidden" name="mission_end2" value="<%= end1 %>">
+     <input type="hidden" name="mission_end2" value="<%= end2 %>">
      <input type="hidden" name="mission_reservation" value="<%= reservation %>">
      <input type="hidden" name="mission_time" value="<%= time %>">
      <input type="hidden" name="mission_content" value="<%= content %>">
      <input type="hidden" name="ofile" value="<%= ofile %>">
      <input type="hidden" name="mission_cost" value="<%= cost %>">
-     <input type="hidden" name="mission_status" value="1">
 </form>
 
 

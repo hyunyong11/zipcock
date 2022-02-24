@@ -158,10 +158,8 @@ public class MissionController {
 			e.printStackTrace();
 		}
 		
-
-		missionDTO.setMission_start(req.getParameter("mission_start1")+"|"+req.getParameter("mission_start2"));
-		missionDTO.setMission_waypoint(req.getParameter("mission_waypoint1")+"|"+req.getParameter("mission_waypoint2"));
-		missionDTO.setMission_end(req.getParameter("mission_end1")+"|"+req.getParameter("mission_end2"));
+		missionDTO.setMission_waypoint(req.getParameter("mission_waypoint0")+"|"+req.getParameter("mission_waypoint1")+"|"+req.getParameter("mission_waypoint2"));
+		missionDTO.setMission_end(req.getParameter("mission_end0")+"|"+req.getParameter("mission_end1")+"|"+req.getParameter("mission_end2"));
 		
 		int result = sqlSession.getMapper(MissionImpl.class).mission(missionDTO);
 		System.out.println("입력결과 : "+ result);

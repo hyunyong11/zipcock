@@ -8,17 +8,17 @@
 	
 	<insert id="mission">
 		INSERT INTO mission (mission_num, mission_id, mission_category, mission_name, mission_content, mission_sex,
-				mission_Hid, mission_start, mission_waypoint, mission_end, mission_mission,
-				mission_reservation, mission_time, mission_cost, mission_status
+				mission_Hid, mission_waypoint, mission_end, mission_mission,
+				mission_reservation, mission_time, mission_cost
 				<if test="mission_ofile != null and mission_sfile !=null">
 				, mission_ofile, mission_sfile
 				</if> 
 				)
 				
 			VALUES (mission_seq.nextval, #{mission_id}, #{mission_category}, #{mission_name}, #{mission_content}, #{mission_sex}, 
-						#{mission_Hid}, #{mission_start}, #{mission_waypoint}, 
+						#{mission_Hid}, #{mission_waypoint}, 
 						#{mission_end}, #{mission_mission}, #{mission_reservation},
-						#{mission_time}, #{mission_cost}, #{mission_status}
+						#{mission_time}, #{mission_cost}
 						<if test="mission_ofile != null and mission_sfile !=null">
 						 , #{mission_ofile}, #{mission_sfile}
 						</if>
@@ -40,10 +40,6 @@
 	<select id="getTotalCount" resultType="int">
 		SELECT COUNT(*) from mission
 	</select>
-	
-	
-	
 
 	
 </mapper>
-

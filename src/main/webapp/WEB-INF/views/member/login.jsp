@@ -201,9 +201,6 @@ function kakaoLogout() {
 
 	</div>
 	<!-- wrapper -->
-
-
-
 </div>
 </body>
 </html>

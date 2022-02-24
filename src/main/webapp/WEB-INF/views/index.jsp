@@ -2,11 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<!--
-   Canvas by TEMPLATE STOCK
-   templatestock.co @templatestock
-   Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
--->
 <html lang="en">
 <head>  
     <meta charset="utf-8">
@@ -31,20 +26,9 @@
     <!-- =============== Owl Carousel Assets =============== -->
     <link href="/zipcock/resources/owl-carousel/owl.carousel.css" rel="stylesheet">
     <link href="/zipcock/resources/owl-carousel/owl.theme.css" rel="stylesheet">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 </head>
 
 <body>
-    <!-- =============== Preloader =============== -->
-    <!-- <div id="preloader">
-        <div id="loading">
-        </div>
-    </div> -->
     <!-- =============== nav =============== -->
     <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
         <div class="container">
@@ -61,7 +45,6 @@
                     </a>
                 </div>
 
-                <!-- Collect the nav links, forms, and other content for toggling -->
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
@@ -91,10 +74,10 @@
                         <li>
                             <a class="page-scroll" href="#contact">Contact</a>
                         </li>
-                         <!-- <li>
+                        <li>
                             <a href="webSocket.do" target="_blank">웹소켓</a>
                         </li>
-                         -->
+                         
                         <!-- 로그인 유무에 따른 join logout -->
                         <c:choose>
                         <c:when test="${ empty sessionScope.siteUserInfo }">
@@ -319,73 +302,73 @@
        <div class="col-xs-12 col-sm-12 col-md-12 wow zoomIn animated headding" data-wow-delay=".1s">
        <section class="cusMainFaqList">
           <h3 class="subTitle4C">&nbsp;&nbsp;&nbsp;&nbsp;NOTICE</h3>
-      <div class="container">
-      <h2>공지사항</h2>
-
-         
-      <table border="1" width="100%">
-         <tr>
-            <td align="center" style="background-color: lightgray;">
-               집에서 심부름을 콕! 집콕!
-            </td>
-         </tr>
-      </table>
-      
-      <!-- table>tr*2>td*5 -->
-      <table class="table table-bordered" id="dataTable" width="90%" cellspacing="0" >
-         <tr style="background-color: #ffc654">
-            <th width="10%" style="text-align: center">번호</th>
-            <th width="*" >제목</th>
-            <th width="15%" style="text-align: center">작성자</th>
-            <th width="10%" style="text-align: center">작성일</th>
-            <th width="15%" style="text-align: center">조회수</th>
-         </tr> 
-         <c:choose>
-            <c:when test="${empty listRows }">
-               <tr>
-                  <td colspan="6" class="text-center">
-                     등록된 게시물이 없습니다 ^^*
-                  </td>
-               </tr>
-            </c:when>
-         <c:otherwise>
-            <c:forEach items="${listRows }" var="row" 
-               varStatus="loop">
-               <!-- 리스트반복시작 -->
-               <tr>
-                  <td class="text-center">${row.virtualNum }</td>
-                  <td class="text-left">
-                     <a href="./NoticeV.do?num=${row.mboard_num}
-                        &nowPage=${nowPage}">${row.mboard_title}</a>
-                  </td>
-                  <td class="text-center">${row.mboard_id }</td>
-                  <td class="text-center">${row.mboard_date }</td>
-                  <td class="text-center">${row.mboard_count }</td>
-               </tr>
-               
-               <!-- 리스트반복끝 -->
-            </c:forEach>
-         </c:otherwise>
-         </c:choose>
-         <table border="1" width="100%">
-            <tr>
-               <td align="center" style="background-color: lightgray;">
-                  집에서 심부름을 콕! 집콕!
-               </td>
-            </tr>
-         </table>
-      <!-- 페이지 번호 -->
-         <table border="0" width="100%">
-            <tr>
-               <td align="center">
-               <button type="button" style="background-color: #ffc654; font-weight: bold"
-                  onclick="location.href='Notice.do'">더 보기</button>
-               </td>
-            </tr>
-            <br />
-         </table>
-      </table>
-      </div>
+       <div class="container">
+	      <h2>공지사항</h2>
+	
+	         
+	      <table border="1" width="100%">
+	         <tr>
+	            <td align="center" style="background-color: lightgray;">
+	               집에서 심부름을 콕! 집콕!
+	            </td>
+	         </tr>
+	      </table>
+	      
+	      <!-- table>tr*2>td*5 -->
+	      <table class="table table-bordered" id="dataTable" width="90%" cellspacing="0" >
+	         <tr style="background-color: #ffc654">
+	            <th width="10%" style="text-align: center">번호</th>
+	            <th width="*" >제목</th>
+	            <th width="15%" style="text-align: center">작성자</th>
+	            <th width="10%" style="text-align: center">작성일</th>
+	            <th width="15%" style="text-align: center">조회수</th>
+	         </tr> 
+	         <c:choose>
+	            <c:when test="${empty listRows }">
+	               <tr>
+	                  <td colspan="6" class="text-center">
+	                     등록된 게시물이 없습니다 ^^*
+	                  </td>
+	               </tr>
+	            </c:when>
+	         <c:otherwise>
+	            <c:forEach items="${listRows }" var="row" 
+	               varStatus="loop">
+	               <!-- 리스트반복시작 -->
+	               <tr>
+	                  <td class="text-center">${row.virtualNum }</td>
+	                  <td class="text-left">
+	                     <a href="./NoticeV.do?num=${row.mboard_num}
+	                        &nowPage=${nowPage}">${row.mboard_title}</a>
+	                  </td>
+	                  <td class="text-center">${row.mboard_id }</td>
+	                  <td class="text-center">${row.mboard_date }</td>
+	                  <td class="text-center">${row.mboard_count }</td>
+	               </tr>
+	               
+	               <!-- 리스트반복끝 -->
+	            </c:forEach>
+	         </c:otherwise>
+	         </c:choose>
+	         <table border="1" width="100%">
+	            <tr>
+	               <td align="center" style="background-color: lightgray;">
+	                  집에서 심부름을 콕! 집콕!
+	               </td>
+	            </tr>
+	         </table>
+	      <!-- 페이지 번호 -->
+	         <table border="0" width="100%">
+	            <tr>
+	               <td align="center">
+	               <button type="button" style="background-color: #ffc654; font-weight: bold"
+	                  onclick="location.href='Notice.do'">더 보기</button>
+	               </td>
+	            </tr>
+	            <br />
+	         </table>
+	      </table>
+      	</div>
          
         </section>
         </div>
@@ -436,7 +419,7 @@
                       </div>              
                     </div>     
                       
-        </div>     
+        	</div>     
           <!-- =============== popup large image =============== -->
           <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
           <div class="modal-dialog" role="document">
@@ -566,45 +549,6 @@
         });
     </script>
     <!-- 챗봇 코드 -->
-    <script>
-     (function() {
-       var w = window;
-       if (w.ChannelIO) {
-         return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
-       }
-       var ch = function() {
-         ch.c(arguments);
-       };
-       ch.q = [];
-       ch.c = function(args) {
-         ch.q.push(args);
-       };
-       w.ChannelIO = ch;
-       function l() {
-         if (w.ChannelIOInitialized) {
-           return;
-         }
-         w.ChannelIOInitialized = true;
-         var s = document.createElement('script');
-         s.type = 'text/javascript';
-         s.async = true;
-         s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
-         s.charset = 'UTF-8';
-         var x = document.getElementsByTagName('script')[0];
-         x.parentNode.insertBefore(s, x);
-       }
-       if (document.readyState === 'complete') {
-         l();
-       } else if (window.attachEvent) {
-         window.attachEvent('onload', l);
-       } else {
-         window.addEventListener('DOMContentLoaded', l, false);
-         window.addEventListener('load', l, false);
-       }
-     })();
-     ChannelIO('boot', {
-       "pluginKey": "9145fc6d-f292-46af-b22a-2e630b92ab68"
-     });
-   </script>
+    <%@ include file="/resources/commons/chatBot.jsp" %>
 </body>
 </html>

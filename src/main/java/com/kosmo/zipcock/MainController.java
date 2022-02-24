@@ -87,13 +87,6 @@ public class MainController {
 		return "mission/registration";
 	}
 	
-//	//심부름 리스트
-//	@RequestMapping("/HList.do")
-//	public String HList() {
-//	
-//		return "mission/HList";
-//	}
-	
 	
 	
 

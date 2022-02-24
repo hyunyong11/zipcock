@@ -20,6 +20,9 @@ public interface MemberImpl {
 	//로그인
 	public MemberDTO login (String id, String pass);
 	
+	//아이디찾기
+	public MemberDTO findId (String name, String email);
+		
 	//회원정보 수정(조회)
 	public ArrayList<MemberDTO> getMemberInfo(String id);
 	

@@ -25,30 +25,11 @@
 	    }
 	}
 	
-	function findId() {
-	   	var form = document.idFrm;
-	   	if(!form.name.value){
-	        alert('이름을 입력하세요');
-	        form.name.focus();
-	        return false;
-	    }
-	   	
-	   	if(!form.email_1.value){
-		    alert("이메일을 입력하세요");
-		    form.email_1.focus();
-		    return false;
-		}
-		if(form.email_check.value==""){
-		    alert("도메인을 선택하세요");
-		    form.email_check.focus();
-		    return false;
-		}
-		form.method = "post";
-		form.action = "findId.do"; 
-		form.submit(); 
-    }
-	
 	function findPwd(){
+	    alert("죄송합니다. 챗봇을 통해 문의해주세요.\n(메인 오른쪽 하단)");
+	    window.location.href = "zipcock.do";
+	    return false;
+
 		var form = document.pwdFrm;
 		if(form.id.value==''){
 			alert('아이디를 입력해주세요'); 
@@ -90,7 +71,47 @@
 	    	form.email_2.value = domain; 
 	    	form.email_2.readOnly = true;
 	    }
+	} 
+	
+	function findIdRequest(){
+		const name = document.getElementById('name').value;
+		const email_1 = document.getElementById('email_1').value;
+		const email_2 = document.getElementById('email_2').value;
+		
+		var form = document.idFrm;
+	   	if(!form.name.value){
+	        alert('이름을 입력하세요');
+	        form.name.focus();
+	        return false;
+	    }
+	   	
+	   	if(!form.email_1.value){
+		    alert("이메일을 입력하세요");
+		    form.email_1.focus();
+		    return false;
+		}
+		if(form.email_check.value==""){
+		    alert("도메인을 선택하세요");
+		    form.email_check.focus();
+		    return false;
+		}
+		
+		$.ajax({
+			type : 'post',
+			url : 'findId.do',
+			data : {'name': name, 'email_1': email_1, 'email_2': email_2},
+			success : function(data) {
+				console.log(data);
+				alert("아이디는 '"+ data +"'입니다.");
+				window.location.href = "memberLogin.do";
+			},
+			error : function(){
+				alert("일치하는 회원이 없습니다.");
+				window.location.reload();
+			}
+		})
 	}
+	
 </script>
 <div class="container">
 	
@@ -110,7 +131,7 @@
 					
 				<div class="id_box">
 				<!-- ID form in -->
-				<form name="idFrm" onsubmit="return findId(this);">
+				<form name="idFrm">
 						
 					<!-- NAME -->
 					<div>
@@ -118,7 +139,7 @@
 							<label for="name">이름</label>
 						</h3>
 						<span class="box int_name"> 
-							<input type="text" id="name" class="join_H" maxlength="20" name="member_name"> 
+							<input type="text" id="name" class="join_H" maxlength="20" name="name"> 
 						</span> <span class="error_next_box"></span>
 					</div>
 					
@@ -128,7 +149,7 @@
 							<label for="email">이메일</label>
 						</h3>
 						<span class="box_email"> 
-							<input type="text" id="email_1" class="join_email" maxlength="20" name="member_email" value="">
+							<input type="text" id="email_1" class="join_email" maxlength="20" name="email_1" value="">
 						</span>
 						&nbsp;@
 						<span class="box_email"> 
@@ -163,7 +184,7 @@
 					</div> 
 					<!-- FIND BTN-->
 					<div class="btn_area">
-						<button type="submit" id="btnJoin">
+						<button type="button" id="btnJoin" onclick="findIdRequest()">
 							<span>아이디 찾기</span>
 						</button>
 					</div>

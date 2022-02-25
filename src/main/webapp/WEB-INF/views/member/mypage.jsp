@@ -55,28 +55,24 @@
        <div class="text">회원정보수정<span class="circle"></span></div>
        <div class="right"> > </div>
    </a>
-	<a href="review.do" class="item">
-		<div class="icon">Ⅱ</div>
-		<div class="text">리뷰쓰기</div>
-		<div class="right"> > </div>
-   </a>
+	
 	<a href="memberDelete.do" class="item">
-       <div class="icon">Ⅲ</div>
-       <div class="text">회원탈퇴</div>
+       <div class="icon">Ⅱ</div>
+       <div class="text">회원탈퇴<span class="circle"></span></div>
        <div class="right"> > </div>
    </a>
    <c:choose>
-      <%-- <c:when test="${sessionScope.siteUserInfo.member_status eq 1 }">
-         <a href="CInfo.do" class="item">
-             <div class="icon">ii</div>
-             <div class="text">정보</div>
-             <div class="right"> > </div>
-           </a>
-      </c:when> --%>
+      <c:when test="${sessionScope.siteUserInfo.member_status eq 1 }">
+         <a href="review.do" class="item">
+			<div class="icon">Ⅲ</div>
+			<div class="text">리뷰쓰기<span class="circle"></span></div>
+			<div class="right"> > </div>
+	   </a>
+      </c:when>
       <c:when test="${sessionScope.siteUserInfo.member_status eq 2 }">
          <a href="review.do" class="item">
-             <div class="icon">Ⅳ</div>
-             <div class="text">리뷰보기</div>
+             <div class="icon">Ⅲ</div>
+             <div class="text">리뷰보기<span class="circle"></span></div>
              <div class="right"> > </div>
            </a>
       </c:when>

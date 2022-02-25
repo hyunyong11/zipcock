@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%> 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="/resources/commons/isLogin.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,11 +12,10 @@
 </head>
 <body>
 <script>
-	function deleteRow(mission_num) {
-		if (confirm("정말로 삭제하시겠습니까?")) {
-			location.href="delete.do?idx="+ mission_num;
-		}       
-	}
+function deleteList(num) {
+    alert("삭제하시겠습니까?");
+    location.href='deleteAction.do?num='+ num;
+}
 </script>
 <div class="container">
 	<h3 class="text-center mt-5">Cock List</h3>
@@ -141,12 +139,12 @@
 							<!-- 작성자 본인에게만 수정/삭제 버튼 보임 처리 -->
 							<c:if test="${ sessionScope.siteUserInfo.member_id eq row.mission_id}">
 								<button class="btn btn-outline-primary btn-sm"
-								onclick="location.href='modify.do?idx=${row.mission_num}';">
+								 onclick="location.href='userEdit.do?num=${row.mission_num}';">
 								수정</button>
 								
 								<!-- 삭제 버튼을 누를 경우 idx값을 JS의 함수로 전달한다. -->
 								<button class="btn btn-outline-danger btn-sm"
-								onclick="javascript:deleteRow(${row.mission_num});">
+								onclick="deleteList(${row.mission_num});">
 								삭제</button>
 							</c:if>
 							<c:if test="${ sessionScope.siteUserInfo.member_status eq 2 && row.mission_status eq 1 }" >

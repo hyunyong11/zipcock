@@ -1,6 +1,8 @@
 package com.kosmo.zipcock;
 
 import java.io.File;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -19,7 +21,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import board.util.PagingUtil;
-import membership.MemberDTO;
 import mission.MissionDTO;
 import mission.MissionImpl;
 import mission.ParameterDTO;
@@ -329,5 +330,130 @@ public class MissionController {
         return "mission/pay";
     }
 	
-	
+	 //사용자요청 수정페이지 진입
+    @RequestMapping("userEdit.do")
+    public String userEdit(Model model, HttpServletRequest req, HttpSession session) {
+        
+        String num = req.getParameter("num");
+        String id = (String)session.getAttribute("Id");
+        
+        MissionDTO missionDTO = new MissionDTO();
+        
+        missionDTO = sqlSession.getMapper(MissionImpl.class).statusSelect(num, id);
+        session.setAttribute("missionStatus", missionDTO.getMission_status());
+        
+        ArrayList<MissionDTO> lists = sqlSession.getMapper(MissionImpl.class).missionCEdit(num);
+        
+        for(MissionDTO dto : lists) {
+            if(!(dto.getMission_waypoint() == null)) {
+                String waypoint = dto.getMission_waypoint();
+                
+                int way = waypoint.indexOf("|");
+                
+                String way_1 = waypoint.substring(0, way+1);
+                String way_2 = waypoint.substring(way+1);
+                
+                model.addAttribute("way_1", way_1);
+                model.addAttribute("way_2", way_2);
+            }
+            
+            String end = dto.getMission_end();
+            
+            int e = end.indexOf("|");
+            
+            String end_1 = end.substring(0, e+1);
+            String end_2 = end.substring(e+1);
+            
+            model.addAttribute("end_1", end_1);
+            model.addAttribute("end_2", end_2);
+        }
+        
+        model.addAttribute("lists", lists);
+        
+        return "member/missionCEdit";
+    }
+    //사용자요청 수정처리
+    @RequestMapping("/userEditAction.do")
+    public String userEditAction(HttpSession session, Model model, MultipartHttpServletRequest req, MissionDTO missionDTO) {
+        
+        String id = (String)session.getAttribute("Id");
+        int num = Integer.parseInt(req.getParameter("num"));
+        System.out.println(id);
+        System.out.println(num);
+        
+        //물리적 경로 얻어오기
+        String path = req.getSession().getServletContext().getRealPath("/resources/upload");
+        MultipartFile mfile = null;
+        // 파일정보를 저장한 Map컬렉션을 2개이상 저장하기 위한 용도의 List컬렉션
+        List<Object> resultList = new ArrayList<Object>();
+        
+        try {
+            //업로드폼의 file속성의 필드를 가져온다. (여기서는 2개임)
+            Iterator itr = req.getFileNames();
+            
+            //갯수만큼 반복
+            while(itr.hasNext()) {
+                //전송된 파일명을 읽어온다.
+                mfile = req.getFile(itr.next().toString());
+                
+                //한글깨짐방지 처리 후 전송된 파일명을 가져온다.
+                String originalName = new String(mfile.getOriginalFilename().getBytes(), "UTF-8");
+                
+                //서버로 전송된 파일이 없다면 파일없이 서버에 저장
+                if("".equals(originalName)) continue;
+                    
+                String ext = originalName.substring(originalName.lastIndexOf('.'));
+                //UUID를 통해 생성된 문자열과 확장자를 결합해서 파일명을 완성한다.
+                String saveFileName = getUuid() + ext;
+                
+                //물리적 경로에 새롭게 생성된 파일명으로 파일 저장
+                mfile.transferTo(new File(path + File.separator + saveFileName));
+                
+                missionDTO.setMission_ofile(originalName);
+                missionDTO.setMission_sfile(saveFileName);
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        //예약이 즉시일 경우
+        if(missionDTO.getMission_mission() == 1) {
+            
+            // 예약한 날짜(현재날짜)를 DB에 저장한다.
+            LocalDate now = LocalDate.now();
+            
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            
+            String formated = now.format(formatter);
+            
+            System.out.println(formated);
+            
+            missionDTO.setMission_reservation(formated);
+        }
+        
+        missionDTO.setMission_id(id);
+        missionDTO.setMission_num(num);
+        
+        missionDTO.setMission_start(req.getParameter("start_1") + "|" + req.getParameter("start_2"));
+        missionDTO.setMission_waypoint(req.getParameter("way_1") + "|" + req.getParameter("way_2"));
+        missionDTO.setMission_end(req.getParameter("end_1") + "|" + req.getParameter("end_2"));
+        
+        sqlSession.getMapper(MissionImpl.class).EditAction(missionDTO);
+        
+        return "redirect:CInfoAll.do";
+    }
+    
+    //사용자 요청 삭제처리
+    @RequestMapping("/deleteAction.do")
+    public String deleteAction(HttpSession session, HttpServletRequest req) {
+        
+        String id = (String)session.getAttribute("Id");
+        int num = Integer.parseInt(req.getParameter("num"));
+        
+        sqlSession.getMapper(MissionImpl.class).delete(id, num);
+        
+        return "redirect:CInfoAll.do";
+        
+    }
 }

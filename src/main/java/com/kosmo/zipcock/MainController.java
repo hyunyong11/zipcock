@@ -64,6 +64,12 @@ public class MainController {
 		return "member/logout";
 	}
 	
+	//회원 탈퇴
+    @RequestMapping("/mdelete.do")
+    public String memberdelete() {
+        return "member/mdelete";
+    }
+	
 	//아이디/비밀번호 찾기
 	@RequestMapping("/findIdpw.do")
 	public String findmember() {
@@ -71,14 +77,12 @@ public class MainController {
 		return "member/find_Idpw";
 	}
 	
-	
 	//마이페이지
 	@RequestMapping("/mypage.do")
 	public String mypage() {
 	
 		return "member/mypage";
 	}
-	
 	
 	//심부름 요청 페이지 이동
 	@RequestMapping(value="/mission_select.do", method=RequestMethod.GET)

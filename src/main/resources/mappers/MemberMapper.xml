@@ -74,9 +74,16 @@
 			WHERE member_id=#{member_id} AND member_status=#{member_status}
 	</update>
 	
+	<!-- 카카오로그인시 가입여부 -->
 	<select id="kakaoLogin" resultType="membership.MemberDTO">
 		SELECT * FROM member WHERE member_id=#{0}
 	</select>
+	
+	<!-- 회원탈퇴 -->
+	<delete id="memberDelete" >
+		DELETE FROM member
+			WHERE member_id=#{param1} 
+	</delete>
 
 </mapper>
 

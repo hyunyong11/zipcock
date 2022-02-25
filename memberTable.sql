@@ -189,3 +189,51 @@ values (mboard_seq.nextval, '관리자4', '이건 공지사항4', '이건공지사항내용이네4'
 
 commit;
 select * from mboard;
+
+----------------------------------------------------------------------------------------------
+
+create table review(
+    review_num number primary key not null,
+    mission_num number not null,
+    review_id varchar2(10) not null,
+    review_content varchar2(200) not null,
+    review_point number not null,
+    review_date date default sysdate not null
+);
+--리뷰 시퀀스
+create sequence review_seq
+    increment by 1
+    start with 1
+    minvalue 1
+    nomaxvalue
+    nocycle
+    nocache;
+--리뷰 더미데이터
+insert into review
+(review_num, mission_num, review_id, review_content, review_point, review_date)
+values (review_seq.nextval,1,'kosmo', '이것은 리뷰입니다','5' ,sysdate);
+insert into review
+(review_num, mission_num, review_id, review_content, review_point, review_date)
+values (review_seq.nextval,2,'kosmo2', '이것은 리뷰입니다','2' ,sysdate);
+insert into review
+(review_num, mission_num, review_id, review_content, review_point, review_date)
+values (review_seq.nextval,3,'kosmo3', '이것은 리뷰입니다','3' ,sysdate);
+insert into review
+(review_num, mission_num, review_id, review_content, review_point, review_date)
+values (review_seq.nextval,1,'kosmo4', '이것은 리뷰입니다','4' ,sysdate);
+insert into review
+(review_num, mission_num, review_id, review_content, review_point, review_date)
+values (review_seq.nextval,1,'kosmo5', '이것은 리뷰입니다','1' ,sysdate);
+insert into review
+(review_num, mission_num, review_id, review_content, review_point, review_date)
+values (review_seq.nextval,1,'kosmoh123', '이것은 리뷰입니다','3' ,sysdate);
+insert into review
+(review_num, mission_num, review_id, review_content, review_point, review_date)
+values (review_seq.nextval,0,'kosmoh123', '엄청 좋아요','5' ,sysdate);
+insert into review
+(review_num, mission_num, review_id, review_content, review_point, review_date)
+values (review_seq.nextval,1,'kosmoh123', '보통','3' ,sysdate);
+insert into review
+(review_num, mission_num, review_id, review_content, review_point, review_date)
+values (review_seq.nextval,2,'kosmoh123', '싫어요','2' ,sysdate);
+commit;

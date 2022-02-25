@@ -303,4 +303,20 @@ public class MemberController {
 	}
 	
 
+
+    //회원탈퇴 
+    @RequestMapping("/memberDelete.do")
+    public String delete(HttpServletRequest req, HttpSession session)
+    {
+        //로그인 확인
+        if(session.getAttribute("siteUserInfo")==null){
+            return "redirect:login.do";
+        }
+        
+        sqlSession.getMapper(MemberImpl.class).memberDelete(
+            ((MemberDTO)session.getAttribute("siteUserInfo")).getMember_id()
+        );
+        return "member/memberDelete";
+    }   
+	
 }

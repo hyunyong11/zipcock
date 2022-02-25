@@ -47,6 +47,16 @@ public interface MissionImpl {
 	//헬퍼 상세보기
 	public ArrayList<MissionDTO> missionHDetail(int idx);
 	
+    // 기존 게시물을 조회하고 수정
+    public MissionDTO statusSelect(String id, String num);
+    public ArrayList<MissionDTO> missionCEdit(String num);
+    
+    //사용자 요청사항 수정
+    public void EditAction(MissionDTO missionDTO);
+    
+    //사용자 요청사항 삭제
+    public int delete(String id, int num);
+    
 	
 	
 }

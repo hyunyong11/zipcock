@@ -61,6 +61,7 @@ function writeValidate(f)
 }
 <%
 String mission_num = request.getParameter("mission_num");
+String mission_category = request.getParameter("row.mission_category");
 %>
 </script>
 <!-- JSTL의 url태그는 컨텍스트루트 경로를 자동으로 포함시켜 준다. -->
@@ -116,7 +117,7 @@ String mission_num = request.getParameter("mission_num");
 			<td>
 				<input type="text" class="form-control" 
 					style="width:100px;" name="mission_category" 
-					value="${mybatis.MyBoardDTO.mission_category }" />
+					value="<%=mission_category %>" />
 			</td>
 			</tr>
 		<tr>

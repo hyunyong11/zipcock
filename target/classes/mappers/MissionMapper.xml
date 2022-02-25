@@ -81,5 +81,34 @@
 		SELECT COUNT(*) from mission
 	</select>
 
-	
+	 <!-- 수정게시물 진입을 위한 매칭상태 검색 -->
+    <select id="statusSelect" resultType="mission.MissionDTO">
+        SELECT mission_status FROM mission
+                WHERE mission_num=#{0}
+    </select>
+    
+    <!-- 게시물 수정페이지 진입 -->
+    <select id="missionCEdit" resultType="mission.MissionDTO">
+        SELECT * FROM mission
+            WHERE mission_num=#{0}
+    </select>
+    
+    <!-- 사용자 요청 수정처리 -->
+    <update id="EditAction">
+        UPDATE mission
+        SET mission_category=#{mission_category}, mission_name=#{mission_name}, mission_content=#{mission_content},
+            mission_sex=#{mission_sex}, mission_start=#{mission_start}, mission_waypoint=#{mission_waypoint},
+            mission_end=#{mission_end}, mission_mission=#{mission_mission}, mission_reservation=#{mission_reservation},
+            mission_time=#{mission_time}
+            <if test="mission_ofile != null and mission_sfile != null">
+                ,mission_ofile=#{mission_ofile}, mission_sfile=#{mission_sfile}
+            </if>
+            
+            WHERE mission_id=#{mission_id} AND mission_num=#{mission_num}
+    </update>
+    
+    <!-- 사용자 요청 삭제처리 -->
+    <delete id="delete">
+        DELETE FROM mission WHERE mission_id=#{0} AND mission_num=#{1}
+    </delete>
 </mapper>

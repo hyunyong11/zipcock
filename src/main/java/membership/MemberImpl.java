@@ -35,4 +35,7 @@ public interface MemberImpl {
 	//카카오 로그인
 	public MemberDTO kakaoLogin(String id);
 	
+	//회원탈퇴
+	public void memberDelete(String member_id);
+	
 }

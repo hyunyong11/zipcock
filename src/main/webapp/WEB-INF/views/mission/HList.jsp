@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%> 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ include file="/resources/commons/isLogin.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +16,7 @@
 	function deleteRow(mission_num) {
 		if (confirm("정말로 삭제하시겠습니까?")) {
 			location.href="delete.do?idx="+ mission_num;
-		}
+		}       
 	}
 </script>
 <div class="container">
@@ -49,7 +50,7 @@
 			<c:otherwise>
 				<!-- 세션영역에 속성이 있을 때, 즉 로그인되었을 때.. -->
 				<button class="btn btn-danger"
-					onclick="location.gref='logout.do';">
+					onclick="location.href='logout.do';">
 					로그아웃
 				</button>
 			</c:otherwise>
@@ -58,9 +59,8 @@
 			심부름 요청
 		</button>
 	</div>
-	
 	<!-- 방명록 반복 부분 s -->
-	<c:forEach items="${lists }" var="row">		
+	<c:forEach items="${lists }" var="row" >		
 		<div class="border mt-2 mb-2">
 			<div class="media">
 			
@@ -68,8 +68,8 @@
 					
 
 				  <div class="accordion-item">
-				    <h2 class="accordion-header" id="headingOne">
-				      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+				    <h2 class="accordion-header" id="heading${row.mission_num }">
+				      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${row.mission_num }" aria-expanded="false" aria-controls="collapse${row.mission_num }">
 				        
 				        <div class="media-left mr-3">
 							<c:choose>
@@ -116,7 +116,7 @@
 					        		매칭완료
 								</span>
 				        	</c:when>
-				        	<c:when test="${ row.mission_status eq 4 }">
+				        	<c:when test="${ row.mission_status eq 3 }">
 				        		<span class="badge bg-secondary m-2">
 					        		종료됨
 								</span>
@@ -124,8 +124,8 @@
 				        </c:choose>
 				      </button>
 				    </h2>
-				    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-				      <div class="accordion-body">
+				    <div id="collapse${row.mission_num }" class="accordion-collapse collapse" aria-labelledby="heading${row.mission_num }" data-bs-parent="#accordionExample">
+				      <div class="accordion-body"  style="position: relative;">
 				        <div align="right">
 						<img src="/zipcock/resources/img/profile.png" style="width:20px"> ${ row.mission_id }
 							<%-- ${row.member_age } --%>
@@ -148,6 +148,11 @@
 								<button class="btn btn-outline-danger btn-sm"
 								onclick="javascript:deleteRow(${row.mission_num});">
 								삭제</button>
+							</c:if>
+							<c:if test="${ sessionScope.siteUserInfo.member_status eq 2 && row.mission_status eq 1 }" >
+							<button class="btn btn-outline-primary" onclick="location.href='mypage.do';"  style="position: absolute; left: 90%; bottom: 2.75em;">
+								지원하기
+							</button>
 							</c:if>
 						</div>
 						${row.mission_content } <br>
@@ -186,10 +191,11 @@
 							</c:when>
 						</c:choose>
 						
+						
 						비용: ${ row.mission_cost } 원 <br> 
 						
 						 
-					
+						
 				      </div>
 				    </div>
 				  </div>

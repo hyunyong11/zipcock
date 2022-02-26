@@ -6,6 +6,9 @@
 <head>
     <title>마이페이지</title>
 </head>
+<% 
+String id = (String)session.getAttribute("Id");
+%>
 <body>
 <div class="container">
 	
@@ -37,6 +40,7 @@
 		
 		<!-- table>tr*2>td*5 -->
 		<table class="table table-bordered" id="dataTable" width="90%" cellspacing="0" >
+		<input type="hid-den" name="member_id" value=<%=id%>>
 				<tr style="background-color: #ffc654">
 					<th width="10%" style="text-align: center">번호</th>
 					<th width="*" >제목</th>
@@ -52,12 +56,11 @@
 						</tr>
 					</c:when>
 					<c:otherwise>
-						<c:forEach items="${lists }" var="row" 
-							varStatus="loop">
+						<c:forEach items="${lists }" var="row" varStatus="loop">
 							<c:if test="${sessionScope.siteUserInfo.member_id eq row.mission_id}">
 							<!-- 리스트반복시작 -->
 							<tr>
-								<td class="text-center" style="background-color: lightgray">${row.mission_num }</td>
+								<td class="text-center" style="background-color: lightgray">${row.virtualNum }</td>
 								<td class="text-left">
 									<a href="missionCDetail.do?mission_num=${row.mission_num }">${row.mission_name }</a>
 								</td>

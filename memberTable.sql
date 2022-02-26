@@ -138,17 +138,52 @@ drop sequence mission_seq;
 insert into mission 
 (mission_num, mission_id, mission_category, mission_name, mission_content,
 mission_start, mission_end, mission_mission, mission_time, mission_cost, mission_status)
-values (mission_seq.nextval, 'test1', '배달,장보기', '배달해주세요', '떡볶이 배달해주세요~~', '출발좌표', '도착좌표', '1', '1', '4000', '1');
+values (mission_seq.nextval, 'test1', '배달,장보기', '떡복이이이이이배달해주세요', '떡볶이 배달해주세요~~!!', '출발좌표', '도착좌표', '1', '1', '4000', '1');
+
+insert into mission 
+(mission_num, mission_id, mission_category, mission_name, mission_content,
+mission_start, mission_end, mission_mission, mission_time, mission_cost, mission_status)
+values (mission_seq.nextval, 'test1', '배달,장보기', '배달해주세요', '떡볶이 배달해주세요~~^^', '출발좌표', '도착좌표', '1', '1', '4000', '1');
+
+
+insert into mission 
+(mission_num, mission_id, mission_category, mission_name, mission_content,
+mission_start, mission_end, mission_mission, mission_time, mission_cost, mission_status)
+values (mission_seq.nextval, 'test1', '배달,장보기', '배달해주세요2', '떡볶이 배달해주세요~~2', '출발좌표', '도착좌표', '1', '1', '4000', '1');
+
+insert into mission 
+(mission_num, mission_id, mission_category, mission_name, mission_content,
+mission_start, mission_end, mission_mission, mission_time, mission_cost, mission_status)
+values (mission_seq.nextval, 'test1', '배달,장보기', '배달해주세요3', '떡볶이 배달해주세요~~3', '출발좌표', '도착좌표', '1', '1', '4000', '1');
+
+insert into mission 
+(mission_num, mission_id, mission_category, mission_name, mission_content,
+mission_start, mission_end, mission_mission, mission_time, mission_cost, mission_status)
+values (mission_seq.nextval, 'test1', '배달,장보기', '배달해주세요4', '떡볶이 배달해주세요~~4', '출발좌표', '도착좌표', '1', '1', '4000', '1');
+
+
+insert into mission 
+(mission_num, mission_id, mission_category, mission_name, mission_content,
+mission_start, mission_end, mission_mission, mission_time, mission_cost, mission_status)
+values (mission_seq.nextval, 'test1', '배달,장보기', '배달해주세요5', '떡볶이 배달해주세요~~5', '출발좌표', '도착좌표', '1', '1', '4000', '1');
+
+insert into mission 
+(mission_num, mission_id, mission_category, mission_name, mission_content,
+mission_start, mission_end, mission_mission, mission_time, mission_cost, mission_status)
+values (mission_seq.nextval, 'test1', '배달,장보기', '배달해주세요6', '떡볶이 배달해주세요~~6', '출발좌표', '도착좌표', '1', '1', '4000', '1');
+
+insert into mission 
+(mission_num, mission_id, mission_category, mission_name, mission_content,
+mission_start, mission_end, mission_mission, mission_time, mission_cost, mission_status)
+values (mission_seq.nextval, 'test1', '배달,장보기', '배달해주세요7', '떡볶이 배달해주세요~~7', '출발좌표', '도착좌표', '1', '1', '4000', '1');
+
 
 insert into mission 
 (mission_num, mission_id, mission_category, mission_name, mission_content,
 mission_start, mission_end, mission_mission, mission_reservation, mission_time, mission_cost, mission_status)
 values (mission_seq.nextval, 'hong', '청소,집안일', '청소요청!', '깨끗하게 청소부탁해요^^', '출발좌표', '도착좌표', '2', '2022-02-20', '4', '10000', '2');
 
-insert into mission 
-(mission_num, mission_id, mission_category, mission_name, mission_content, mission_sex,
-mission_start, mission_end, mission_mission, mission_time, mission_cost, mission_status)
-values (mission_seq.nextval, 'sim', '역할대행', '역할대행', '마법사 역할이요', '2', '출발좌표', '도착좌표', '1', '5', '30000', '3');
+
 
 commit;
 select * from mission;
@@ -237,3 +272,4 @@ insert into review
 (review_num, mission_num, review_id, review_content, review_point, review_date)
 values (review_seq.nextval,2,'kosmoh123', '싫어요','2' ,sysdate);
 commit;
+

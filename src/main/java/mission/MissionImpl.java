@@ -27,8 +27,9 @@ public interface MissionImpl {
 	 방명록 1차 버전에서 사용하는 메서드
 	 게시물 수 카운트와 목록에 출력할 게시물 가져오기
 	 */
+	public int getTotalCount(String member_id);
 	public int getTotalCount();
-	public ArrayList<MissionDTO> listPage(int s, int e);
+	public ArrayList<MissionDTO> listPage (String member_id, int s, int e);
 	
 	/*
 	 방명록 2차 버전에서 사용할 메서드

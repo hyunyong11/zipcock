@@ -16,6 +16,67 @@ function deleteList(num) {
     alert("삭제하시겠습니까?");
     location.href='deleteAction.do?num='+ num;
 }
+
+
+window.onload = function(){
+	//현재 웹브라우저가 웹노티를 지원하는지 확인한다.
+    if(window.Notification){
+    	//알림에 관한 권한 요청 알림창 띄움
+        Notification.requestPermission();
+    }
+    else{
+        alert("알림을 지원하지 않는 브라우저입니다.");
+    }
+}
+
+function calculate(){
+    setTimeout(function(){
+        notify();
+    }, 1000);
+    setTimeout(function(){
+    	chat();
+    }, 1000);
+}
+
+function chat(){
+    setTimeout(function(){
+        notify();
+    }, 1000);
+}
+
+function notify(){
+    if(Notification.permission !== "granted"){
+        alert("알림을 지원하지 않습니다.");
+    }
+    else{
+    	console.log("웹노티 클릭");
+    	//Notification 객체를 통해 제목, 내용, 아이콘을 설정한 후 표시한다.
+        var notification = new Notification(
+            '심부름이 매칭되었습니다.',
+            {
+                icon: 'http://cfile201.uf.daum.net/image/235BFD3F5937AC17164572',
+                body: '클릭하면 채팅창으로 이동합니다.'
+            }
+        );
+    	//알림창을 클릭했을때 이동할 URL을 이벤트 핸들러에 등록한다.
+        notification.onclick = function (){
+        	//채팅 아이디(대화명)가 입력되었는지 확인한다.
+            var id = document.getElementById("member_id");
+            
+            //getElementById로 각각의 속성을 가져와서 띄워주고 잇다.
+            //채팅창을 오픈한다.
+            var room = document.getElementById("chat_room");
+               window.open("webChat.do?member_id=" + id.value + "&chat_room=" + room.value, 
+               		room.value+"-"+id.value, "width=500, height=800");
+               /*
+               window.open(창의 URL(경로), 창의 이름, 창의 속성);
+               ※창의 이름이 동일할 경우 여러개의 창을 열어도 하나의 창에서
+               열리게 되므로 항상 다른 이름으로 설정해야 한다.
+               */
+            }
+        }
+ 	};
+
 </script>
 <div class="container">
 	<h3 class="text-center mt-5">Cock List</h3>
@@ -58,7 +119,9 @@ function deleteList(num) {
 		</button>
 	</div>
 	<!-- 방명록 반복 부분 s -->
-	<c:forEach items="${lists }" var="row" >		
+	<c:forEach items="${lists }" var="row" >
+	<input type="hidden" id="chat_room" value="${row.mission_num }">	
+	<input type="hidden" id="member_id" value="${sessionScope.siteUserInfo.member_id }">	
 		<div class="border mt-2 mb-2">
 			<div class="media">
 			
@@ -146,11 +209,18 @@ function deleteList(num) {
 								<button class="btn btn-outline-danger btn-sm"
 								onclick="deleteList(${row.mission_num});">
 								삭제</button>
+								<c:if test="${ sessionScope.siteUserInfo.member_status eq 1 && row.mission_status eq 1 }" >
+									<!-- <button class="btn btn-outline-primary" onclick="chatWin('normal');"  style="position: absolute; left: 90%; bottom: 2.75em;"> -->
+									<button class="btn btn-outline-primary" onclick="chat();"  style="position: absolute; left: 90%; bottom: 2.75em;">
+										1:1 채팅하기
+									</button>
+								</c:if>
 							</c:if>
 							<c:if test="${ sessionScope.siteUserInfo.member_status eq 2 && row.mission_status eq 1 }" >
-							<button class="btn btn-outline-primary" onclick="location.href='mypage.do';"  style="position: absolute; left: 90%; bottom: 2.75em;">
-								지원하기
-							</button>
+								<!-- <button class="btn btn-outline-primary" onclick="chatWin('normal');"  style="position: absolute; left: 90%; bottom: 2.75em;"> -->
+								<button class="btn btn-outline-primary" onclick="calculate();"  style="position: absolute; left: 90%; bottom: 2.75em;">
+									지원하기
+								</button>
 							</c:if>
 						</div>
 						${row.mission_content } <br>

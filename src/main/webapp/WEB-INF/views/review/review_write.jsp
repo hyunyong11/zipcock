@@ -88,7 +88,7 @@ String mission_category = request.getParameter("row.mission_category");
 		action="<c:url value="/writeAction.do" />" >
 		
 	<table class="table table-bordered">
-	<input type="hid-den" class="form-control" name="mission_num"  value="<%=mission_num %>" />
+	<input type="hidden" class="form-control" name="mission_num"  value="<%=mission_num %>" />
 	<colgroup>
 		<col width="20%"/>
 		<col width="10%"/>
@@ -103,22 +103,29 @@ String mission_category = request.getParameter("row.mission_category");
 			<td>
 				<input type="text" class="form-control" 
 					style="width:100px;" name="review_id" 
-						value="${sessionScope.siteUserInfo.member_id }" readonly/>
+						value="${sessionScope.siteUserInfo.member_id }" value="review_id" readonly/>
 			<th class="text-center" 
 				style="vertical-align:middle;">별점</th>
 			<td>
-				<input type="text" class="form-control" 
-					style="width:100px;" name="review_point" 
-					value="${mybatis.MyBoardDTO.review_point }" />
-			</td>
+                <span class="rate" style="text-align: center"> 
+                    <select id="review_point" class="sel" name="review_point" required>
+                            <option value="">별점</option>
+                            <option value="1" style="color: red;">★</option>
+                            <option value="2" style="color: red;">★★</option>
+                            <option value="3" style="color: red;">★★★</option>
+                            <option value="4" style="color: red;">★★★★</option>
+                            <option value="5" style="color: red;">★★★★★</option>    
+                    </select>
+                </span>
+            </td>
 			<tr>
-			<th class="text-center" 
+			<%-- <th class="text-center" 
 				style="vertical-align:middle;">카테고리</th>
 			<td>
 				<input type="text" class="form-control" 
 					style="width:100px;" name="mission_category" 
 					value="<%=mission_category %>" />
-			</td>
+			</td> --%>
 			</tr>
 		<tr>
 			<th class="text-center" 

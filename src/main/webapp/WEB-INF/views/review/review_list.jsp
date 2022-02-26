@@ -137,7 +137,7 @@ function deleteRow(review_num){
 		<c:if test="${sessionScope.siteUserInfo.member_id eq row.review_id}">
 		<!-- 리스트반복시작 -->
 			<tr>
-				<td class="text-center" style="background-color: lightgray">${row.review_num }</td>
+				<td class="text-center" style="background-color: lightgray">${row.virtualNum }</td>
 				<td class="text-center" >${row.mission_num }</td>
 				<td class="text-center" >${row.review_content  }</td>
 				<td class="text-center">${row.review_point  }</td>

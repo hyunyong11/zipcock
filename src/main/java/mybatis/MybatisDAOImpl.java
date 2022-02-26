@@ -22,16 +22,16 @@ public interface MybatisDAOImpl {
 	게시물수 카운트와 목록에 출력할 게시물 가져오기
 	 */
 	public int getTotalCount();//파라미터 없음
-	public ArrayList<MyBoardDTO> listPage(int s, int e);//파라미터 2개 있음
+	public ArrayList<MyBoardDTO> listPage(String review_id, int s, int e);//파라미터 2개 있음
 	
 	/*
 	@Param 어노테이션을 통해 파라미터를 전달하면 Mapper에서는 별칭을 통해
 	인파라미터 처리를 할 수 있다. 
 	 */
 	public int write(@Param("_review_id") String review_id, 
-			@Param("_review_content") String review_content,
-			@Param("_review_point") String review_point,
-			@Param("_mission_category")String mission_category);
+            @Param("_mission_num") String mission_num,
+            @Param("_review_point") String review_point,
+            @Param("_review_content") String review_content);
 	
 	//기존 게시물의 내용을 읽어오기 위한 메서드
 	public MyBoardDTO view(ParameterDTO parameterDTO);
@@ -40,7 +40,7 @@ public interface MybatisDAOImpl {
 	//삭제처리
 	public int delete(String review_num, String review_id);
 		
-	
+	public int getTotalCount(String member_id);
 	
 	
 	

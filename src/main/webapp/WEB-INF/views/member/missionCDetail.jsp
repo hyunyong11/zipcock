@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="/resources/commons/header.jsp" %>
-<%@ include file="/resources/commons/isLogin.jsp" %>
+<%@ include file="/resources/commons/isLogin.jsp" %> 
 <head>
      <title>요청내역</title>
     <!-- 리스트 삭제처리 -->
@@ -52,7 +52,7 @@
             <c:if test="${sessionScope.siteUserInfo.member_id eq row.mission_id}">
             <tr>
                 <th style="background-color: #ffc654">No</th>
-                <td style="text-align: left; color: #FF4C00">${row.mission_num }</td>
+                <td style="text-align: left; color: #FF4C00">${row.virtualNum }</td>
                 <th style="background-color: #ffc654">작성자</th>
                 <td style="text-align: left; color: #FF4C00">${row.mission_id }</td>          
             </tr>

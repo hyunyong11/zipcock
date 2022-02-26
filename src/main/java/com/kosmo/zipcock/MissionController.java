@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +21,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import board.util.EnvFileReader;
 import board.util.PagingUtil;
+import membership.MemberDTO;
 import mission.MissionDTO;
 import mission.MissionImpl;
 import mission.ParameterDTO;
@@ -181,17 +184,24 @@ public class MissionController {
 		return uuid;
 	}
 	
+	
 	//헬퍼 마이페이지 요청내역
 	@RequestMapping("/HInfoAll.do")
-	public String hInfoAll(Model model, HttpServletRequest req) {
+	public String hInfoAll(Model model, HttpServletRequest req, HttpSession session) {
 		
-		
+		MissionDTO parameterDTO = new MissionDTO();
+		String member_id = ((MemberDTO)session.getAttribute("siteUserInfo")).getMember_id();
 		int totalRecordCount =
-			sqlSession.getMapper(MissionImpl.class).getTotalCount();
+				sqlSession.getMapper(MissionImpl.class)
+					.getTotalCount(member_id);
 		
 		//페이지 처리를 위한 설정값
-		int pageSize = 4;//한 페이지당 출력할 게시물의 갯수
-		int blockPage = 2;//한 블럭당 출력할 페이지번호의 갯수
+		int pageSize = Integer.parseInt(
+	            EnvFileReader.getValue("MboardInit.properties",
+	                     "mboard.pageSize"));
+        int blockPage = Integer.parseInt(
+                EnvFileReader.getValue("MboardInit.properties",
+                        "mboard.blockPage"));
 		//전체 페이지 수 계산
 		int totalPage = (int)Math.ceil((double)totalRecordCount/pageSize);
 		//현제페이지 번호 설정
@@ -208,12 +218,14 @@ public class MissionController {
 		int start = (nowPage-1) * pageSize + 1;
 		int end = nowPage * pageSize;
 		
+		parameterDTO.setStart(start);
+		parameterDTO.setEnd(end);
 		/*
 		서비스 역할의 인터페이스의 추상메서드를 호출하면 mapper가 동작됨
-		전달된 파라미터는 #{param1}과 같이 순서대로 사용한다. 
-		 */
+		전달된 파라미터는 #{param1}과 같이 순서대로 사용한다. */
+		 
 		ArrayList<MissionDTO> lists =
-			sqlSession.getMapper(MissionImpl.class).listPage(start, end);
+			sqlSession.getMapper(MissionImpl.class).listPage(member_id, start, end);
 				
 		String pagingImg =
 			PagingUtil.pagingImg(totalRecordCount, pageSize, blockPage, nowPage,
@@ -234,7 +246,7 @@ public class MissionController {
 	
 	//마이페이지 사용자 사용내역
 	@RequestMapping("/CInfoAll.do")
-	public String cInfoAll(Model model, HttpServletRequest req) {
+	public String cInfoAll(Model model, HttpServletRequest req, HttpSession session) {
 		
 		//방명록 테이블의 게시물의 갯수 카운트
 		/*
@@ -245,12 +257,17 @@ public class MissionController {
 			-> 추상메서드와 동일한 이름의 id속성을 가진 엘리먼트 선택
 			-> 쿼리문 실행 및 결과 반환
 		 */
+		//Map<String, Object> paramMap = model.asMap();
+		//ParameterDTO parameterDTO = new ParameterDTO();
+		MissionDTO parameterDTO = new MissionDTO();
+		String mission_id = ((MemberDTO)session.getAttribute("siteUserInfo")).getMember_id();
 		int totalRecordCount =
-			sqlSession.getMapper(MissionImpl.class).getTotalCount();
+				sqlSession.getMapper(MissionImpl.class)
+					.getTotalCount(mission_id);
 		
 		//페이지 처리를 위한 설정값
-		int pageSize = 4;//한 페이지당 출력할 게시물의 갯수
-		int blockPage = 2;//한 블럭당 출력할 페이지번호의 갯수
+		int pageSize = 7;
+        int blockPage = 3;
 		//전체 페이지 수 계산
 		int totalPage = (int)Math.ceil((double)totalRecordCount/pageSize);
 		//현제페이지 번호 설정
@@ -261,22 +278,45 @@ public class MissionController {
 		*/
 		//페이지번호가 null이거나 빈값인 경우 1페이지로 설정한다. 
 		int nowPage = (req.getParameter("nowPage")==null || req.getParameter("nowPage").equals("")) 
-			? 1 : Integer.parseInt(req.getParameter("nowPage"));
-		
+	            ? 1 : Integer.parseInt(req.getParameter("nowPage"));
+		System.out.println(nowPage);
 		//해당 페이지에 출력할 게시물의 구간을 계산한다. 
 		int start = (nowPage-1) * pageSize + 1;
 		int end = nowPage * pageSize;
 		
+		// 게시물의 구간을 DTO에 저장
+		parameterDTO.setStart(start);
+		parameterDTO.setEnd(end);
+		//paramMap.put("start", start);
+        //paramMap.put("end", end);
 		/*
 		서비스 역할의 인터페이스의 추상메서드를 호출하면 mapper가 동작됨
 		전달된 파라미터는 #{param1}과 같이 순서대로 사용한다. 
 		 */
 		ArrayList<MissionDTO> lists =
-			sqlSession.getMapper(MissionImpl.class).listPage(start, end);
-				
+			sqlSession.getMapper(MissionImpl.class).listPage(mission_id, start, end);
+		System.out.println(lists);
+		//가상번호 계산후 부여하기 
+	      int virtualNum = 0;
+	      int countNum = 0;
+	      for(MissionDTO row : lists) {
+	         //전체게시물의 갯수에서 하나씩 차감하면서 가상번호를 부여한다.(페이징X)
+	         //virtualNum = totalRecordCount --;
+	         
+	         /*********가상번호계산 추가코드 Start****************/
+	         
+	         virtualNum = totalRecordCount - 
+	               (((nowPage-1)*pageSize) + countNum++);
+	         System.out.println(virtualNum);
+	         /*********가상번호계산 추가코드 End****************/
+	         
+	         //가상번호를 setter를 통해 저장
+	         row.setVirtualNum(virtualNum);
+	      }
+		
 		String pagingImg =
 			PagingUtil.pagingImg(totalRecordCount, pageSize, blockPage, nowPage,
-				req.getContextPath()+"/cInfoAll.do?");
+				req.getContextPath()+"/CInfoAll.do?");
 		model.addAttribute("pagingImg", pagingImg);
 		
 		//내용에 대한 줄바꿈 처리
@@ -285,8 +325,10 @@ public class MissionController {
 			
 			dto.setMission_id(temp);
 		}
-		model.addAttribute("lists", lists);
-		
+		model.addAttribute("pagingImg", pagingImg);
+        model.addAttribute("totalPage", totalPage);//전체페이지 수
+        model.addAttribute("nowPage", nowPage);//현제페이지 번호
+        model.addAttribute("lists", lists);
 		
 		return "/member/cInfoAll";
 	}
@@ -295,11 +337,11 @@ public class MissionController {
 	@RequestMapping("/missionCDetail.do")
 	public String missionCDetail(Model model, HttpServletRequest req) {
 			
-			int mission_num = Integer.parseInt(req.getParameter("mission_num"));
+		int mission_num = Integer.parseInt(req.getParameter("mission_num"));
 
-			ArrayList<MissionDTO> lists =
-				sqlSession.getMapper(MissionImpl.class).missionCDetail(mission_num);
-					
+		ArrayList<MissionDTO> lists =
+			sqlSession.getMapper(MissionImpl.class).missionCDetail(mission_num);
+			
 		model.addAttribute("lists", lists);
 		
 		return "/member/missionCDetail";

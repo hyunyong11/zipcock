@@ -74,9 +74,6 @@
                         <li>
                             <a class="page-scroll" href="#contact">Contact</a>
                         </li>
-                        <li>
-                            <a href="webSocket.do" target="_blank">웹소켓</a>
-                        </li>
                          
                         <!-- 로그인 유무에 따른 join logout -->
                         <c:choose>

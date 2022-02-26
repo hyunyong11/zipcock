@@ -80,7 +80,9 @@ function writeValidate(f)
     <h3 class="subTitle4C">&nbsp;&nbsp;&nbsp;&nbsp;</h3>
 	<div class="container">
 		<h2>리뷰게시판</h2>
-	<form name="writeFrm" method="post"  onsubmit="return writeValidate(this);" action="<c:url value="/modifyAction.do" />" >
+	<form name="writeFrm" method="post" 
+        onsubmit="return writeValidate(this);"
+        action="<c:url value="/modifyAction.do" />" >
 	<table border="1" width="100%">
 		<tr>
 			<td align="center" style="font-weight: bold; background-color: #B9EEFF;">
@@ -99,37 +101,30 @@ function writeValidate(f)
 		<col width="*"/>
 	</colgroup>
 	<tbody>
-		<tr>
-			<th class="text-center" 
-				style="vertical-align:middle;">작성자</th>
-			<td>
-				<input type="text" class="form-control" 
-					style="width:100px;" name="review_id" 
-						value="${sessionScope.siteUserInfo.member_id }"  readonly/>
-			<th class="text-center" 
-				style="vertical-align:middle;">별점</th>
-			<td>
-				<input type="text" class="form-control" 
-					style="width:100px;" name="review_point" 
-					value="${dto.review_point }" />
-			</td>
-			<tr>
-			<th class="text-center" 
-				style="vertical-align:middle;">카테고리</th>
-			<td>
-				<input type="text" class="form-control" 
-					style="width:100px;" name="mission_category" 
-					value="${dto.mission_category }" />
-			</td>
-				<th class="text-center" 
-				style="vertical-align:middle;">심부름번호</th>
-			<td>
-				<input type="text" class="form-control" 
-					style="width:100px;" name="mission_num" 
-					value="${dto.mission_num}" />
-			</td>
-			</tr>
-		<tr>
+        <tr>
+            <th class="text-center" 
+                style="vertical-align:middle;">작성자</th>
+            <td>
+                <input type="text" class="form-control" 
+                    style="width:100px;" name="review_id" 
+                        value="${sessionScope.siteUserInfo.member_id }" />
+            <th class="text-center" 
+                style="vertical-align:middle;">별점</th>
+            <td>
+                <span class="rate" style="text-align: center"> 
+                    <select id="review_point" class="sel" name="review_point" required>
+                            <option value="">별점</option>
+                            <option value="1" style="color: red;">★</option>
+                            <option value="2" style="color: red;">★★</option>
+                            <option value="3" style="color: red;">★★★</option>
+                            <option value="4" style="color: red;">★★★★</option>
+                            <option value="5" style="color: red;">★★★★★</option>    
+                    </select>
+                </span>
+                
+            </td>
+            
+        <tr>
 			<th class="text-center" 
 				style="vertical-align:middle;">내용</th>
 			<td colspan="5">

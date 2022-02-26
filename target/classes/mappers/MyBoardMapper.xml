@@ -19,9 +19,9 @@
 
 	<!-- ### 방명록 1차 버전에서 사용 ### -->
 	<!-- 게시물의 갯수를 카운트 한 후 정수타입으로 반환한다.  -->
-	<select id="getTotalCount" resultType="int">
-		SELECT COUNT(*) from review
-	</select>
+    <select id="getTotalCount" resultType="int">
+        SELECT COUNT(*) FROM review WHERE review_id=#{member_id}
+    </select>
 	
 	<!-- 목록에 출력할 게시물을 select한 후 결과는 ArrayList<MyBoardDTO> 
 	타입으로 반환하다. Mybatis는 레코드 인출을 위한 select계열의 쿼리문을 
@@ -32,10 +32,10 @@
 	<select id="listPage" resultType="mybatis.MyBoardDTO">			
 		SELECT * FROM (
 		    SELECT Tb.*, rownum rNum FROM (
-		        SELECT * FROM review ORDER BY review_num DESC
+		        SELECT * FROM review WHERE review_id=#{param1} ORDER BY review_num DESC
 		    ) Tb
 		)
-		WHERE rNum BETWEEN #{param1} AND #{param2}
+		WHERE rNum BETWEEN #{param2} AND #{param3}
 	</select>
 	
 	<!--  
@@ -45,7 +45,7 @@
 	<insert id="write">
 		INSERT INTO review (review_num, review_id, review_point, review_content ,mission_num)
 		VALUES
-		( review_seq.nextval, #{_review_id}, #{_review_point},#{_review_content},#{_mission_category} ) 
+		( review_seq.nextval, #{_review_id}, #{_review_point}, #{_review_content}, #{_mission_num} ) 
 	</insert>
 	
 	<!--  
@@ -65,7 +65,7 @@
 	-->
 		<update id="modify" parameterType="mybatis.MyBoardDTO">
 		UPDATE review 
-			SET	review_id=#{review_id}, review_content=#{review_content}
+			SET review_id=#{review_id}, review_content=#{review_content}, review_point=#{review_point}
 			WHERE review_num=#{review_num} AND review_id=#{review_id}
 	</update>
 	<!-- 

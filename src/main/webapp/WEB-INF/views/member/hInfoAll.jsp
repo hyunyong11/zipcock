@@ -56,7 +56,7 @@
 						<c:forEach items="${lists }" var="row">        
 	  			<c:if test="${sessionScope.siteUserInfo.member_id eq row.mission_Hid}">
                 <tr>
-                    <td>${row.mission_num }</td>
+                    <td>${row.virtualNum }</td>
                     <th>
                       <a href="missionHDetail.do?mission_num=${row.mission_num }">${row.mission_name }</a>
                     </th>

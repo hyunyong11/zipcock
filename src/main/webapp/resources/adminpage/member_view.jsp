@@ -213,7 +213,6 @@ function deletePost(){
 									<%
 				                    } else if(flag.equals("qna")) {
 									%>
-									<button type="button" class="btn btn-primary" onclick="location.href='member_edit.jsp?flag=<%=flag%>&num=<%=qdto.getNum()%>';">수정하기</button>
 									<button type="button" class="btn btn-success" onclick="deletePost();">삭제하기</button>			
 									<button type="button" class="btn btn-warning" 
 										onclick="location.href='member_list.jsp?flag=<%=flag%>';">리스트보기</button>

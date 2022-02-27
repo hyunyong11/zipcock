@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE mapper
-    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="mybatis.MybatisMemberImpl">
-	
- 	<!--  
- 	파라미터를 받는 두번째 방법으로 순서대로 0, 1...로 기술한다. 
- 	2개의 파라미터를 통해 select한 결과를 MemberVO객체로 반환한다. 
- 	-->
-	<select id="login" resultType="membership.MemberDTO">
-		SELECT * FROM member WHERE member_id=#{0} and member_pass=#{1}
+<!-- namespace를 통해 서비스 역할의 인터페이스와 연결한다. -->  
+<mapper namespace="mybatis.IAndroidDAO">
+
+	<select id="memberList" resultType="membership.MemberDTO">
+		SELECT * FROM member ORDER BY member_id DESC
 	</select>
 	
-</mapper>     
+	
+	<select id="memberLogin" resultType="membership.MemberDTO" 
+		parameterType="membership.MemberDTO">
+		SELECT * FROM member WHERE member_id=#{member_id} and member_pass=#{member_pass}
+	</select> 
+ 	 
+</mapper>
+
+
+

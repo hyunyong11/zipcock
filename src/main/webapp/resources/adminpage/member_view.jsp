@@ -1,7 +1,8 @@
 
 
-<%@page import="board.QBoardDTO"%>
-<%@page import="board.QBoardDAO"%>
+<%@page import="mybatis.QBoardDTO"%>
+
+<%@page import="mybatis.QBoardDAO"%>
 <%@page import="board.MBoardDTO"%>
 <%@page import="board.MBoardDAO"%>
 <%@page import="java.util.HashMap"%> 
@@ -161,13 +162,13 @@ function deletePost(){
 										<th class="text-center" 
 											style="vertical-align:middle;">작성자</th>
 										<td>
-											<%= qdto.getQboard_id() %>
+											<%= qdto.getId() %>
 										</td>
 										
 										<th class="text-center" 
 											style="vertical-align:middle;">작성일</th>
 										<td>
-											<%= qdto.getQboard_date() %>
+											<%= qdto.getPostdate() %>
 										</td>
 									</tr>
 									
@@ -176,7 +177,7 @@ function deletePost(){
 										<th class="text-center" 
 											style="vertical-align:middle;">조회수</th>
 										<td>
-											<%= qdto.getQboard_count() %> 
+											<%= qdto.getVisitcount() %> 
 										</td>
 										
 										
@@ -185,14 +186,14 @@ function deletePost(){
 										<th class="text-center" 
 											style="vertical-align:middle;">제목</th>
 										<td colspan="3">
-											<%= qdto.getQboard_title() %>
+											<%= qdto.getTitle() %>
 										</td>
 									</tr>
 									<tr>
 										<th class="text-center" 
 											style="vertical-align:middle;">내용</th>
 										<td colspan="3">
-											<%= qdto.getQboard_content().replace("\r\n", "<br/>") %>
+											<%= qdto.getContent().replace("\r\n", "<br/>") %>
 										</td>
 									</tr>
 									<%
@@ -212,7 +213,7 @@ function deletePost(){
 									<%
 				                    } else if(flag.equals("qna")) {
 									%>
-									<button type="button" class="btn btn-primary" onclick="location.href='member_edit.jsp?flag=<%=flag%>&num=<%=qdto.getQboard_num()%>';">수정하기</button>
+									<button type="button" class="btn btn-primary" onclick="location.href='member_edit.jsp?flag=<%=flag%>&num=<%=qdto.getNum()%>';">수정하기</button>
 									<button type="button" class="btn btn-success" onclick="deletePost();">삭제하기</button>			
 									<button type="button" class="btn btn-warning" 
 										onclick="location.href='member_list.jsp?flag=<%=flag%>';">리스트보기</button>

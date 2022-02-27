@@ -1,6 +1,7 @@
 
-<%@page import="board.QBoardDTO"%>
-<%@page import="board.QBoardDAO"%>
+
+<%@page import="mybatis.QBoardDTO"%>
+<%@page import="mybatis.QBoardDAO"%>
 <%@page import="board.MBoardDTO"%>
 <%@page import="board.MBoardDAO"%>
 <%@page import="java.util.HashMap"%>
@@ -143,14 +144,14 @@ function validateForm(form) {  // 폼 내용 검증
 											style="vertical-align:middle;">제목</th>
 										<td>
 											<input type="text" name="title" class="form-control" 
-											value=<%= qdto.getQboard_title() %> />
+											value=<%= qdto.getTitle() %> />
 										</td>
 									</tr>
 									<tr>
 										<th class="text-center" 
 											style="vertical-align:middle;">내용</th>
 										<td>
-											<textarea name="content" rows="10" class="form-control"><%= qdto.getQboard_content() %></textarea>
+											<textarea name="content" rows="10" class="form-control"><%= qdto.getContent() %></textarea>
 										</td>
 									</tr>
 									<%

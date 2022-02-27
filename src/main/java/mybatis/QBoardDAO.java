@@ -1,4 +1,4 @@
-package board;
+package mybatis;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -97,12 +97,12 @@ public class QBoardDAO extends JDBConnect{
 				// 하나의 레코드를 읽어서 DTO객체에 저장한다.
 				QBoardDTO dto = new QBoardDTO();
 				
-				dto.setQboard_num(rs.getInt(1));
-				dto.setQboard_id(rs.getString(2));
-				dto.setQboard_title(rs.getString(3));
-				dto.setQboard_content(rs.getString(4));
-				dto.setQboard_date(rs.getDate(5));
-				dto.setQboard_count(rs.getInt(6));
+				dto.setNum(rs.getString(1));
+				dto.setId(rs.getString(2));
+				dto.setTitle(rs.getString(3));
+				dto.setContent(rs.getString(4));
+				dto.setPostdate(rs.getString(5));
+				dto.setVisitcount(rs.getString(6));
 				//리스트 컬렉션에 DTO객체를 추가한다.
 				List.add(dto);
 			}
@@ -124,16 +124,16 @@ public class QBoardDAO extends JDBConnect{
 		try {
 			// 인파라미터가 있는 쿼리문 작성(동적쿼리문)
 			String query = " INSERT INTO qboard( "
-						 + " qboard_num, qboard_id, qboard_title, qboard_content, qboard_date, qboard_count) "
+						 + " num, id, title, content, postdate, visitcount) "
 						 + " VALUES ( "
 						 + " qboard_seq.nextval, ?, ?, ?, sysdate, 0)";
 			
 			// 동적쿼리문 실행을 위한 prepared객체 생성
 			psmt = con.prepareStatement(query);
 			// 순서대로 인파라미터 설정
-			psmt.setString(1, dto.getQboard_id());
-			psmt.setString(2, dto.getQboard_title());
-			psmt.setString(3, dto.getQboard_content());
+			psmt.setString(1, dto.getId());
+			psmt.setString(2, dto.getTitle());
+			psmt.setString(3, dto.getContent());
 			
 			//쿼리문 실행 : 입력에 성공한다면 1이 반환된다 실패시 0 반환
 			result = psmt.executeUpdate();
@@ -151,7 +151,7 @@ public class QBoardDAO extends JDBConnect{
 		QBoardDTO dto = new QBoardDTO();
 		
 		String query = "SELECT * FROM qboard "
-					 + " WHERE qboard_num=?";
+					 + " WHERE num=?";
 		
 		try {
 			psmt = con.prepareStatement(query);
@@ -161,12 +161,12 @@ public class QBoardDAO extends JDBConnect{
 			
 			if(rs.next()) { // ResultSet에서 커서를 이동시켜 레코드를 읽은 후
 				// DTO 객체에 레코드의 내용을 추가한다.
-				dto.setQboard_num(rs.getInt(1));
-				dto.setQboard_id(rs.getString(2));
-				dto.setQboard_title(rs.getString(3));
-				dto.setQboard_content(rs.getString(4));
-				dto.setQboard_date(rs.getDate(5)); //날짜타입이므로 getDate()사용함
-				dto.setQboard_count(rs.getInt(6));
+				dto.setNum(rs.getString(1));
+				dto.setId(rs.getString(2));
+				dto.setTitle(rs.getString(3));
+				dto.setContent(rs.getString(4));
+				dto.setPostdate(rs.getString(5));
+				dto.setVisitcount(rs.getString(6));
 			}
 		}
 		catch (Exception e) {
@@ -181,8 +181,8 @@ public class QBoardDAO extends JDBConnect{
 	public void updateVisitCount(int num) {
 		// visitcount 컬럼은 number 타입이므로 덧셈이 가능하다.
 		String query = "UPDATE qboard SET "
-					 + " qboard_count=qboard_count+1 "
-					 + " WHERE qboard_num=?";
+					 + " visitcount=visitcount+1 "
+					 + " WHERE num=?";
 		
 		try {
 			psmt = con.prepareStatement(query);
@@ -201,7 +201,7 @@ public class QBoardDAO extends JDBConnect{
 		
 		try {
 			// 쿼리문 작성
-			String query = "DELETE FROM qboard WHERE qboard_num=?";
+			String query = "DELETE FROM qboard WHERE num=?";
 			
 			//prepared객체 생성 및 인파라미터 설정
 			psmt = con.prepareStatement(query);
@@ -225,15 +225,15 @@ public class QBoardDAO extends JDBConnect{
 		try {
 			// update를 위한 쿼리문
 			String query = "UPDATE qboard SET "
-						 + " qboard_title=?, qboard_content=? "
-						 + " WHERE qboard_num=?";
+						 + " title=?, content=? "
+						 + " WHERE num=?";
 			
 			// prepared객체 생성
 			psmt = con.prepareStatement(query);
 			// 인파라미터 설정
-			psmt.setString(1, dto.getQboard_title());
-			psmt.setString(2, dto.getQboard_content());
-			psmt.setInt(3, dto.getQboard_num());
+			psmt.setString(1, dto.getTitle());
+			psmt.setString(2, dto.getContent());
+			psmt.setString(3, dto.getNum());
 			//쿼리 실행
 			result = psmt.executeUpdate();
 		}
@@ -250,8 +250,8 @@ public class QBoardDAO extends JDBConnect{
 	{
 		//쿼리문 작성
 		String sql = "UPDATE qboard SET "
-				+ " qboard_count=qboard_count+1 "
-				+ " WHERE qboard_num=? ";
+				+ " visitcount=visitcount+1 "
+				+ " WHERE num=? ";
 		
 		/*
 		행의 변화를 주는 쿼리문 실행이므로 update메서드를 사용한다.
@@ -273,7 +273,7 @@ public class QBoardDAO extends JDBConnect{
 		
 		QBoardDTO dto = new QBoardDTO();
 		String sql = "SELECT * FROM Qboard "
-				+ " WHERE qboard_num="+num;
+				+ " WHERE num="+num;
 		try {
 			/*
 			queryForObject() 메서드는 쿼리문을 실행한 후 반드시 하나의 결과를

@@ -52,6 +52,9 @@
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">관리자 페이지</h1>
                     </div>
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <a href="/zipcock/zipcock.do">ZIPCOCK 바로가기</a>
+                    </div>
 
                     <!-- Content Row -->
                     

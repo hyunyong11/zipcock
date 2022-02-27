@@ -1,6 +1,7 @@
  
-<%@page import="board.QBoardDAO"%>
-<%@page import="board.QBoardDTO"%>
+<%@page import="mybatis.QBoardDTO"%>
+<%@page import="mybatis.QBoardDAO"%>
+
 <%@page import="board.MBoardDAO"%>
 <%@page import="board.MBoardDTO"%>
 <%@page import="utils.JSFunction"%>
@@ -22,9 +23,9 @@ dto.setMboard_title(title);
 dto.setMboard_content(content);
 
 QBoardDTO qdto = new QBoardDTO(); 
-qdto.setQboard_num(Integer.parseInt(num));
-qdto.setQboard_title(title);
-qdto.setQboard_content(content);
+qdto.setNum(num); //(Integer.parseInt(num));
+qdto.setTitle(title);
+qdto.setContent(content);
 
 //DB연결
 MBoardDAO dao = new MBoardDAO(application);

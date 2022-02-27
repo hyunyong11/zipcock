@@ -1,5 +1,6 @@
-<%@page import="board.QBoardDTO"%>
-<%@page import="board.QBoardDAO"%>
+
+<%@page import="mybatis.QBoardDTO"%>
+<%@page import="mybatis.QBoardDAO"%>
 <%@page import="board.MBoardDTO"%>
 <%@page import="board.MBoardDAO"%>
 <%@page import="java.net.URLEncoder"%>
@@ -213,11 +214,11 @@ qdao.close();
 									        <tr>
 									        <td><%= virtualNum %></td>
 									        <td class="text-start">
-									        <a href="member_view.jsp?flag=<%= flag %>&num=<%= dto.getQboard_num() %>"><%= dto.getQboard_title() %></a>    
+									        <a href="member_view.jsp?flag=<%= flag %>&num=<%= dto.getNum() %>"><%= dto.getTitle() %></a>    
 									        </td>
-									        <td><%= dto.getQboard_id() %></td>
-									        <td><%= dto.getQboard_date() %></td>
-									        <td><%= dto.getQboard_count() %></td>
+									        <td><%= dto.getId() %></td>
+									        <td><%= dto.getPostdate() %></td>
+									        <td><%= dto.getContent() %></td>
 									        </tr>
 									    <%
 											}

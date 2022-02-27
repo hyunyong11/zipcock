@@ -1,6 +1,7 @@
+<%@page import="mybatis.QBoardDTO"%>
 <%@page import="board.MBoardDAO"%>
-<%@page import="board.QBoardDAO"%>
-<%@page import="board.QBoardDTO"%>
+<%@page import="mybatis.QBoardDAO"%>
+
 <%@page import="board.MBoardDTO"%>
 <%@page import="utils.JSFunction"%>
 

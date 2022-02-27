@@ -1,5 +1,6 @@
-<%@page import="board.QBoardDAO"%>
-<%@page import="board.QBoardDTO"%>
+<%@page import="mybatis.QBoardDTO"%>
+<%@page import="mybatis.QBoardDAO"%>
+
 <%@page import="board.MBoardDAO"%>
 <%@page import="board.MBoardDTO"%>
 <%@page import="utils.JSFunction"%>
@@ -22,8 +23,8 @@
                 QBoardDTO qdto = new QBoardDTO();
                 dto.setMboard_title(title);
                 dto.setMboard_content(content);
-                qdto.setQboard_title(title);
-                qdto.setQboard_content(content);
+                qdto.setTitle(title);
+                qdto.setContent(content);
                 //dto.setFlag(flag);
 
                 /* SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -33,7 +34,7 @@
 
                 //세션영역에 저장된 회원 인증정보(아이디)를 가져와서 DTO에 저장한다. 
                 dto.setMboard_id(session.getAttribute("Id").toString());
-                qdto.setQboard_id(session.getAttribute("Id").toString());
+                qdto.setId(session.getAttribute("Id").toString());
 
                 //DAO객체 생성 및 DB연결
                 MBoardDAO dao = new MBoardDAO(application);

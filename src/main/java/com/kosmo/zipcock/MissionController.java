@@ -39,8 +39,6 @@ public class MissionController {
 	@Autowired
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
-		System.out.println("My MissionController 준비끝");
-		
 	}
 	
 	
@@ -91,7 +89,7 @@ public class MissionController {
 						req.getContextPath()
 							+"/HList.do?");
 		model.addAttribute("pagingImg", pagingImg);
-		
+
 		for(MissionDTO dto : lists) {
 			
 			String temp =
@@ -101,17 +99,28 @@ public class MissionController {
 			String mWay = dto.getMission_waypoint();
 			
 			if (mWay != null) {
-				String Addr =
-					mWay.substring(0, mWay.lastIndexOf("|")+1);
-				dto.setMission_waypoint(Addr);
+				int Addr = mWay.lastIndexOf("|");
+				
+				String way_rest = mWay.substring(1, Addr);
+                String way_2 = mWay.substring(Addr+1);
+				
+                int way_num = way_rest.lastIndexOf("|");
+                String way_1 = way_rest.substring(way_num+1);
+				
+				dto.setMission_waypoint(way_1+","+way_2);
 			}
 			
 			String mEnd = dto.getMission_end();
-			String Addr2[] =
-					mEnd.split("|");
-//					mEnd.substring(0, mEnd.lastIndexOf("|")+1);
+			int Addr2 = mEnd.lastIndexOf("|");
 			
-			dto.setMission_end(Addr2[2]);
+			String end_rest = mEnd.substring(1, Addr2);
+            String end_2 = mEnd.substring(Addr2+1);
+            
+            int end_num = end_rest.lastIndexOf("|");
+            String end_1 = end_rest.substring(end_num+1);
+            dto.setMission_end(end_1+","+end_2);
+
+            
 		}
 		model.addAttribute("lists", lists);
 		
@@ -389,25 +398,28 @@ public class MissionController {
         for(MissionDTO dto : lists) {
             if(!(dto.getMission_waypoint() == null)) {
                 String waypoint = dto.getMission_waypoint();
-                
-                int way = waypoint.indexOf("|");
-                
-                String way_1 = waypoint.substring(0, way+1);
+                int way = waypoint.lastIndexOf("|");
+                String way_rest = waypoint.substring(1, way);
                 String way_2 = waypoint.substring(way+1);
-                
-                model.addAttribute("way_1", way_1);
                 model.addAttribute("way_2", way_2);
+                
+                int way_num = way_rest.lastIndexOf("|");
+                String way_1 = way_rest.substring(way_num+1);
+                model.addAttribute("way_1", way_1);
             }
             
             String end = dto.getMission_end();
             
-            int e = end.indexOf("|");
+            int e = end.lastIndexOf("|");
             
-            String end_1 = end.substring(0, e+1);
+            String end_rest = end.substring(1, e);
             String end_2 = end.substring(e+1);
             
-            model.addAttribute("end_1", end_1);
             model.addAttribute("end_2", end_2);
+            
+            int end_num = end_rest.lastIndexOf("|");
+            String end_1 = end_rest.substring(end_num+1);
+            model.addAttribute("end_1", end_1);
         }
         
         model.addAttribute("lists", lists);

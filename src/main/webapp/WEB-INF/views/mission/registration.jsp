@@ -173,10 +173,10 @@ function setDisplay(){
                <input type="hidden" id="errLoca" class="int" maxlength="50" name="mission_waypoint0" value="" >
 
                <span class="box int_location"> 
-               <input type="text" id="errLoca" class="int" maxlength="50" name="mission_waypoint1" value="" >
+               <input type="text" id="errLoca" class="int" maxlength="50" name="mission_waypoint1" value="">
                </span>
                <span class="box int_location"> 
-               <input type="text" id="errLoca" class="int" maxlength="50" name="mission_waypoint2" value="" >
+               <input type="text" id="errLoca" class="int" maxlength="50" name="mission_waypoint2" value="">
                <span class="step_url">상세주소 입력</span>
                </span> 
             </div>
@@ -191,7 +191,7 @@ function setDisplay(){
                <input type="text" id="errLoca" class="int" maxlength="50" name="mission_end1" value="" required>
                </span>
                <span class="box int_location"> 
-               <input type="text" id="errLoca" class="int" maxlength="50" name="mission_end2" value="" >
+               <input type="text" id="errLoca" class="int" maxlength="50" name="mission_end2" value="" required>
                <span class="step_url">상세주소 입력</span>
                </span> 
             </div>

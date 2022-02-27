@@ -142,7 +142,7 @@ function inputImg(frm) {
 			
 			<c:forEach items="${ lists }" var="list">
 			
-			<input type="hi-dden" value="${ list.mission_num }" name="num">
+			<input type="hidden" value="${ list.mission_num }" name="num">
             <!-- 가격/심부름 종류 -->
             <div>
                <h3 class="join_title">
@@ -225,7 +225,7 @@ function inputImg(frm) {
                <input type="text" id="errLoca" class="int" maxlength="50" name="end_1" value="${ end_1 }" required>
                </span>
                <span class="box int_location"> 
-               <input type="text" id="errLoca" class="int" maxlength="50" name="end_2" value="${ end_2 }" >
+               <input type="text" id="errLoca" class="int" maxlength="50" name="end_2" value="${ end_2 }" required>
                <span class="step_url">상세주소 입력</span>
                </span> 
             </div>

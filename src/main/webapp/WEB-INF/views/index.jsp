@@ -48,22 +48,8 @@
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
-                       <!-- <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Cock Service
-                      </a>
-                      <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                        <li><a class="dropdown-item" href="HList.do">List</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                      </ul>
-                    </li> -->
-                    
                         <li>
                             <a class="page-scroll" href="#about">About</a>
-                        </li>
-                        <li>
-                            <a class="page-scroll" href="HList.do">Cock</a>
                         </li>
                         <li>
                             <a class="page-scroll" href="#Notice">Notice</a>
@@ -72,10 +58,10 @@
                             <a class="page-scroll" href="#Screenshots">Screenshots</a>
                         </li>
                         <li>
-                            <a class="page-scroll" href="./resources/build/index.html">Q&A</a>
+                            <a class="page-scroll" href="HList.do">Cock</a>
                         </li>
                         <li>
-                            <a class="page-scroll" href="#contact">Contact</a>
+                            <a class="page-scroll" href="./resources/build/index.html">Q&A</a>
                         </li>
                          
                         <!-- 로그인 유무에 따른 join logout -->
@@ -452,64 +438,6 @@
    </div><!-- =============== container end =============== -->
     </section>
    
-    <!-- =============== Contact =============== -->
-    <section id="contact">
-   <!-- =============== container =============== -->
-      <div class="container">
-             <div class="row">
-                 <div class="col-xs-12 col-sm-12 col-md-12 wow bounceIn animated headding" data-wow-delay=".1s">
-                   <h2>Contact <span>Us</span></h2>
-                   <p>Display your mobile apps awesome features with icon lists and an image carousel of each page. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation.</p>
-               </div>
-
-
-         </div>
-
-         <div class="row">
-
-            <div class="col-xs-12 col-sm-4 col-md-4 wow bounceIn animated" data-wow-delay=".1s">
-
-               <form>
-                  <div class="ajax-hidden">
-                     <div class="form-group wow fadeInUp animated">
-                        <label for="c_name" class="sr-only">Name</label>
-                        <input type="text" placeholder="Name" name="c_name" class="form-control" id="c_name">
-                     </div>
-
-                     <div data-wow-delay=".1s" class="form-group wow fadeInUp animated">
-                        <label for="c_email" class="sr-only">Email</label>
-                        <input type="email" placeholder="E-mail" name="c_email" class="form-control" id="c_email">
-                     </div>
-
-                     <div data-wow-delay=".2s" class="form-group wow fadeInUp animated">
-                        <textarea placeholder="Message" rows="7" name="c_message" id="c_message" class="form-control"></textarea>
-                     </div>
-
-                     <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit">Send Message</button>
-                  </div>
-                  <div class="ajax-response"></div>
-               </form>
-
-            </div>
-                <div class="col-xs-12 col-sm-4 col-md-4 wow bounceIn animated map" data-wow-delay=".5s">
-
-                 <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d6508922.473104964!2d-123.76275651635396!3d37.19583981824279!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sCalifornia%2C+United+States!5e0!3m2!1sen!2sin!4v1450994260631" width="100%" height="250" frameborder="0" style="border:0" allowfullscreen></iframe>
-
-            </div>
-                 <div class="col-xs-12 col-sm-4 col-md-4 wow bounceIn animated" data-wow-delay=".6s">
-
-                 <section id="text-15" class="widget widget_text">
-                         <h3 class="widget-title">California, United States</h3> <div class="textwidget">785, Firs Avenue, place Mall,<br>
-                        <p>Tel: 01 234-56786<br>
-                        Mobile: 01 234-56786<br>
-                        E-mail: <a href="#">info@templatestock.com</a></p>
-                        <a href="#">Get directions on the map</a> â  </div>
-                    </section>
-
-            </div>                
-         </div>
-      </div><!-- =============== container end =============== -->
-   </section>
     <!-- Footer -->
     <footer id="footer">
    <!-- =============== container =============== -->

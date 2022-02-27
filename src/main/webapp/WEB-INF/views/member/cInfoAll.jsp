@@ -40,7 +40,7 @@ String id = (String)session.getAttribute("Id");
 		
 		<!-- table>tr*2>td*5 -->
 		<table class="table table-bordered" id="dataTable" width="90%" cellspacing="0" >
-		<input type="hid-den" name="member_id" value=<%=id%>>
+		<input type="hidden" name="member_id" value=<%=id%>>
 				<tr style="background-color: #ffc654">
 					<th width="10%" style="text-align: center">번호</th>
 					<th width="*" >제목</th>

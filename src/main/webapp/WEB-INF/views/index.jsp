@@ -72,6 +72,9 @@
                             <a class="page-scroll" href="#Screenshots">Screenshots</a>
                         </li>
                         <li>
+                            <a class="page-scroll" href="./resources/build/index.html">커뮤니티</a>
+                        </li>
+                        <li>
                             <a class="page-scroll" href="#contact">Contact</a>
                         </li>
                          

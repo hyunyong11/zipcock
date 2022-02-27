@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+    #lay_top{height: 50px;line-height: 50px;background-color:blueviolet;font-size: 1.5em;text-align: center;}
+    #lay_top p{width: 100%;}
+    #lay_left{background-color:antiquewhite;font-size: 1.5em;text-align: center;}
+    #lay_left p{width: 100%;}
+    #lay_contents{font-size: 12px; padding: 20px 10px;}
+    #lay_contents th{text-align: center;}
+    #lay_contents td{padding: 10px;}
+    #lay_bottom{height: 50px;line-height: 50px;background-color:greenyellow;font-size: 1.5em;text-align: center;}
+    #lay_bottom p{width: 100%;}
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- Top 영역 s -->
+    <div class="row" id="lay_top">
+        <p>TOP</p>
+    </div>
+    <!-- Top 영역 e -->
+    <!-- Middle 영역 s -->
+    <div class="row">
+        <!-- Left 영역 s -->
+        <div class="col-lg-2" id="lay_left">
+            <p>LEFT</p>
+        </div>
+        <!-- Left 영역 e -->
+        <!-- Contents 영역 s -->
+        <div class="col-lg-10" id="lay_contents">
+            <h2>게시판목록</h2>
+            <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th width="10%">번호</th>
+                    <th width="*">제목</th>
+                    <th width="15%">작성자</th>
+                    <th width="15%">조회수</th>
+                    <th width="15%">작성일</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr align="center">
+                    <td>100</td>
+                    <td align="left"><a href="#">나는 제목</a></td>
+                    <td align="center">홍길동</td>
+                    <td align="center">20</td>
+                    <td align="center">2020.02.20</td>
+                </tr>
+            </tbody>    
+            </table>
+            <div align="right">
+                <button type="button">글쓰기</button>
+            </div>            
+        </div>
+        <!-- Contents 영역 e -->
+    </div>
+    <!-- Middle 영역 e -->
+    <!-- Bottom 영역 s -->
+    <div class="row" id="lay_bottom">
+        <p>BOTTOM</p>
+    </div>
+    <!-- Bottom 영역 e -->
+</div>    
+</body>
+</html>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace에는 서비스객체 역할을 하는 interface의 풀경로를 기술한다. -->
+<mapper namespace="mybatis.IBoardDAO">
+ 	
+ 	<!--  
+ 	호출된 메서드명(id속성) : getTotalCount
+ 	반환타입(resultType속성) : int 즉 정수타입으로 반환
+ 	파라미터타입(parameterType속성) : ParameterDTO객체를 통해 모든 파라미터를 전달받는다.
+ 	-->
+	<select id="getTotalCount" resultType="int" 
+		parameterType="mybatis.QParameterDTO">
+		
+		SELECT COUNT(*) FROM qboard		
+		<!-- 검색어로 입력한 단어가 있을때 아래 쿼리문이 추가됨 -->
+		<if test="searchTxt!=null"> 
+			WHERE  
+			<!-- List컬렉션에 추가된 단어의 갯수만큼 아래 쿼리문이 동적으로 추가된다. 
+			만약 "가을", "겨울" 이라는 단어가 추가되었다면 
+			( title like '%가을%' or title like '%겨울%' ) 과 같이 쿼리문이 추가될것이다.
+			
+			속성중 collection="searchTxt" 부분은 ParameterDTO의 멤버변수 중 List컬렉션으로
+			생성된 항목을 기술한다. 		
+			-->
+			<foreach collection="searchTxt" item="str" open="(" close=")" 
+				separator="or">
+				${searchField} like '%'||#{str}||'%'
+			</foreach>		 
+		</if>
+	</select>
+	<!-- 구간에 해당하는 게시물을 추출한다. -->
+	<select id="listPage" resultType="mybatis.QBoardDTO" 
+		parameterType="mybatis.QParameterDTO">			
+		SELECT * FROM (
+		    SELECT Tb.*, rownum rNum FROM (
+		        SELECT * FROM qboard   
+				<if test="searchTxt!=null">
+					WHERE
+					<foreach collection="searchTxt" item="str" open="(" 
+						close=")" separator="or">
+						${searchField} like '%'||#{str}||'%'
+					</foreach> 
+				</if>					
+		        ORDER BY num DESC
+		    ) Tb
+		)
+		WHERE rNum BETWEEN #{start} AND #{end}
+	</select>
+
+	<!-- 게시물 내용보기 -->
+	<select id="view" resultType="mybatis.QBoardDTO" 
+		parameterType="mybatis.QParameterDTO">
+		SELECT * FROM qboard WHERE num=#{num}
+	</select>	
+	
+	<!-- 리뷰게시물 내용보기 -->
+	<select id="review" resultType="mybatis.QReviewDTO" 
+		parameterType="mybatis.QParameterDTO">
+		SELECT * FROM qreview WHERE num=#{num}
+	</select>	
+	
+	<!-- 게시물 작성하기 -->
+	<!-- resultType을 명시하지 않더라도 항상 성공 실패시 1과 0을 반환한다.  -->
+	<insert id="write" parameterType="mybatis.QBoardDTO">
+		INSERT INTO qboard (num, title, content, id, visitcount)
+		VALUES (seq_qboard.NEXTVAL, #{title}, #{content}, #{id}, 0)
+	</insert>
+	
+	<!-- 리뷰 작성하기 -->
+	<!-- resultType을 명시하지 않더라도 항상 성공 실패시 1과 0을 반환한다.  -->
+	<insert id="rewrite" parameterType="mybatis.QReviewDTO">
+		INSERT INTO qreview (num, content, id)
+		VALUES (#{num}, #{content}, #{id})
+	</insert>	
+	
+	<!-- 
+	삭제처리. 전달되는 파라미터 순으로 param1, 2형태로 인파라미터 처리함.
+	 -->
+	<delete id="delete">
+		DELETE FROM qboard WHERE num=#{num}
+	</delete>
+	
+	<!-- 
+	수정처리. 전송된 폼값은 커맨드객체를 통해 한꺼번에 전달 받음으로
+	각 멤버변수의 getter()를 통해 인파라미터를 처리할 수 있다.  
+	-->
+	<update id="modify" parameterType="mybatis.QBoardDTO">
+		UPDATE qboard 
+			SET	title=#{title}, content=#{content}
+			WHERE num=#{num}
+	</update>		
+	
+</mapper>
+
+
+

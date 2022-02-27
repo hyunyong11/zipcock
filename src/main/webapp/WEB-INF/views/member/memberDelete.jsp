@@ -1,64 +1,17 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
 <html>
 <head>
-<style>
-.button {
-  background-color: #4CAF50; /* Green */
-  border: none;
-  color: white;
-  padding: 16px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  transition-duration: 0.4s;
-  cursor: pointer;
-}
+<meta charset="UTF-8">
+<title>회원탈퇴</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="/zipcock/resources/css/joinmember.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 
-.btn1 {
-  background-color: white; 
-  color: black; 
-  border: 2px solid #4CAF50;
-}
-
-.btn1:hover {
-  background-color: #4CAF50;
-  color: white;
-}
-
-.btn2 {
-  background-color: white; 
-  color: black; 
-  border: 2px solid #008CBA;
-}
-
-.btn2:hover {
-  background-color: #008CBA;
-  color: white;
-}
-.btn3{
- background-color: white; 
-  color: black; 
-  border: 2px solid #008CBA;
-  float:right;
-}
-.btn3:hover{
-  background-color: #008CBA;
-  color: white;
-
-}
-.btn4{
-background-color: white; 
-  color: black; 
-  border: 2px solid #4CAF50;
-}
-.btn4:hover{
- background-color: #4CAF50;
-  color: white;
-}
-</style>
  <title>회원탈퇴</title> 
  
 <script>
@@ -68,23 +21,46 @@ function deleteRow(member_id){
 	}
 }
 </script>
-<body>
 </head>
 <body>
- 	
- 	<div>
- 		<label for="member_id">아이디</label>
- 		<input type="text" id="identification" name="member_id" value="${sessionScope.siteUserInfo.member_id }" readonly/>
- 	</div>
- 	
- 	<div>
- 		<label for="member_pass">비밀번호</label>
- 		<input type="password" id="password" name="member_pass" />
- 	</div>
- 	
- <button class="btn btn1" 
-	onclick="javascript:deleteRow(${row.member_id});">탈퇴</button> 
- 	
+<div class="container">
+<!-- 바디 -->
+	<!-- header -->
+	<div id="header">
+		<h1 class="login_title">
+			<label for="email">회원탈퇴</label><br>
+			<!-- <img src="images/villagehero.png"> -->
+		</h1>
+		<h3>집콕 회원 탈퇴 신청 </h3>
+	</div>
+
+<!-- wrapper -->
+	<div id="wrapper">
+
+		<!-- content -->
+		<div id="content">
+			<div>
+				<h3 class="join_title">
+					<label for="id">아이디</label>
+				</h3>
+				<span class="box int_id"> 
+					<input type="text" class="join_H" id="identification" name="member_id" value="${sessionScope.siteUserInfo.member_id }" readonly/>
+				</span>
+			 	<span class="error_next_box"></span>
+		<div>
+			<h3 class="join_title">
+				<label for="pass" class="join_H">비밀번호</label>
+			</h3>
+			<span class="box int_pass"> 
+				<input type="password" id="pass" class="join_H" maxlength="16" name="pass" required> 
+				<img src="/zipcock/resources/img/m_icon_pass.png" id="pass1_img" class="passImg">
+			</span> <span class="error_next_box"></span>
+		</div>
+		<div class="btn_area">
+			<button type="button" id="btnJoin"
+					onclick="javascript:deleteRow(${row.member_id});"><span>회원탈퇴</span>
+			</button>
+		</div>
 </form>
 </body>
 </html>

@@ -109,7 +109,7 @@ function setDisplay(){
       <div id="content">
 
          <!-- form in -->
-         <form name="form1" id="form1" method="post" onsubmit="return validateForm(this);" enctype="multipart/form-data" action='<c:url value="/mission_regist.do"/>'>
+         <form name="form1" id="form1" method="post" onsubmit="return validateForm(this);" enctype="multipart/form-data" action='<c:url value="/mission_pay.do"/>'>
             <input type="hidden" name="mission_id" value="<%= id %>">
             <input type="hidden" name="buyer_emaill" value="<%= email %>">
             <input type="hidden" name="buyer_name" value="<%= name %>">

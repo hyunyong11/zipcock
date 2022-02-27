@@ -65,44 +65,50 @@ select * from member;
 
 ------------------------------------------------------------------------------------------------------------
 create table qboard (
-    qboard_num number primary key,
-    qboard_id varchar2(20) not null,
-    qboard_title varchar2(30) not null,
-    qboard_content varchar2(200) not null,
-    qboard_date date default sysdate not null,
-    qboard_count number default 0 not null
-); 
+    num number primary key,
+    title varchar2(30) not null,
+    content varchar2(200) not null,
+    id varchar2(20) not null,
+    postdate date default sysdate not null,
+    visitcount number default 0 not null
+);
 drop table qboard;
-
-create sequence qboard_seq
+create sequence seq_qboard
     increment by 1
     start with 1
     minvalue 1
     nomaxvalue
     nocycle
     nocache;
-drop sequence qboard_seq;
-
+drop sequence seq_qboard;
+--qna더미데이터
 insert into qboard
-(qboard_num, qboard_id, qboard_title, qboard_content, qboard_date, qboard_count)
-values (qboard_seq.nextval, '관리자', '이건 큐엔에이', '이건 큐엔에이내용이네', sysdate, 0);
+(num, title, content, id, postdate, visitcount)
+values (seq_qboard.nextval, '큐제목1', '큐내용1', '더미아이디', sysdate, 0);
 insert into qboard
-(qboard_num, qboard_id, qboard_title, qboard_content, qboard_date, qboard_count)
-values (qboard_seq.nextval, '관리자', '이건 큐엔에이1', '이건 큐엔에이내용이네', sysdate, 0);
+(num, title, content, id, postdate, visitcount)
+values (seq_qboard.nextval, '큐제목2', '큐내용2', '더미아이디', sysdate, 0);
 insert into qboard
-(qboard_num, qboard_id, qboard_title, qboard_content, qboard_date, qboard_count)
-values (qboard_seq.nextval, '관리자', '이건 큐엔에이2', '이건 큐엔에이내용이네', sysdate, 0);
+(num, title, content, id, postdate, visitcount)
+values (seq_qboard.nextval, '큐제목3', '큐내용3', '더미아이디', sysdate, 0);
 insert into qboard
-(qboard_num, qboard_id, qboard_title, qboard_content, qboard_date, qboard_count)
-values (qboard_seq.nextval, '관리자', '이건 큐엔에이3', '이건 큐엔에이내용이네', sysdate, 0);
-insert into qboard
-(qboard_num, qboard_id, qboard_title, qboard_content, qboard_date, qboard_count)
-values (qboard_seq.nextval, '관리자', '이건 큐엔에이4', '이건 큐엔에이내용이네', sysdate, 0);
+(num, title, content, id, postdate, visitcount)
+values (seq_qboard.nextval, '큐제목4', '큐내용4', '더미아이디', sysdate, 0);
 
 commit;
 
 
+create table qreview (
+    num number primary key,
+    content varchar2(200) not null,
+    id varchar2(20) not null
+);
 
+insert into qreview
+(num, content, id)
+values (1, '리뷰내용1', '리뷰관리자');
+
+commit;
 ------------------------------------------------------------------------------------------------------------
 create table mission (
     mission_num number primary key,
@@ -271,5 +277,12 @@ values (review_seq.nextval,1,'kosmoh123', '보통','3' ,sysdate);
 insert into review
 (review_num, mission_num, review_id, review_content, review_point, review_date)
 values (review_seq.nextval,2,'kosmoh123', '싫어요','2' ,sysdate);
+
+insert into review
+(review_num, mission_num, review_id, review_content, review_point, review_date)
+values (review_seq.nextval,2,'helper', '어허허허','2' ,sysdate);
+insert into review
+(review_num, mission_num, review_id, review_content, review_point, review_date)
+values (review_seq.nextval,2,'helper', 'good허333','5' ,sysdate);
 commit;
 

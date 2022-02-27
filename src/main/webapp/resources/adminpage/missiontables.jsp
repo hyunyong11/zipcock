@@ -1,5 +1,5 @@
-<%@page import="membership.MissionDTO"%>
-<%@page import="membership.MissionDAO"%>
+<%@page import="mission.MissionDTO"%>
+<%@page import="mission.MissionDAO"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.List"%>
@@ -127,51 +127,52 @@ dao.close();
 								        %> 
 
 								        <tr>
-							        		<th><input type="hidden" name="id" value="<%=dto.getNum()%>"/><%=dto.getNum()%></th>
-                                            <th><%=dto.getId() %></th>
+							        		<th><input type="hidden" name="id" value="<%=dto.getMission_num()%>"/><%=dto.getMission_num()%></th>
+                                            <th><%=dto.getMission_id() %></th>
                                             <th>
-                                            <% if(dto.getCategory()==0){ %>
+                                            <% if(dto.getMission_category()=="배달,장보기"){ %>
                                             배달, 장보기
-                                            <%}else if(dto.getCategory()==1){ %>
+                                            <%}else if(dto.getMission_category()=="청소,집안일"){ %>
                                             청소, 집안일
-                                            <%}else if(dto.getCategory()==2){ %>
+                                            <%}else if(dto.getMission_category()=="설치,운반"){ %>
                                             설치, 조립, 운반
-                                            <%}else if(dto.getCategory()==3){ %>
+                                            <%}else if(dto.getMission_category()=="동행,돌봄"){ %>
                                             동행, 돌봄
-                                            <%}else if(dto.getCategory()==4){ %>
+                                            <%}else if(dto.getMission_category()=="벌레,쥐잡기"){ %>
                                             벌레, 쥐잡기
-                                            <%}else if(dto.getCategory()==5){ %>
-                                            역활대행
-                                            <%}else if(dto.getCategory()==6){ %>
+                                            <%}else if(dto.getMission_category()=="역할대행"){ %>
+                                            역할대행
+                                            <%}else if(dto.getMission_category()=="과외,알바"){ %>
                                             과외, 알바
-                                            <%}else if(dto.getCategory()==7){ %>
+                                            <%}else if(dto.getMission_category()=="기타"){ %>
                                             기타 원격
                                             <%} %>
                                             </th>
-                                            <th><%=dto.getName()%></th>
-                                            <th><%=dto.getContent() %></th>
+                                            <th><%=dto.getMission_name() %></th>
+                                            <th><%=dto.getMission_content() %></th>
                                             <th>
-											<% if(dto.getTime().equals("0")){ %>
+											<% if(dto.getMission_time().equals("1")){ %>
                                             10분이내
-                                            <%}else if(dto.getTime().equals("1")){ %>
+                                            <%}else if(dto.getMission_time().equals("2")){ %>
                                             10~20분
-                                            <%}else if(dto.getTime().equals("2")){ %>
+                                            <%}else if(dto.getMission_time().equals("3")){ %>
                                             20~40분
-                                            <%}else if(dto.getTime().equals("3")){ %>
+                                            <%}else if(dto.getMission_time().equals("4")){ %>
                                             40~60분
-                                            <%}else if(dto.getTime().equals("4")){ %>
+                                            <%}else if(dto.getMission_time().equals("5")){ %>
                                             60분이상
                                             <%} %>
 											</th>
-                                            <th><%=dto.getCost() %></th>                                       
+                                            <th><%=dto.getMission_cost() %></th>     
+                                            <!-- 이거 Hlist에서는 3가지(1,2,3)로 나누어져있음 확인바람 -->                                  
                                             <th>
-                                            <% if(dto.getStatus()==0){ %>
+                                            <% if(dto.getMission_status()==0){ %>
                                             심부름 매칭중
-                                            <%}else if(dto.getStatus()==1){ %>
+                                            <%}else if(dto.getMission_status()==1){ %>
                                             심부름 진행중
-                                            <%}else if(dto.getStatus()==2){ %>
+                                            <%}else if(dto.getMission_status()==2){ %>
                                             픽업완료
-                                            <%}else if(dto.getStatus()==3){ %>
+                                            <%}else if(dto.getMission_status()==3){ %>
                                             심부름 완료
                                             <%} %>
                                             </th>                                            

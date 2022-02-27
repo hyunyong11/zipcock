@@ -132,8 +132,8 @@ function kakaoLogout() {
 					     <!-- 카카오 로그인 버튼 -->
 						<div id="kakaologin">
 							<div class="kakaobtn">
-								<input type="hid-den" name="kakaoemail" id="kakaoemail" value=""/>
-								<input type="hid-den" name="kakaoname" id="kakaoname" value=""/>
+								<input type="hidden" name="kakaoemail" id="kakaoemail" value=""/>
+								<input type="hidden" name="kakaoname" id="kakaoname" value=""/>
 								<a href="javascript:kakaoLogin();"> 
 									<img src="/zipcock/resources/img/kakao_login_medium_wide.png" style="width: 100%;"/>
 								</a>

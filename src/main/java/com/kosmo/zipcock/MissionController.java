@@ -54,7 +54,6 @@ public class MissionController {
 		// 검색어가 있을 경우 저장
 		parameterDTO.setSearchField(req.getParameter("searchField"));
 		parameterDTO.setSearchTxt(req.getParameter("searchTxt"));
-		System.out.println("검색어: "+ parameterDTO.getSearchTxt());
 		
 		// 게시물 카운트(DTO객체를 인수로 전달)
 		int totalRecordCount =
@@ -178,7 +177,6 @@ public class MissionController {
 		missionDTO.setMission_end(req.getParameter("mission_end0")+"|"+req.getParameter("mission_end1")+"|"+req.getParameter("mission_end2"));
 		
 		int result = sqlSession.getMapper(MissionImpl.class).mission(missionDTO);
-		System.out.println("입력결과 : "+ result);
 		
 		return "mission/missionAlert";
 	}
@@ -188,7 +186,6 @@ public class MissionController {
 	//서버 업로드를 위한 메소드
 	public static String getUuid() {
 		String uuid = UUID.randomUUID().toString();
-		//System.out.println("생성된UUID-1:"+uuid);
 		
 		return uuid;
 	}
@@ -288,7 +285,6 @@ public class MissionController {
 		//페이지번호가 null이거나 빈값인 경우 1페이지로 설정한다. 
 		int nowPage = (req.getParameter("nowPage")==null || req.getParameter("nowPage").equals("")) 
 	            ? 1 : Integer.parseInt(req.getParameter("nowPage"));
-		System.out.println(nowPage);
 		//해당 페이지에 출력할 게시물의 구간을 계산한다. 
 		int start = (nowPage-1) * pageSize + 1;
 		int end = nowPage * pageSize;
@@ -304,7 +300,6 @@ public class MissionController {
 		 */
 		ArrayList<MissionDTO> lists =
 			sqlSession.getMapper(MissionImpl.class).listPage(mission_id, start, end);
-		System.out.println(lists);
 		//가상번호 계산후 부여하기 
 	      int virtualNum = 0;
 	      int countNum = 0;
@@ -316,7 +311,6 @@ public class MissionController {
 	         
 	         virtualNum = totalRecordCount - 
 	               (((nowPage-1)*pageSize) + countNum++);
-	         System.out.println(virtualNum);
 	         /*********가상번호계산 추가코드 End****************/
 	         
 	         //가상번호를 setter를 통해 저장
@@ -344,8 +338,8 @@ public class MissionController {
 	
 	//마이페이지 사용자 사용내역 자세히 보기
 	@RequestMapping("/missionCDetail.do")
-	public String missionCDetail(Model model, HttpServletRequest req) {
-			
+	public String missionCDetail(Model model, HttpServletRequest req, HttpSession session) {
+		
 		int mission_num = Integer.parseInt(req.getParameter("mission_num"));
 
 		ArrayList<MissionDTO> lists =
@@ -432,8 +426,6 @@ public class MissionController {
         
         String id = (String)session.getAttribute("Id");
         int num = Integer.parseInt(req.getParameter("num"));
-        System.out.println(id);
-        System.out.println(num);
         
         //물리적 경로 얻어오기
         String path = req.getSession().getServletContext().getRealPath("/resources/upload");
@@ -481,8 +473,6 @@ public class MissionController {
             
             String formated = now.format(formatter);
             
-            System.out.println(formated);
-            
             missionDTO.setMission_reservation(formated);
         }
         
@@ -509,5 +499,20 @@ public class MissionController {
         
         return "redirect:CInfoAll.do";
         
+    }
+    
+    //사용자가 심부름 완료버튼을 눌렀을때
+    @RequestMapping(value="/missionAction.do", method=RequestMethod.POST)
+    public String missionAction(Model model, HttpServletRequest req, MissionDTO missionDTO) {
+        
+    	int mission_status = Integer.parseInt(req.getParameter("mission_status"));
+    	int mission_num = Integer.parseInt(req.getParameter("mission_num"));
+    	
+    	missionDTO.setMission_status(mission_status);
+    	missionDTO.setMission_num(mission_num);
+    	
+        int result = sqlSession.getMapper(MissionImpl.class).missionAction(missionDTO);
+        
+        return "redirect:mypage.do";
     }
 }

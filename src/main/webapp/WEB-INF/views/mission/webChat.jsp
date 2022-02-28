@@ -151,6 +151,17 @@ function enterkey(){
     }
 }
 
+function complete() {
+	alert("집콕을 이용해주셔서 감사합니다^^ \n수행내역은 마이페이지에서 확인가능합니다.")
+	opener.name = "parentPage";
+    document.comForm.target = opener.name;
+    document.comForm.action = "missionAction.do";
+	
+	document.comForm.submit();
+	//window.opener.location.href="missionAction.do";
+	self.close();
+
+}
 </script>
 
 <div id="contentWrap">
@@ -171,6 +182,13 @@ function enterkey(){
                 <input type="text" autocomplete="off" size="30" id="inputMessage" placeholder="메시지를 입력하세요" onkeyup="enterkey();" />
                 <input type="button" id="sendBtn" onclick="sendMessage();" value="전송">
             </div>
+            <form name="comForm" method="POST">
+				<input type="hidden" name="mission_status" value="3" />
+				<input type="hidden" name="mission_num" value="${param.chat_room }" />
+		            <button class="btn btn-warning" onclick="complete();"  style="position: sticky; left: 90%; bottom: 2.75em;">
+						심부름 완료
+					</button>
+			</form>		
         </div>
     </div>
 </div>

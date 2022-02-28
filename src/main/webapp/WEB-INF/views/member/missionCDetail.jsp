@@ -51,14 +51,24 @@
             <c:forEach items="${lists }" var="row">        
             <c:if test="${sessionScope.siteUserInfo.member_id eq row.mission_id}">
             <tr>
-                <th style="background-color: #ffc654">No</th>
-                <td style="text-align: left; color: #FF4C00">${row.virtualNum }</td>
+                <th style="background-color: #ffc654">심부름</th>
+                <c:choose>
+                <c:when test="${ row.mission_status eq 1 }">
+                <td style="text-align: left; color: #FF4C00">매칭중</td>
+                </c:when>
+                <c:when test="${ row.mission_status eq 2 }">
+                <td style="text-align: left; color: #FF4C00">매칭완료</td>
+                </c:when>
+                <c:when test="${ row.mission_status eq 3 }">
+                <td style="text-align: left; color: #FF4C00">심부름완료</td>
+                </c:when>
+                </c:choose>
                 <th style="background-color: #ffc654">작성자</th>
                 <td style="text-align: left; color: #FF4C00">${row.mission_id }</td>          
             </tr>
             <tr>
                 <th style="background-color: #ffc654">비용</th>
-                <td style="text-align: left; color: #FF4C00">${row.mission_cost }</td>            
+                <td style="text-align: left; color: #FF4C00">${row.mission_cost }원</td>            
                 <th style="background-color: #ffc654">심부름 항목</th>
                 <td style="text-align: left; color: #FF4C00">${row.mission_category }</td>
             </tr>
@@ -80,13 +90,18 @@
                 
                 <button type="button" style="background-color: #ffc654; font-weight: bold"
                     onclick="location.href='./CInfoAll.do';">리스트보기</button>
+                <c:choose>
+                <c:when test="${ row.mission_status eq 3 }">
                 <button class="button" style="background-color: #ffc654; font-weight: bold" >
-                    <%-- onclick="location.href='write.do?mission_num=${row.mission_num }"> --%>
                     <a href="write.do?mission_num=${row.mission_num }" >
                     리뷰작성하기</a>
                 </button>
+                </c:when>
+                <c:when test="${ row.mission_status eq 1 }">
                 <button type="button" style="background-color: #ffc654; font-weight: bold"
                     onclick="location.href='userEdit.do?num=${row.mission_num}';">요청변경</button>
+                </c:when>
+                </c:choose>
                 <button type="button" style="background-color: #ffc654; font-weight: bold"
                     onclick="deleteList(${row.mission_num});">요청삭제</button>
                 </td>

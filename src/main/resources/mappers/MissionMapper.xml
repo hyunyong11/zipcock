@@ -116,4 +116,10 @@
     <delete id="delete">
         DELETE FROM mission WHERE mission_id=#{0} AND mission_num=#{1}
     </delete>
+    
+    <!-- 심부름 상태 수정 -->
+    <update id="missionAction">
+        UPDATE mission 
+        	SET mission_status=#{mission_status} WHERE mission_num=#{mission_num}
+    </update>
 </mapper>

@@ -141,6 +141,7 @@ create sequence mission_seq
     nocache;
 drop sequence mission_seq;
 
+
 insert into mission 
 (mission_num, mission_id, mission_category, mission_name, mission_content,
 mission_start, mission_end, mission_mission, mission_time, mission_cost, mission_status)

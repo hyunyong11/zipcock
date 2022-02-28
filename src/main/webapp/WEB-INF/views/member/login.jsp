@@ -36,7 +36,6 @@ function kakaoLogin() {
 			  
 			  $('#kakaoemail').val(email);
 			  $('#kakaoname').val(name);
-			  //location.href='kakaoLogin.do';
 			  document.loginForm.submit();
           },
           fail: function (error) {

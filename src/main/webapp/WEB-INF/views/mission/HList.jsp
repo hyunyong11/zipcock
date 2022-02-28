@@ -38,13 +38,13 @@ function calculate(){
     }, 1000);
 }
 
-function chat(){
+function chat(num){
     setTimeout(function(){
-        notify();
+        notify(num);
     }, 1000);
 }
 
-function notify(){
+function notify(num){
     if(Notification.permission !== "granted"){
         alert("알림을 지원하지 않습니다.");
     }
@@ -54,7 +54,7 @@ function notify(){
         var notification = new Notification(
             '심부름이 매칭되었습니다.',
             {
-                icon: 'http://cfile201.uf.daum.net/image/235BFD3F5937AC17164572',
+                icon: 'https://ifh.cc/g/UiILD3.png',
                 body: '클릭하면 채팅창으로 이동합니다.'
             }
         );
@@ -62,12 +62,11 @@ function notify(){
         notification.onclick = function (){
         	//채팅 아이디(대화명)가 입력되었는지 확인한다.
             var id = document.getElementById("member_id");
-            
             //getElementById로 각각의 속성을 가져와서 띄워주고 잇다.
             //채팅창을 오픈한다.
-            var room = document.getElementById("chat_room");
-               window.open("webChat.do?member_id=" + id.value + "&chat_room=" + room.value, 
-               		room.value+"-"+id.value, "width=500, height=800");
+            //var room = document.getElementById("chat_room");
+               window.open("webChat.do?member_id=" + id.value + "&chat_room=" + num, 
+            		num+"-"+id.value, "width=500, height=800");
                /*
                window.open(창의 URL(경로), 창의 이름, 창의 속성);
                ※창의 이름이 동일할 경우 여러개의 창을 열어도 하나의 창에서
@@ -120,7 +119,6 @@ function notify(){
 	</div>
 	<!-- 방명록 반복 부분 s -->
 	<c:forEach items="${lists }" var="row" >
-	<input type="hidden" id="chat_room" value="${row.mission_num }">	
 	<input type="hidden" id="member_id" value="${sessionScope.siteUserInfo.member_id }">	
 		<div class="border mt-2 mb-2">
 			<div class="media">
@@ -188,9 +186,9 @@ function notify(){
 				    <div id="collapse${row.mission_num }" class="accordion-collapse collapse" aria-labelledby="heading${row.mission_num }" data-bs-parent="#accordionExample">
 				      <div class="accordion-body"  style="position: relative;">
 				        <div align="right">
-						<img src="/zipcock/resources/img/profile.png" style="width:20px"> ${ row.mission_id }
-							<%-- ${row.member_age } --%>
-							member_age
+						<img src="/zipcock/resources/img/profile.png" style="width:20px"> ${ row.mission_id } &nbsp;&nbsp;&nbsp;&nbsp;
+							<%-- ${row.member_age }
+							member_age --%>
 							<%-- <c:if test="${ member_sex eq 1 }">
 								여성
 							</c:if>
@@ -211,7 +209,7 @@ function notify(){
 								삭제</button>
 								<c:if test="${ sessionScope.siteUserInfo.member_status eq 1 && row.mission_status eq 1 }" >
 									<!-- <button class="btn btn-outline-primary" onclick="chatWin('normal');"  style="position: absolute; left: 90%; bottom: 2.75em;"> -->
-									<button class="btn btn-outline-primary" onclick="chat();"  style="position: absolute; left: 90%; bottom: 2.75em;">
+									<button class="btn btn-outline-primary" onclick="chat(${row.mission_num});"  style="position: absolute; left: 90%; bottom: 2.75em;">
 										1:1 채팅하기
 									</button>
 								</c:if>

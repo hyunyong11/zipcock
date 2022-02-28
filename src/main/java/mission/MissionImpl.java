@@ -58,6 +58,6 @@ public interface MissionImpl {
     //사용자 요청사항 삭제
     public int delete(String id, int num);
     
-	
+    public int missionAction(MissionDTO missionDTO);
 	
 }

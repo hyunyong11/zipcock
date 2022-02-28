@@ -127,7 +127,7 @@
                     </p>
                 </div>
                 <div class="col-xs-12 col-sm-7 col-md-7 wow slideInLeft animated">
-                    <img src="/zipcock/resources/img/phones.png" alt="phones" />
+                    <img src="/zipcock/resources/img/phones.png" alt="phones" style="bottom: 100px;" />
                 </div>
             </div>
         </div>
@@ -142,7 +142,9 @@
             <span></span>
             <div class="row">
                 <div class="col-xs-12 col-sm-5 col-md-3 wow fadeInLeft animated"  data-wow-delay=".5s">
-                    <h1><span>HELLO!</span> '집콕'을 소개합니다.</h2>      
+                    <h1>HELLO!
+                    <br><span>'집콕'</span>을 
+                    <br> 소개합니다.</h2>      
                   </div>
                   
                   <div class="col-xs-12 col-sm-7 col-md-9 wow fadeInRight animated" style="padding-left: 130px" data-wow-delay=".5s">

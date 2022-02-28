@@ -12,9 +12,9 @@
 <body>
 <div class="container">
    <div id="header">
-	<h1 class="login_title">
-		<label>MY PAGE</label><br>
-	</h1>
+   <h1 class="login_title">
+      <label>MY PAGE</label><br>
+   </h1>
  </div>
  <div id="wrapper">
  <div class="summaryContainer">
@@ -55,8 +55,8 @@
        <div class="text">회원정보수정<span class="circle"></span></div>
        <div class="right"> > </div>
    </a>
-	
-	<a href="memberDelete.do" class="item">
+   
+   <a href="memberDelete.do" class="item">
        <div class="icon">Ⅱ</div>
        <div class="text">회원탈퇴<span class="circle"></span></div>
        <div class="right"> > </div>
@@ -64,10 +64,10 @@
    <c:choose>
       <c:when test="${sessionScope.siteUserInfo.member_status eq 1 }">
          <a href="review.do" class="item">
-			<div class="icon">Ⅲ</div>
-			<div class="text">리뷰쓰기<span class="circle"></span></div>
-			<div class="right"> > </div>
-	   </a>
+         <div class="icon">Ⅲ</div>
+         <div class="text">리뷰쓰기<span class="circle"></span></div>
+         <div class="right"> > </div>
+      </a>
       </c:when>
       <c:when test="${sessionScope.siteUserInfo.member_status eq 2 }">
          <a href="review.do" class="item">
@@ -82,8 +82,8 @@
    <a href="Notice.do" class="item">
      <div>공지사항</div>
    </a>    
-   <a href="serviceCenter.do" class="item">
-     <div>FAQ</div>
+   <a href="/zipcock/resources/build/index.html" class="item">
+     <div>Q&A</div>
    </a>    
    <a href="download.do" class="item">
      <div>앱 다운로드</div>

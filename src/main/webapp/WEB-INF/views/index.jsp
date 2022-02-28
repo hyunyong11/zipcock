@@ -324,8 +324,7 @@
 	               <tr>
 	                  <td class="text-center">${row.virtualNum }</td>
 	                  <td class="text-left">
-	                     <a href="./NoticeV.do?num=${row.mboard_num}
-	                        &nowPage=${nowPage}">${row.mboard_title}</a>
+	                     <a href="./NoticeV.do?num=${row.mboard_num}&nowPage=${nowPage}">${row.mboard_title}</a>
 	                  </td>
 	                  <td class="text-center">${row.mboard_id }</td>
 	                  <td class="text-center">${row.mboard_date }</td>

@@ -9,10 +9,15 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import board.util.PagingUtil;
 import membership.MemberDTO;
+import mission.MissionDTO;
+import mission.MissionImpl;
+import mission.ParameterDTO;
 import mybatis.IAndroidDAO;
 
 @Controller
@@ -72,4 +77,44 @@ public class AndroidController {
 		System.out.println("요청들어옴:"+returnMap);
 		return returnMap;
 	}
+	
+	@RequestMapping("/android/memberInfo.do")
+	@ResponseBody
+	public Map<String, Object> memberInfo(MemberDTO memberDTO) {
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		MemberDTO Info =
+			sqlSession.getMapper(IAndroidDAO.class).memberInfo(memberDTO);
+		returnMap.put("memberInfo", Info);
+		returnMap.put("isLogin", 1);
+
+		System.out.println("요청들어옴:"+returnMap);
+		return returnMap;
+	}
+	
+	
+	@RequestMapping("/android/missionObject.do")
+	@ResponseBody
+	public Map<String, Object> missionObject(HttpServletRequest req) {
+      
+		Map<String, Object> map = new HashMap<String, Object>();      
+		ArrayList<MissionDTO> lists = 
+				sqlSession.getMapper(MissionImpl.class).missionList();
+		
+		//System.out.println("오브젝트="+lists);
+		map.put("missionList", lists);
+		return map;
+	}
+	
+	@RequestMapping("/android/missionList.do")
+	@ResponseBody
+	public ArrayList<MissionDTO> missionList(HttpServletRequest req) {
+		
+		System.out.println("심부름 리스트 요청받음");
+
+		ArrayList<MissionDTO> lists = 
+				sqlSession.getMapper(MissionImpl.class).missionList();
+		//System.out.println("리스트="+lists);
+		return lists;
+	}
+
 }

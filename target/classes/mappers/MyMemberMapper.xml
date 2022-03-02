@@ -16,7 +16,12 @@
 		parameterType="membership.MemberDTO">
 		SELECT * FROM member WHERE member_id=#{member_id} and member_pass=#{member_pass}
 	</select> 
- 	 
+	
+	<select id="memberInfo" resultType="membership.MemberDTO" 
+		parameterType="membership.MemberDTO">
+		SELECT * FROM member WHERE member_id=#{member_id}
+	</select>
+
 </mapper>
 
 

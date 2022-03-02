@@ -63,7 +63,7 @@
                         <li>
                             <a class="page-scroll" href="./resources/build/index.html">Q&A</a>
                         </li>
-                         
+                        
                         <!-- 로그인 유무에 따른 join logout -->
                         <c:choose>
                         <c:when test="${ empty sessionScope.siteUserInfo }">

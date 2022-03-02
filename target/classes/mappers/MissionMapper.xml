@@ -122,4 +122,11 @@
         UPDATE mission 
         	SET mission_status=#{mission_status} WHERE mission_num=#{mission_num}
     </update>
+    
+    
+	<select id="missionList" resultType="mission.MissionDTO">
+    	SELECT * FROM mission ORDER BY mission_num DESC
+    </select>
+ 	 
+    
 </mapper>

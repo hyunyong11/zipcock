@@ -21,6 +21,31 @@
 		parameterType="membership.MemberDTO">
 		SELECT * FROM member WHERE member_id=#{member_id}
 	</select>
+	
+	<select id="delstart" resultType="mission.MissionDTO" 
+		parameterType="mission.MissionDTO">
+		SELECT * FROM mission WHERE mission_Hid=#{mission_Hid} and mission_status=1
+	</select>
+	
+	<select resultType="membership.MemberDTO" id="ImemberDelete" parameterType="membership.MemberDTO">
+		DELETE FROM member WHERE member_id=#{member_id} 
+	</select>
+	
+	<select resultType="board.MBoardDTO" id="mboardList">
+		SELECT * FROM mboard ORDER BY mboard_date DESC 
+	</select>
+
+	<select resultType="board.MBoardDTO" id="mboardView" parameterType="board.MBoardDTO">
+		SELECT * FROM mboard WHERE mboard_num=#{mboard_num} 
+	</select>
+	
+	<select id="missionList" resultType="mission.MissionDTO">
+		SELECT * FROM mission ORDER BY mission_num DESC 
+	</select>
+
+	<select id="missionView" resultType="mission.MissionDTO">
+		SELECT * FROM mission WHERE mission_num = #{mission_num}
+	</select>
 
 </mapper>
 

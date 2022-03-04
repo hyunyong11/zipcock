@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import board.MBoardDTO;
 import board.util.PagingUtil;
 import membership.MemberDTO;
 import mission.MissionDTO;
@@ -82,8 +83,10 @@ public class AndroidController {
 	@ResponseBody
 	public Map<String, Object> memberInfo(MemberDTO memberDTO) {
 		Map<String, Object> returnMap = new HashMap<String, Object>();
+		
 		MemberDTO Info =
-			sqlSession.getMapper(IAndroidDAO.class).memberInfo(memberDTO);
+				sqlSession.getMapper(IAndroidDAO.class).memberInfo(memberDTO);
+		
 		returnMap.put("memberInfo", Info);
 		returnMap.put("isLogin", 1);
 
@@ -91,14 +94,65 @@ public class AndroidController {
 		return returnMap;
 	}
 	
+	@RequestMapping("/android/delstart.do")
+	@ResponseBody
+	public Map<String, Object> delstart(MissionDTO missionDTO) {
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		
+		MissionDTO Info =
+				sqlSession.getMapper(IAndroidDAO.class).delstart(missionDTO);
+		
+		returnMap.put("getMission", Info);
+		returnMap.put("success", 1);
+
+		System.out.println("요청들어옴:"+returnMap);
+		return returnMap;
+	}
 	
+	
+	@RequestMapping("/android/ImemberDelete.do")
+	@ResponseBody
+	public Map<String, Object> ImemberDelete(MemberDTO memberDTO) {
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		MemberDTO Delete =
+			sqlSession.getMapper(IAndroidDAO.class).ImemberDelete(memberDTO);
+		returnMap.put("ImemberDelete", Delete);
+		returnMap.put("isLogin", 1);
+
+		System.out.println("요청들어옴:"+returnMap);
+		return returnMap;
+	}
+	
+	@RequestMapping("/android/mboardList.do")
+	@ResponseBody
+	public ArrayList<MBoardDTO> mboardList(HttpServletRequest req) {
+		System.out.println("요청들어옴");
+		ArrayList<MBoardDTO> lists = 
+				sqlSession.getMapper(IAndroidDAO.class).mboardList();
+		return lists;
+	}
+	
+	@RequestMapping("/android/mboardView.do")
+	@ResponseBody
+	public Map<String, Object> mboardView(MBoardDTO mboardDTO) {
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		MBoardDTO Views = 
+			sqlSession.getMapper(IAndroidDAO.class).mboardView(mboardDTO);
+		returnMap.put("mboardView", Views);
+
+		System.out.println("요청들어옴:"+returnMap);
+		return returnMap;
+	}
+	
+	
+	//미션 리스트쪽
 	@RequestMapping("/android/missionObject.do")
 	@ResponseBody
 	public Map<String, Object> missionObject(HttpServletRequest req) {
       
 		Map<String, Object> map = new HashMap<String, Object>();      
 		ArrayList<MissionDTO> lists = 
-				sqlSession.getMapper(MissionImpl.class).missionList();
+				sqlSession.getMapper(IAndroidDAO.class).missionList();
 		
 		//System.out.println("오브젝트="+lists);
 		map.put("missionList", lists);
@@ -109,12 +163,39 @@ public class AndroidController {
 	@ResponseBody
 	public ArrayList<MissionDTO> missionList(HttpServletRequest req) {
 		
-		System.out.println("심부름 리스트 요청받음");
+		//System.out.println("심부름 리스트 요청받음");
 
 		ArrayList<MissionDTO> lists = 
-				sqlSession.getMapper(MissionImpl.class).missionList();
+				sqlSession.getMapper(IAndroidDAO.class).missionList();
 		//System.out.println("리스트="+lists);
 		return lists;
+	}
+	
+	//미션 뷰쪽
+	@RequestMapping("/android/missionViewObject.do")
+	@ResponseBody
+	public Map<String, Object> missionViewObject(MissionDTO missionDTO) {
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		System.out.println("심부름 디테일 부르자");
+		ArrayList<MissionDTO> view = 
+				sqlSession.getMapper(IAndroidDAO.class).missionView(missionDTO);
+		returnMap.put("missionView", view);
+		System.out.println("detail="+view);
+		
+		return returnMap;
+	}
+	
+	
+	@RequestMapping("/android/missionView.do")
+	@ResponseBody
+	public ArrayList<MissionDTO> missionView(MissionDTO missionDTO) {
+		
+		System.out.println("심부름 디테일 부르자");
+
+		ArrayList<MissionDTO> view = 
+				sqlSession.getMapper(IAndroidDAO.class).missionView(missionDTO);
+		System.out.println("리스트="+view);
+		return view;
 	}
 
 }

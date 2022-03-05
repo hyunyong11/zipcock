@@ -47,6 +47,18 @@
 		SELECT * FROM mission WHERE mission_num = #{mission_num}
 	</select>
 
+	<select id="missionListSearch" resultType="mission.MissionDTO" parameterType="mission.ParameterDTO">
+		SELECT * FROM mission
+			<if test="searchTxt!=null and !searchTxt.equals('')">
+				WHERE mission_name like '%'||#{searchTxt}||'%'
+			</if>
+			ORDER BY mission_num DESC
+	</select>
+	
+	<select id="reviewList" resultType="mybatis.ParameterDTO" >
+		 SELECT * FROM review WHERE review_id=#{review_id} ORDER BY review_num DESC
+	</select>
+
 </mapper>
 
 

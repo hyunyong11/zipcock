@@ -154,7 +154,6 @@ public class AndroidController {
 		ArrayList<MissionDTO> lists = 
 				sqlSession.getMapper(IAndroidDAO.class).missionList();
 		
-		//System.out.println("오브젝트="+lists);
 		map.put("missionList", lists);
 		return map;
 	}
@@ -163,11 +162,9 @@ public class AndroidController {
 	@ResponseBody
 	public ArrayList<MissionDTO> missionList(HttpServletRequest req) {
 		
-		//System.out.println("심부름 리스트 요청받음");
-
 		ArrayList<MissionDTO> lists = 
 				sqlSession.getMapper(IAndroidDAO.class).missionList();
-		//System.out.println("리스트="+lists);
+
 		return lists;
 	}
 	
@@ -176,12 +173,9 @@ public class AndroidController {
 	@ResponseBody
 	public Map<String, Object> missionViewObject(MissionDTO missionDTO) {
 		Map<String, Object> returnMap = new HashMap<String, Object>();
-		System.out.println("심부름 디테일 부르자");
 		ArrayList<MissionDTO> view = 
 				sqlSession.getMapper(IAndroidDAO.class).missionView(missionDTO);
 		returnMap.put("missionView", view);
-		System.out.println("detail="+view);
-		
 		return returnMap;
 	}
 	
@@ -190,12 +184,30 @@ public class AndroidController {
 	@ResponseBody
 	public ArrayList<MissionDTO> missionView(MissionDTO missionDTO) {
 		
-		System.out.println("심부름 디테일 부르자");
-
 		ArrayList<MissionDTO> view = 
 				sqlSession.getMapper(IAndroidDAO.class).missionView(missionDTO);
-		System.out.println("리스트="+view);
 		return view;
+	}
+	
+	@RequestMapping("/android/missionListSearch.do")
+	@ResponseBody
+	public ArrayList<MissionDTO> missionListSearch(ParameterDTO parameterDTO) {
+		
+		ArrayList<MissionDTO> search = 
+				sqlSession.getMapper(IAndroidDAO.class).missionListSearch(parameterDTO);
+		System.out.println("리스트="+search);
+		return search;
+	}
+	
+
+	@RequestMapping("/android/reviewList.do")
+	@ResponseBody
+	public ArrayList<mybatis.ParameterDTO> reviewList(mybatis.ParameterDTO parameterDTO) {
+		
+		ArrayList<mybatis.ParameterDTO> lists = 
+				sqlSession.getMapper(IAndroidDAO.class).reviewList(parameterDTO);
+		System.out.println("리스트="+lists);
+		return lists;
 	}
 
 }

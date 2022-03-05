@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import board.MBoardDTO;
 import membership.MemberDTO;
 import mission.MissionDTO;
+import mission.ParameterDTO;
 
 public interface IAndroidDAO {
 
@@ -25,4 +26,8 @@ public interface IAndroidDAO {
     public ArrayList<MissionDTO> missionList();
     
     public ArrayList<MissionDTO> missionView(MissionDTO missionDTO);
+    
+    public ArrayList<MissionDTO> missionListSearch (ParameterDTO parameterDTO);
+    
+    public ArrayList<mybatis.ParameterDTO> reviewList(mybatis.ParameterDTO parameterDTO);
 }

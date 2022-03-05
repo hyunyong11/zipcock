@@ -29,12 +29,9 @@ window.onload = function(){
     }
 }
 
-function calculate(){
+function calculate(num){
     setTimeout(function(){
-        notify();
-    }, 1000);
-    setTimeout(function(){
-    	chat();
+    	chat(num);
     }, 1000);
 }
 
@@ -216,7 +213,7 @@ function notify(num){
 							</c:if>
 							<c:if test="${ sessionScope.siteUserInfo.member_status eq 2 && row.mission_status eq 1 }" >
 								<!-- <button class="btn btn-outline-primary" onclick="chatWin('normal');"  style="position: absolute; left: 90%; bottom: 2.75em;"> -->
-								<button class="btn btn-outline-primary" onclick="calculate();"  style="position: absolute; left: 90%; bottom: 2.75em;">
+								<button class="btn btn-outline-primary" onclick="calculate(${row.mission_num});"  style="position: absolute; left: 90%; bottom: 2.75em;">
 									지원하기
 								</button>
 							</c:if>

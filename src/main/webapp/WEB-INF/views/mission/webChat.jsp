@@ -185,9 +185,12 @@ function complete() {
             <form name="comForm" method="POST">
 				<input type="hidden" name="mission_status" value="3" />
 				<input type="hidden" name="mission_num" value="${param.chat_room }" />
-		            <button class="btn btn-warning" onclick="complete();"  style="position: sticky; left: 90%; bottom: 2.75em;">
-						심부름 완료
-					</button>
+				<c:if test="${ sessionScope.siteUserInfo.member_status eq 1}" >
+			            <button class="btn btn-warning" onclick="complete();"  style="position: sticky; left: 90%; bottom: 2.75em;">
+							심부름 완료
+						</button>
+				</c:if>
+		            
 			</form>		
         </div>
     </div>

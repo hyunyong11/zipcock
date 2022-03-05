@@ -29,9 +29,12 @@ window.onload = function(){
     }
 }
 
-function calculate(num){
+function calculate(){
     setTimeout(function(){
-    	chat(num);
+        notify();
+    }, 1000);
+    setTimeout(function(){
+    	chat();
     }, 1000);
 }
 
@@ -195,7 +198,7 @@ function notify(num){
 							
 							<!--  수정,삭제버튼 -->
 							<!-- 작성자 본인에게만 수정/삭제 버튼 보임 처리 -->
-							<c:if test="${ sessionScope.siteUserInfo.member_id eq row.mission_id && row.mission_status eq 1}">
+							<c:if test="${ sessionScope.siteUserInfo.member_id eq row.mission_id && row.mission_status eq 1 }">
 								<button class="btn btn-outline-primary btn-sm"
 								 onclick="location.href='userEdit.do?num=${row.mission_num}';">
 								수정</button>
@@ -213,7 +216,7 @@ function notify(num){
 							</c:if>
 							<c:if test="${ sessionScope.siteUserInfo.member_status eq 2 && row.mission_status eq 1 }" >
 								<!-- <button class="btn btn-outline-primary" onclick="chatWin('normal');"  style="position: absolute; left: 90%; bottom: 2.75em;"> -->
-								<button class="btn btn-outline-primary" onclick="calculate(${row.mission_num});"  style="position: absolute; left: 90%; bottom: 2.75em;">
+								<button class="btn btn-outline-primary" onclick="calculate();"  style="position: absolute; left: 90%; bottom: 2.75em;">
 									지원하기
 								</button>
 							</c:if>

@@ -28,7 +28,7 @@
 	</select>
 	
 	<select resultType="membership.MemberDTO" id="ImemberDelete" parameterType="membership.MemberDTO">
-		DELETE FROM member WHERE member_id=#{member_id} 
+		DELETE FROM memberWHERE member_id=#{member_id} 
 	</select>
 	
 	<select resultType="board.MBoardDTO" id="mboardList">

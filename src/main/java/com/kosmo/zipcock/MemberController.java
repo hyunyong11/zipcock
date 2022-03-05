@@ -1,6 +1,8 @@
 package com.kosmo.zipcock;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -8,6 +10,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -26,6 +29,7 @@ import org.springframework.web.servlet.ModelAndView;
 import jdk.internal.org.jline.utils.Log;
 import membership.MemberDTO;
 import membership.MemberImpl;
+import utils.JSFunction;
 
 @Controller
 public class MemberController {
@@ -109,7 +113,7 @@ public class MemberController {
 	// 로그인 처리(session객체 사용)
 	@RequestMapping("/memberLoginAction.do")
 	public ModelAndView memberLoginAction (
-			HttpServletRequest req, HttpSession session) {
+			HttpServletRequest req, HttpSession session, HttpServletResponse resp) throws IOException {
 		// 폼값으로 전송된 id, pass를 매개변수로 전달하여 Mapper호출
 		MemberDTO dto =
 				sqlSession.getMapper(MemberImpl.class).login(
@@ -144,10 +148,14 @@ public class MemberController {
 			
 			if (result == null) { // 회원이 아닌경우 (카카오 계정으로 처음 방문한 경우) 카카오 회원정보 설정 창으로 이동
 				//System.out.println("카카오 회원 정보 설정한다");
-				
+				resp.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = resp.getWriter();
+				String alertText = "등록된 정보가 없어 회원가입페이지로 이동합니다.";
+		        out.println("<script>alert('" + alertText + "');</script> ");
+		        out.flush();
+		        
 				req.setAttribute("kakaoemail", req.getParameter("kakaoemail"));
 				req.setAttribute("kakaoname", req.getParameter("kakaoname"));
-				
 				
 				mv.setViewName("member/join_Kakao");
 				return mv;

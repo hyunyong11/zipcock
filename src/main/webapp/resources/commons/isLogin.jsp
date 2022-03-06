@@ -7,7 +7,7 @@
 if(session.getAttribute("Id") == null)  {
 %>
 <script>
-	alert('로그인 후 신청가능합니다.');
+	alert('로그인 먼저 해주세요^^');
 	location.href="./memberLogin.do";
 </script>
 <%

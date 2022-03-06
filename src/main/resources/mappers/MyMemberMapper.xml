@@ -58,6 +58,16 @@
 	<select id="reviewList" resultType="mybatis.ParameterDTO" >
 		 SELECT * FROM review WHERE review_id=#{review_id} ORDER BY review_num DESC
 	</select>
+	
+	<update id="Reviewmodify" parameterType="mybatis.ParameterDTO">
+		UPDATE review 
+			SET review_content=#{review_content}, review_point=#{review_point}
+			WHERE review_num=#{review_num}
+	</update>
+	
+	<select id="Reviewdelete">
+		DELETE FROM review WHERE review_num=#{review_num} AND review_id=#{review_id}
+	</select>	
 
 </mapper>
 

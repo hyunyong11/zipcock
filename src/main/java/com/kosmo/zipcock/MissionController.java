@@ -59,7 +59,7 @@ public class MissionController {
 		int totalRecordCount =
 				sqlSession.getMapper(MissionImpl.class)
 					.getTotalCountSearch(parameterDTO);
-		System.out.println("totalRecordCount= "+ totalRecordCount);
+		//System.out.println("totalRecordCount= "+ totalRecordCount);
 		
 		int pageSize = 4; 
 		int blockPage = 2;
@@ -344,6 +344,7 @@ public class MissionController {
 
 		ArrayList<MissionDTO> lists =
 			sqlSession.getMapper(MissionImpl.class).missionCDetail(mission_num);
+		//System.out.println(lists);
 			
 		model.addAttribute("lists", lists);
 		

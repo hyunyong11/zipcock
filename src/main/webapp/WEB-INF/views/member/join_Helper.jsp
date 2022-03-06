@@ -121,7 +121,7 @@ function id_check_person(form){
 			<form name = "Hjoin" method="post" onsubmit="return joinValidate(this);" enctype="multipart/form-data" action='<c:url value="/helper.do" />'>
 				
 				<!-- 회원등급 -->
-				<input type="hid-den" name="member_status" value="2">
+				<input type="hidden" name="member_status" value="2">
 				<!-- NAME -->
 				<div>
 					<h3 class="join_title">

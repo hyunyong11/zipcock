@@ -18,8 +18,9 @@ import board.util.PagingUtil;
 import membership.MemberDTO;
 import mission.MissionDTO;
 import mission.MissionImpl;
-import mission.ParameterDTO;
+
 import mybatis.IAndroidDAO;
+import mybatis.ParameterDTO;
 
 @Controller
 public class AndroidController {
@@ -189,6 +190,7 @@ public class AndroidController {
 		return view;
 	}
 	
+	/*
 	@RequestMapping("/android/missionListSearch.do")
 	@ResponseBody
 	public ArrayList<MissionDTO> missionListSearch(ParameterDTO parameterDTO) {
@@ -198,16 +200,37 @@ public class AndroidController {
 		System.out.println("리스트="+search);
 		return search;
 	}
-	
+	*/
 
 	@RequestMapping("/android/reviewList.do")
 	@ResponseBody
-	public ArrayList<mybatis.ParameterDTO> reviewList(mybatis.ParameterDTO parameterDTO) {
+	public ArrayList<ParameterDTO> reviewList(ParameterDTO parameterDTO) {
 		
-		ArrayList<mybatis.ParameterDTO> lists = 
+		ArrayList<ParameterDTO> lists = 
 				sqlSession.getMapper(IAndroidDAO.class).reviewList(parameterDTO);
-		System.out.println("리스트="+lists);
 		return lists;
 	}
+	
+	
+	@RequestMapping("/android/Reviewmodify.do")
+    @ResponseBody
+    public int Reviewmodify(ParameterDTO parameterDTO) {
+        //Map<String, Object> returnMap = new HashMap<String, Object>();
+		int Reviewmodify =
+            sqlSession.getMapper(IAndroidDAO.class).Reviewmodify(parameterDTO);
+        
+        return Reviewmodify;
+    }
+    
+    @RequestMapping("/android/Reviewdelete.do")
+    @ResponseBody
+    public Map<String, Object> Reviewdelete(ParameterDTO parameterDTO) {
+        Map<String, Object> returnMap = new HashMap<String, Object>();
+        ParameterDTO Reviewdelete =
+            sqlSession.getMapper(IAndroidDAO.class).Reviewdelete(parameterDTO);
+        returnMap.put("Reviewdelete", Reviewdelete); 
+        //System.out.println("요청들어옴:"+returnMap);
+        return returnMap;
+    }
 
 }

@@ -220,8 +220,8 @@ function setDisplay(){
                      <option value="">-- 필수 입력 -- </option>
                      <option value="1"> 10분 이내 </option>
                      <option value="2"> 10 ~ 20분 </option>
-                     <option value="3"> 20 ~ 30분 </option>
-                     <option value="4"> 40 ~ 50분 </option>
+                     <option value="3"> 20 ~ 40분 </option>
+                     <option value="4"> 40 ~ 60분 </option>
                      <option value="5"> 60분 이상 </option>
                </select>
                </span> <span class="error_next_box">필수 정보입니다.</span>

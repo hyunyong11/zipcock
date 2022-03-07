@@ -33,4 +33,18 @@ public interface IAndroidDAO {
     public int Reviewmodify(ParameterDTO parameterDTO);
     
     public ParameterDTO Reviewdelete(ParameterDTO parameterDTO);
+    
+    public int memberInfoEdit(MemberDTO memberDTO);
+    
+    public int hmemberInfoEdit(MemberDTO memberDTO);
+    
+    public MemberDTO idCheck(MemberDTO memberDTO);
+    
+    public void memberJoin(MemberDTO memberDTO);
+    
+    public void cMemberJoin(MemberDTO memberDTO);
+    	
+    public MemberDTO findId(MemberDTO memberDTO);
+	
+	public MemberDTO findPass(MemberDTO memberDTO);
 }

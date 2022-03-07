@@ -68,6 +68,62 @@
 	<select id="Reviewdelete">
 		DELETE FROM review WHERE review_num=#{review_num} AND review_id=#{review_id}
 	</select>	
+	
+	<update id="memberInfoEdit" parameterType="membership.MemberDTO">
+      UPDATE member
+         SET member_pass=#{member_pass}, member_email=#{member_email}
+            , member_age=#{member_age}, member_phone=#{member_phone}, member_name=#{member_name}
+         WHERE member_id=#{member_id}
+   </update>
+   
+    <update id="hmemberInfoEdit" parameterType="membership.MemberDTO">
+      UPDATE member
+         SET member_pass=#{member_pass}, member_email=#{member_email}
+            , member_age=#{member_age}, member_phone=#{member_phone}, member_name=#{member_name}, member_bank=#{member_bank}, member_account=#{member_account}, member_introduce=#{member_introduce}
+         WHERE member_id=#{member_id}
+   </update>
+
+	<select id="idCheck" resultType="membership.MemberDTO">
+        SELECT member_id FROM member
+            where member_id=#{member_id}
+    </select>
+    
+    <insert id="cMemberJoin">
+        INSERT INTO member (member_id, member_pass, member_name, member_email,
+                member_age, member_sex, member_phone, member_status)
+            VALUES (#{member_id}, #{member_pass}, #{member_name}, #{member_email}, 
+                        #{member_age}, #{member_sex}, #{member_phone}, #{member_status})
+    </insert>
+    
+    <insert id="memberJoin">
+        INSERT INTO member (member_status, member_id, member_pass, member_name, member_email,
+                member_age, member_sex, member_phone, 
+                member_bank, member_account, member_vehicle,
+                member_introduce
+                <if test="member_ofile != null and member_sfile !=null">
+                , member_ofile, member_sfile
+                </if>
+                )
+                
+            VALUES (#{member_status}, #{member_id}, #{member_pass}, #{member_name}, #{member_email}, 
+                        #{member_age}, #{member_sex}, #{member_phone}, 
+                        #{member_bank}, #{member_account}, #{member_vehicle},
+                        #{member_introduce}
+                        <if test="member_ofile != null and member_sfile !=null">
+                         , #{member_ofile}, #{member_sfile}
+                        </if>
+                         )
+    </insert>
+    
+    <select id="findId" resultType="membership.MemberDTO"
+		parameterType="membership.MemberDTO">
+		SELECT * FROM member WHERE member_name=#{member_name} and member_email=#{member_email}
+		</select>
+
+	<select id="findPass" resultType="membership.MemberDTO"
+		parameterType="membership.MemberDTO">
+		SELECT * FROM member WHERE member_id=#{member_id} and member_email=#{member_email} and member_name=#{member_name}
+	</select>
 
 </mapper>
 

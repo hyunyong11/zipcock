@@ -123,6 +123,12 @@
         	SET mission_status=#{mission_status} WHERE mission_num=#{mission_num}
     </update>
     
+    <!-- 심부름 상태 수정 -->
+    <update id="missionMatch">
+        UPDATE mission 
+        	SET mission_Hid=#{mission_Hid}, mission_status=#{mission_status} WHERE mission_num=#{mission_num}
+    </update>
+    
     
 	<select id="missionList" resultType="mission.MissionDTO">
     	SELECT * FROM mission ORDER BY mission_num DESC

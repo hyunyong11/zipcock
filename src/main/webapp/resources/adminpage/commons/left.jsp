@@ -8,8 +8,8 @@
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.jsp">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+                <div class="sidebar-brand-icon">
+                    <img alt="" src="img/icon.png">
                 </div>
                 <div class="sidebar-brand-text mx-3">${UserName}</div>
             </a>

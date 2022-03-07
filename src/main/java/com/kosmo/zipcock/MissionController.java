@@ -516,4 +516,21 @@ public class MissionController {
         
         return "redirect:mypage.do";
     }
+    
+    //헬퍼가 지원하기버튼을 눌렀을때
+    @RequestMapping(value="/missionMatch.do", method=RequestMethod.POST)
+    public String missionMatch(Model model, HttpServletRequest req, MissionDTO missionDTO, HttpSession session) {
+        
+    	String mission_Hid = ((MemberDTO)session.getAttribute("siteUserInfo")).getMember_id();
+    	int mission_status = Integer.parseInt(req.getParameter("mission_status"));
+    	int mission_num = Integer.parseInt(req.getParameter("mission_num"));
+    	
+    	missionDTO.setMission_Hid(mission_Hid);
+    	missionDTO.setMission_status(mission_status);
+    	missionDTO.setMission_num(mission_num);
+    	
+        int result = sqlSession.getMapper(MissionImpl.class).missionMatch(missionDTO);
+        
+        return "redirect:HList.do";
+    }
 }

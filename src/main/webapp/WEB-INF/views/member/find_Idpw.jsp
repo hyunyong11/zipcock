@@ -135,7 +135,7 @@
 						
 					<!-- NAME -->
 					<div>
-						<h3 class="join_title">
+						<h3 class="join_title" style="width: 50px;">
 							<label for="name">이름</label>
 						</h3>
 						<span class="box int_name"> 
@@ -145,7 +145,7 @@
 					
 					<!-- Email -->
 					<div>
-						<h3 class="join_title">
+						<h3 class="join_title" style="width: 50px;">
 							<label for="email">이메일</label>
 						</h3>
 						<span class="box_email"> 
@@ -198,7 +198,7 @@
 						
 					<!-- ID -->
 					<div>
-						<h3 class="join_title">
+						<h3 class="join_title" style="width: 50px;">
 							<label for="id">아이디</label>
 						</h3>
 						<span class="box int_id"> 
@@ -212,17 +212,17 @@
 						
 					<!-- NAME -->
 					<div>
-						<h3 class="join_title">
+						<h3 class="join_title" style="width: 50px;">
 							<label for="name">이름</label>
 						</h3>
 						<span class="box int_name"> 
-							<input type="text" id="name" class="join_H" maxlength="20" name="member_name"> 
+							<input type="text" id="name" class="join_H" maxlength="20" name="member_name" > 
 						</span> <span class="error_next_box"></span>
 					</div>
 					
 					<!-- Email -->
 					<div>
-						<h3 class="join_title">
+						<h3 class="join_title" style="width: 50px;">
 							<label for="email">이메일</label>
 						</h3>
 						<span class="box_email"> 

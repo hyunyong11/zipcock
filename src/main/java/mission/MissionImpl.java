@@ -59,6 +59,7 @@ public interface MissionImpl {
     public int delete(String id, int num);
     
     public int missionAction(MissionDTO missionDTO);
+    public int missionMatch(MissionDTO missionDTO);
     
     public ArrayList<MissionDTO> missionList();
 	

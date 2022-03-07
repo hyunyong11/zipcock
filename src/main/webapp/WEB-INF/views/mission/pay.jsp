@@ -62,7 +62,7 @@ $(document).ready(function(){
                      contentType: false, 
                      dataType: 'html',
                      success: function(data){                        
-                       document.location.href="/zipcock/mypage.do";
+                       document.location.href="/zipcock/HList.do";
                      },
                      error:function(request,status,error){
                        console.log("Insert ajax 통신 실패!!!");

@@ -371,7 +371,8 @@
 
        <div class="col-xs-12 col-sm-12 col-md-12 wow bounceIn animated headding" data-wow-delay=".1s">
            <h2>Screen <span>Shots</span></h2>
-           <p>Display your mobile apps awesome features with icon lists and an image carousel of each page. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation.</p>
+           <p>집콕은 아래처럼 어플로도 사용가능합니다.<br>
+           집콕 앱으로 더 편하게 심부름을 요청해보세요!</p>
        </div>
 
       <div class="col-xs-12 col-sm-12 col-md-12">

@@ -204,19 +204,23 @@ function notify(num){
 								<button class="btn btn-outline-danger btn-sm"
 								onclick="deleteList(${row.mission_num});">
 								삭제</button>
-								<c:if test="${ sessionScope.siteUserInfo.member_status eq 1 && row.mission_status eq 1 }" >
-									<!-- <button class="btn btn-outline-primary" onclick="chatWin('normal');"  style="position: absolute; left: 90%; bottom: 2.75em;"> -->
-									<button class="btn btn-outline-primary" onclick="chat(${row.mission_num});"  style="position: absolute; left: 90%; bottom: 2.75em;">
-										1:1 채팅하기
-									</button>
-								</c:if>
 							</c:if>
-							<c:if test="${ sessionScope.siteUserInfo.member_status eq 2 && row.mission_status eq 1 }" >
+							<c:if test="${ (row.mission_id eq sessionScope.siteUserInfo.member_id || row.mission_Hid eq sessionScope.siteUserInfo.member_id) && row.mission_status eq 2 }" >
 								<!-- <button class="btn btn-outline-primary" onclick="chatWin('normal');"  style="position: absolute; left: 90%; bottom: 2.75em;"> -->
 								<button class="btn btn-outline-primary" onclick="calculate(${row.mission_num});"  style="position: absolute; left: 90%; bottom: 2.75em;">
-									지원하기
+									1:1 채팅하기
 								</button>
 							</c:if>
+							<form name="comForm" method="POST" action="missionMatch.do">
+							<input type="hidden" name="mission_num" value="${row.mission_num}">
+							<input type="hidden" name="mission_status" value="2">
+								<c:if test="${ sessionScope.siteUserInfo.member_status eq 2 && row.mission_status eq 1 }" >
+									<!-- <button class="btn btn-outline-primary" onclick="chatWin('normal');"  style="position: absolute; left: 90%; bottom: 2.75em;"> -->
+									<button class="btn btn-outline-primary"  style="position: absolute; left: 90%; bottom: 2.75em;">
+										지원하기
+									</button>
+								</c:if>
+							</form>
 						</div>
 						${row.mission_content } <br>
 						위치: 도착지> ${ row.mission_end } <br>

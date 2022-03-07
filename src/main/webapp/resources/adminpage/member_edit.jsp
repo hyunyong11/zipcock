@@ -19,7 +19,7 @@ QBoardDAO qdao = new QBoardDAO(application);
 MBoardDTO dto = dao.selectView(num); //게시물 조회
 QBoardDTO qdto = qdao.selectView(num); //게시물 조회
 //세션영역에 저장된 회원 아이디를 얻어와서 문자열의 형태로 변환
-String sessionId = session.getAttribute("UserId").toString();
+//String sessionId = session.getAttribute("UserId").toString();
 
 dao.close();
 qdao.close();

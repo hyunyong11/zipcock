@@ -29,7 +29,7 @@ qdto.setContent(content);
 
 //DB연결
 MBoardDAO dao = new MBoardDAO(application);
-QBoardDAO qdao = new QBoardDAO(application);
+QBoardDAO qdao = new QBoardDAO(application); 
 
 if(flag.equals("notice")){
 	int affected = dao.updateEdit(dto);

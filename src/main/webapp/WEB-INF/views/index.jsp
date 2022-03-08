@@ -118,13 +118,6 @@
         <div class="container">
             <div class="header-content row">
                 <div class="col-xs-12 col-sm-5 col-md-5">
-                    <h2 class="wow bounceIn animated" data-wow-delay=".40s">FRIENDLY TEMPLATE FOR YOUR APP</h2>
-                    <h3 class="wow bounceIn animated" data-wow-delay=".50s">FOR YOUR SMARTPHONE</h3>
-                    <p class="wow bounceIn animated" data-wow-delay=".60s">Lorem ipsum dolor sit amet, consectetur adipiscing elit.We ensure sit amet, consectetur adipiscing elit</p>
-                    <p>
-                        <div class="btn btn-primary btn-lg btn-ornge wow bounceIn animated" data-wow-delay="1s"><i class="hbtn"></i> <span>Free Download</span> <i class="fa fa-cloud-download"></i>
-                        </div>
-                    </p>
                 </div>
                 <div class="col-xs-12 col-sm-7 col-md-7 wow slideInLeft animated">
                     <img src="/zipcock/resources/img/phones.png" alt="phones" style="bottom: 100px;" />

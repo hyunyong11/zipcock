@@ -69,8 +69,7 @@ public class MybatisController {
         String review_id = ((MemberDTO)session.getAttribute("siteUserInfo")).getMember_id();
         int totalRecordCount =
             sqlSession.getMapper(MybatisDAOImpl.class).getTotalCount(review_id);
-        System.out.println("totalRecordCount="+totalRecordCount);
-        System.out.println("review_id="+review_id);
+        
         
         //페이지 처리를 위한 설정값
         int pageSize = Integer.parseInt(

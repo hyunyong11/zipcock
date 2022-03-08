@@ -125,6 +125,33 @@
 		SELECT * FROM member WHERE member_id=#{member_id} and member_email=#{member_email} and member_name=#{member_name}
 	</select>
 
+	 <insert id="missionRegist">
+      INSERT INTO mission (mission_num, mission_id, mission_category, mission_name, mission_content, mission_sex,
+            mission_end, mission_mission, mission_time, mission_cost, mission_reservation
+            
+            <if test="mission_ofile != null and mission_sfile !=null">
+            , mission_ofile, mission_sfile
+            </if>
+            <if test="mission_waypoint != null">
+                    , mission_waypoint
+            </if>
+        
+            )
+            
+         VALUES (mission_seq.nextval, #{mission_id}, #{mission_category}, #{mission_name}, #{mission_content}, #{mission_sex}, 
+                  #{mission_end}, #{mission_mission},#{mission_time}, #{mission_cost}, #{mission_reservation}
+            
+                  <if test="mission_ofile != null and mission_sfile !=null">
+                   , #{mission_ofile}, #{mission_sfile}
+                  </if>
+                  <if test="mission_waypoint != null">
+                    , #{mission_waypoint}
+                  </if>
+               
+                   )
+   		</insert>
+
+
 </mapper>
 
 

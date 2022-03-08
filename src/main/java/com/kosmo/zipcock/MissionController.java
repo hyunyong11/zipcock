@@ -196,18 +196,16 @@ public class MissionController {
 	public String hInfoAll(Model model, HttpServletRequest req, HttpSession session) {
 		
 		MissionDTO parameterDTO = new MissionDTO();
-		String member_id = ((MemberDTO)session.getAttribute("siteUserInfo")).getMember_id();
+		String mission_hid = ((MemberDTO)session.getAttribute("siteUserInfo")).getMember_id();
+		
 		int totalRecordCount =
-				sqlSession.getMapper(MissionImpl.class)
-					.getTotalCount(member_id);
+                sqlSession.getMapper(MissionImpl.class)
+                    .getTotalCount1(mission_hid);
 		
 		//페이지 처리를 위한 설정값
-		int pageSize = Integer.parseInt(
-	            EnvFileReader.getValue("MboardInit.properties",
-	                     "mboard.pageSize"));
-        int blockPage = Integer.parseInt(
-                EnvFileReader.getValue("MboardInit.properties",
-                        "mboard.blockPage"));
+		int pageSize = 7;
+        int blockPage = 3;
+        
 		//전체 페이지 수 계산
 		int totalPage = (int)Math.ceil((double)totalRecordCount/pageSize);
 		//현제페이지 번호 설정
@@ -231,7 +229,24 @@ public class MissionController {
 		전달된 파라미터는 #{param1}과 같이 순서대로 사용한다. */
 		 
 		ArrayList<MissionDTO> lists =
-			sqlSession.getMapper(MissionImpl.class).listPage(member_id, start, end);
+	            sqlSession.getMapper(MissionImpl.class).listPage1(mission_hid, start, end);
+	                
+	            //가상번호 계산후 부여하기 
+	              int virtualNum = 0;
+	              int countNum = 0;
+	              for(MissionDTO row : lists) {
+	                 //전체게시물의 갯수에서 하나씩 차감하면서 가상번호를 부여한다.(페이징X)
+	                 //virtualNum = totalRecordCount --;
+	                 
+	                 /*********가상번호계산 추가코드 Start****************/
+	                 
+	                 virtualNum = totalRecordCount - 
+	                       (((nowPage-1)*pageSize) + countNum++);
+	                 /*********가상번호계산 추가코드 End****************/
+	                 
+	                 //가상번호를 setter를 통해 저장
+	                 row.setVirtualNum(virtualNum);
+	              }
 				
 		String pagingImg =
 			PagingUtil.pagingImg(totalRecordCount, pageSize, blockPage, nowPage,
@@ -240,11 +255,11 @@ public class MissionController {
 		
 		//내용에 대한 줄바꿈 처리
 		for(MissionDTO dto : lists){
-			String temp = dto.getMission_id().replace("\r\n","<br/>");
-			
-			dto.setMission_id(temp);
-		}
-		model.addAttribute("lists", lists);
+            String temp = dto.getMission_content().replace("\r\n","<br/>");
+            
+            dto.setMission_content(temp);
+        }
+        model.addAttribute("lists", lists);
 		
 		
 		return "/member/hInfoAll";
@@ -324,9 +339,9 @@ public class MissionController {
 		
 		//내용에 대한 줄바꿈 처리
 		for(MissionDTO dto : lists){
-			String temp = dto.getMission_id().replace("\r\n","<br/>");
+			String temp = dto.getMission_content().replace("\r\n","<br/>");
 			
-			dto.setMission_id(temp);
+			dto.setMission_content(temp);
 		}
 		model.addAttribute("pagingImg", pagingImg);
         model.addAttribute("totalPage", totalPage);//전체페이지 수

@@ -74,6 +74,15 @@
 		WHERE rNum BETWEEN #{param2} AND #{param3}
 	</select>
 	
+	<select id="listPage1" resultType="mission.MissionDTO">
+        SELECT * FROM (
+            SELECT Tb.*, rownum rNum FROM (
+                SELECT * FROM mission WHERE mission_hid=#{param1} ORDER BY mission_num DESC
+            ) Tb
+        )
+        WHERE rNum BETWEEN #{param2} AND #{param3}
+    </select>
+	
 	<select id="missionCDetail" resultType="mission.MissionDTO">
 		SELECT * FROM mission WHERE mission_num = #{mission_num}
 	</select>
@@ -85,6 +94,10 @@
 	<select id="getTotalCount" resultType="int">
 		SELECT COUNT(*) FROM mission WHERE mission_id=#{mission_id}
 	</select>
+	
+	<select id="getTotalCount1" resultType="int">
+        SELECT COUNT(*) FROM mission WHERE mission_hid=#{mission_hid}
+    </select>
 
 	 <!-- 수정게시물 진입을 위한 매칭상태 검색 -->
     <select id="statusSelect" resultType="mission.MissionDTO">

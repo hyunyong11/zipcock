@@ -26,7 +26,7 @@ public interface IAndroidDAO {
     
     public ArrayList<MissionDTO> missionView(MissionDTO missionDTO);
     
-    //public ArrayList<MissionDTO> missionListSearch (mission.ParameterDTO parameterDTO);
+    public ArrayList<MissionDTO> missionListSearch (mission.ParameterDTO parameterDTO);
     
     public ArrayList<ParameterDTO> reviewList(ParameterDTO parameterDTO);
     
@@ -47,4 +47,6 @@ public interface IAndroidDAO {
     public MemberDTO findId(MemberDTO memberDTO);
 	
 	public MemberDTO findPass(MemberDTO memberDTO);
+	
+	public void missionRegist(MissionDTO missionDTO);	
 }

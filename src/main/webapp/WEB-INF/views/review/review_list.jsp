@@ -119,7 +119,6 @@ function deleteRow(review_num){
 		<table class="table table-bordered" id="dataTable" width="90%" cellspacing="0" >
 			<tr style="background-color: #ffc654">
 				<th width="10%" style="text-align: center">번호</th>
-				<th width=10%  style="text-align: center"> 심부름내역</th>
 				<th width="*" style="text-align: center" >리뷰내용</th>
 				<th width="10%" style="text-align: center"> 별점</th>
 				<th width="15%" style="text-align: center">작성자</th>
@@ -138,7 +137,6 @@ function deleteRow(review_num){
 		<!-- 리스트반복시작 -->
 			<tr>
 				<td class="text-center" style="background-color: lightgray">${row.virtualNum }</td>
-				<td class="text-center" >${row.mission_num }</td>
 				<td class="text-center" >${row.review_content  }</td>
 				<td class="text-center">${row.review_point  }</td>
 				<td class="text-cemter"><img src="" class="media-object" style="width:70px">${row.review_id }</td>

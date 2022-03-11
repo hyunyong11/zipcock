@@ -29,6 +29,8 @@ import org.springframework.web.servlet.ModelAndView;
 import jdk.internal.org.jline.utils.Log;
 import membership.MemberDTO;
 import membership.MemberImpl;
+import mission.MissionDTO;
+import mybatis.IAndroidDAO;
 import utils.JSFunction;
 
 @Controller
@@ -326,5 +328,18 @@ public class MemberController {
         );
         return "member/memberDelete";
     }   
+    
+  //앱 채팅
+  	@RequestMapping("/android/chatList.do")
+  	@ResponseBody
+  	public ArrayList<MissionDTO> chatList(HttpServletRequest req, MissionDTO missionDTO) {
+  		System.out.println("안드로이드 채팅 리스트 요청");
+  		    
+  		ArrayList<MissionDTO> lists = 
+  				sqlSession.getMapper(IAndroidDAO.class).chatList(missionDTO);
+  		
+  		return lists;
+  	}
+
 	
 }

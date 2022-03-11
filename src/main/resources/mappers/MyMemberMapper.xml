@@ -24,11 +24,41 @@
 	
 	<select id="delstart" resultType="mission.MissionDTO" 
 		parameterType="mission.MissionDTO">
-		SELECT * FROM mission WHERE mission_Hid=#{mission_Hid} and mission_status=1
+		SELECT * FROM mission WHERE mission_num=#{mission_num}
 	</select>
 	
+	<select id="helperLocation" resultType="mission.MissionDTO" 
+		parameterType="mission.MissionDTO">
+		SELECT * FROM mission WHERE mission_num=#{mission_num}
+	</select>
+	
+	<update id="insertLocation" parameterType="mission.MissionDTO">
+		UPDATE mission 
+		SET mission_start = #{mission_start} 
+		WHERE mission_Hid = #{mission_Hid} and mission_num = #{mission_num}
+	</update>
+	
+	<update id="complete" parameterType="mission.MissionDTO">
+		UPDATE mission 
+		SET mission_status = 3 
+		WHERE mission_num = #{mission_num}
+	</update>
+	
+	<update id="Hcomplete" parameterType="mission.MissionDTO">
+		UPDATE mission 
+		SET mission_status = 4 
+		WHERE mission_num = #{mission_num}
+	</update>
+	
+	<update id="matching" parameterType="mission.MissionDTO">
+		UPDATE mission 
+		SET mission_status = 2,
+			mission_Hid = #{mission_Hid}
+		WHERE mission_num = #{mission_num}
+	</update>
+	
 	<select resultType="membership.MemberDTO" id="ImemberDelete" parameterType="membership.MemberDTO">
-		DELETE FROM memberWHERE member_id=#{member_id} 
+		DELETE FROM member WHERE member_id=#{member_id} 
 	</select>
 	
 	<select resultType="board.MBoardDTO" id="mboardList">
@@ -53,6 +83,10 @@
 				WHERE mission_name like '%'||#{searchTxt}||'%'
 			</if>
 			ORDER BY mission_num DESC
+	</select>
+	
+	<select id="chatList" resultType="mission.MissionDTO">
+		SELECT * FROM mission WHERE (mission_id = #{mission_id} OR mission_Hid = #{mission_Hid}) AND (mission_status='2' or mission_status='4')
 	</select>
 	
 	<select id="reviewList" resultType="mybatis.ParameterDTO" >
@@ -149,7 +183,16 @@
                   </if>
                
                    )
-   		</insert>
+   	</insert>
+   		
+   	<select id="simList" resultType="mission.MissionDTO"> <!-- 추가 -->
+		SELECT * FROM mission WHERE mission_id=#{mission_id} and (mission_status = 2 or mission_status = 4)  ORDER BY mission_num DESC 
+	</select>
+	
+	   	<select id="HsimList" resultType="mission.MissionDTO"> <!-- 추가 -->
+		SELECT * FROM mission WHERE mission_Hid=#{mission_Hid} and (mission_status = 2 or mission_status = 4) ORDER BY mission_num DESC 
+	</select>
+	
 
 
 </mapper>

@@ -30,7 +30,7 @@ window.onload = function(){
     messageWindow.scrollTop = messageWindow.scrollHeight;
     
     //웹소켓 객체 생성 (웹소켓 서버에서 @EndPoint로 선언된 요청명을 통해 생성한다.)
-    webSocket = new WebSocket('ws://192.168.219.121:8081/zipcock/EchoServer.do');
+    webSocket = new WebSocket('ws://192.168.219.141:8081/zipcock/EchoServer.do');
     //webSocket = new WebSocket('ws://192.168.219.119:8081/websocket/EchoServer.do');
     
     //클라이언트가 접속했을때...

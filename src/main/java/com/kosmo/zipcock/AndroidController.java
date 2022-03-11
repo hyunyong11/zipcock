@@ -172,6 +172,32 @@ public class AndroidController {
 		return lists;
 	}
 	
+	@RequestMapping("/android/simList.do")//추가
+	@ResponseBody
+	public ArrayList<MissionDTO> simList(MissionDTO missionDTO) {
+		
+		//System.out.println("심부름 리스트 요청받음");
+
+		ArrayList<MissionDTO> lists = 
+				sqlSession.getMapper(IAndroidDAO.class).simList(missionDTO);
+		System.out.println("리스트="+lists);
+		return lists;
+	}
+	
+	@RequestMapping("/android/HsimList.do")//추가
+	@ResponseBody
+	public ArrayList<MissionDTO> HsimList(MissionDTO missionDTO) {
+		
+		//System.out.println("심부름 리스트 요청받음");
+
+		ArrayList<MissionDTO> lists = 
+				sqlSession.getMapper(IAndroidDAO.class).HsimList(missionDTO);
+		//System.out.println("리스트="+lists);
+		return lists;
+	}
+
+
+	
 	//미션 뷰쪽
 	@RequestMapping("/android/missionViewObject.do")
 	@ResponseBody
@@ -459,8 +485,8 @@ public class AndroidController {
              
              fileMap.put("originalName", originalName);
              fileMap.put("saveFileName", saveFileName);
-            missionDTO.setMission_ofile(originalName);
-            missionDTO.setMission_sfile(saveFileName);
+             missionDTO.setMission_ofile(originalName);
+             missionDTO.setMission_sfile(saveFileName);
              
              resultList.add(fileMap);
              
@@ -476,4 +502,56 @@ public class AndroidController {
      //model.addAttribute("resultList", resultList);    
      return resultList;
     }
+    @RequestMapping("/android/helperLocation.do")
+	@ResponseBody
+	public Map<String, Object> helperLocation(MissionDTO missionDTO) {
+      
+		Map<String, Object> returnMap = new HashMap<String, Object>();      
+		MissionDTO lists = 
+				sqlSession.getMapper(IAndroidDAO.class).helperLocation(missionDTO);
+		
+
+		returnMap.put("missionList", lists);
+		returnMap.put("isLogin", 1);
+		
+		System.out.println("오브젝트:"+lists);
+		return returnMap;
+	}
+	
+	@RequestMapping("/android/insertLocation.do")
+	@ResponseBody
+	public int insertLocation(MissionDTO missionDTO) {
+		int rst = 0;
+		rst = sqlSession.getMapper(IAndroidDAO.class).insertLocation(missionDTO);
+		return rst;
+	}
+	
+	@RequestMapping("/android/complete.do")
+	@ResponseBody
+	public int complete(MissionDTO missionDTO) {  
+		int rst = 0;
+		rst = sqlSession.getMapper(IAndroidDAO.class).complete(missionDTO);
+		return rst;
+	}
+	
+	@RequestMapping("/android/Hcomplete.do")
+	@ResponseBody
+	public int Hcomplete(MissionDTO missionDTO) {  
+		int rst = 0;
+		rst = sqlSession.getMapper(IAndroidDAO.class).Hcomplete(missionDTO);
+		return rst;
+	}
+	
+	@RequestMapping("/android/matching.do")
+	@ResponseBody
+	public int matching(MissionDTO missionDTO) {  
+		int rst = 0;
+		rst = sqlSession.getMapper(IAndroidDAO.class).matching(missionDTO);
+		return rst;
+	}
+	
+
+    
+    
 }
+

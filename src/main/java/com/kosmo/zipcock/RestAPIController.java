@@ -63,7 +63,7 @@ public class RestAPIController {
 			sqlSession.getMapper(IBoardDAO.class).getTotalCount(parameterDTO);
 		
 		//한페이지에 출력할 게시물의 갯수
-		int pageSize = 2;
+		int pageSize = 5;
 		int blockPage = 1; //페이지 번호를 출력하지 않으므로 여기서는 필요없음
 		//페이지수 계산
 		int totalPage = (int)Math.ceil((double)totalRecordCount/pageSize);

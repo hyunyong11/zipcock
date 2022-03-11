@@ -107,7 +107,7 @@ function id_check_person(form){
 	<!-- header -->
 	<div id="header">
 		<h1 class="join_title">
-			<label for="id">회원가입</label>
+			<label for="id"><strong>회원가입</strong></label>
 		</h1>
 	</div>
 

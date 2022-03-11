@@ -65,7 +65,7 @@
       <c:when test="${sessionScope.siteUserInfo.member_status eq 1 }">
          <a href="review.do" class="item">
          <div class="icon">Ⅲ</div>
-         <div class="text">리뷰쓰기<span class="circle"></span></div>
+         <div class="text">내가쓴리뷰관리<span class="circle"></span></div>
          <div class="right"> > </div>
       </a>
       </c:when>

@@ -16,6 +16,16 @@ public interface IAndroidDAO {
 	
 	public MissionDTO delstart(MissionDTO missionDTO);
 	
+	public MissionDTO helperLocation(MissionDTO missionDTO);
+	
+	public int insertLocation(MissionDTO missionDTO);
+	
+	public int complete(MissionDTO missionDTO);
+	
+	public int Hcomplete(MissionDTO missionDTO);
+	
+	public int matching(MissionDTO missionDTO);
+	
 	public MBoardDTO mboardView(MBoardDTO mboardDTO);
 	
 	public ArrayList<MBoardDTO> mboardList();
@@ -49,4 +59,11 @@ public interface IAndroidDAO {
 	public MemberDTO findPass(MemberDTO memberDTO);
 	
 	public void missionRegist(MissionDTO missionDTO);	
+	
+	public ArrayList<MissionDTO> chatList(MissionDTO missionDTO);
+	
+    public ArrayList<MissionDTO> simList(MissionDTO missionDTO);
+    
+    public ArrayList<MissionDTO> HsimList(MissionDTO missionDTO);
+
 }

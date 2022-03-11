@@ -74,7 +74,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">심부름 관리:</h6>
                         <a class="collapse-item" href="missiontables.jsp?flag=1">심부름 매칭중</a>
-                        <a class="collapse-item" href="missiontables.jsp?flag=2">심부름 진행중</a>
+                        <a class="collapse-item" href="missiontables.jsp?flag=2">심부름 매칭완료</a>
                         <a class="collapse-item" href="missiontables.jsp?flag=3">심부름 완료</a>
                     </div>
                 </div>

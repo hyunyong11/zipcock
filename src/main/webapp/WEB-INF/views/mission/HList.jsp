@@ -94,6 +94,10 @@ function notify(num){
 			속성이 있는지 확인함. 단, 영역에 저장된 속성명이 유일할 결우
 			내장 객체는 생략할 수 있으므로 필수사항으 아니다.
 		 -->
+		<button class="btn btn-outline-success"
+			onclick="location.href='zipcock.do';">
+			메인으로 가기
+		</button>
 		<c:choose>
 			<c:when test="${ empty sessionScope.siteUserInfo }">
 				<!-- 로그인되지 않았을 때.. -->
@@ -184,14 +188,6 @@ function notify(num){
 				      <div class="accordion-body"  style="position: relative;">
 				        <div align="right">
 						<img src="/zipcock/resources/img/profile.png" style="width:20px"> ${ row.mission_id } &nbsp;&nbsp;&nbsp;&nbsp;
-							<%-- ${row.member_age }
-							member_age --%>
-							<%-- <c:if test="${ member_sex eq 1 }">
-								여성
-							</c:if>
-							<c:otherwise>
-								남성
-							</c:otherwise> --%>
 							
 							<!--  수정,삭제버튼 -->
 							<!-- 작성자 본인에게만 수정/삭제 버튼 보임 처리 -->
@@ -224,7 +220,7 @@ function notify(num){
 						</div>
 						${row.mission_content } <br>
 						위치: 도착지> ${ row.mission_end } <br>
-						<c:if test="${ not empty row.mission_waypoint }">
+						<c:if test="${ not empty row.mission_waypoint}">
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							경유지> ${ row.mission_waypoint } <br>
 						</c:if>

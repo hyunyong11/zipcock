@@ -93,7 +93,7 @@
                 <c:choose>
                 <c:when test="${ row.mission_status eq 3 }">
                 <button class="button" style="background-color: #ffc654; font-weight: bold" >
-                    <a href="write.do?mission_num=${row.mission_num }" >
+                    <a href="write.do?mission_num=${row.mission_num }&mission_hid=${ row.mission_Hid }" >
                     리뷰작성하기</a>
                 </button>
                 </c:when>

@@ -14,6 +14,7 @@ public class ParameterDTO {
 	private Date review_date;
 	private String mission_num;
 	private String mission_category;
+	private String review_hid;
 	private int start; 	
 	private int end;
 	 

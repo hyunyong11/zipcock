@@ -31,6 +31,7 @@ public interface MybatisDAOImpl {
 	public int write(@Param("_review_id") String review_id, 
             @Param("_mission_num") String mission_num,
             @Param("_review_point") String review_point,
+            @Param("_review_hid") String review_hid,
             @Param("_review_content") String review_content);
 	
 	//기존 게시물의 내용을 읽어오기 위한 메서드

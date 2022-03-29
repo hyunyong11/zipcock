@@ -20,7 +20,7 @@
 	<!-- ### 방명록 1차 버전에서 사용 ### -->
 	<!-- 게시물의 갯수를 카운트 한 후 정수타입으로 반환한다.  -->
     <select id="getTotalCount" resultType="int">
-        SELECT COUNT(*) FROM review WHERE review_id=#{member_id}
+        SELECT COUNT(*) FROM review
     </select>
 	
 	<!-- 목록에 출력할 게시물을 select한 후 결과는 ArrayList<MyBoardDTO> 
@@ -32,7 +32,7 @@
 	<select id="listPage" resultType="mybatis.MyBoardDTO">			
 		SELECT * FROM (
 		    SELECT Tb.*, rownum rNum FROM (
-		        SELECT * FROM review WHERE review_id=#{param1} ORDER BY review_num DESC
+		        SELECT * FROM review ORDER BY review_num DESC
 		    ) Tb
 		)
 		WHERE rNum BETWEEN #{param2} AND #{param3}
@@ -43,9 +43,9 @@
 	일련번호는 기존과 동일하게 시퀀스를 통해 입력한다. 
 	-->
 	<insert id="write">
-		INSERT INTO review (review_num, review_id, review_point, review_content ,mission_num)
+		INSERT INTO review (review_num, review_id, review_point, review_content ,mission_num, review_hid)
 		VALUES
-		( review_seq.nextval, #{_review_id}, #{_review_point}, #{_review_content}, #{_mission_num} ) 
+		( review_seq.nextval, #{_review_id}, #{_review_point}, #{_review_content}, #{_mission_num}, #{_review_hid}) 
 	</insert>
 	
 	<!--  

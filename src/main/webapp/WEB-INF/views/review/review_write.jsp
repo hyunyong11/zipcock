@@ -61,7 +61,7 @@ function writeValidate(f)
 }
 <%
 String mission_num = request.getParameter("mission_num");
-String mission_category = request.getParameter("row.mission_category");
+String review_hid = request.getParameter("mission_hid");
 %>
 </script>
 <!-- JSTL의 url태그는 컨텍스트루트 경로를 자동으로 포함시켜 준다. -->
@@ -70,7 +70,7 @@ String mission_category = request.getParameter("row.mission_category");
     <div class="col-xs-12 col-sm-12 col-md-12 wow zoomIn animated headding" data-wow-delay=".1s">
     <section class="cusMainFaqList">
     <br /><br /><br /><br /><br /><br /><br />
-         
+        
          <h3 class="subTitle4C">&nbsp;&nbsp;&nbsp;&nbsp;</h3>
 	<div class="container">
 		<h2>리뷰게시판</h2>
@@ -89,6 +89,7 @@ String mission_category = request.getParameter("row.mission_category");
 		
 	<table class="table table-bordered">
 	<input type="hidden" class="form-control" name="mission_num"  value="<%=mission_num %>" />
+	
 	<colgroup>
 		<col width="20%"/>
 		<col width="10%"/>
@@ -119,13 +120,11 @@ String mission_category = request.getParameter("row.mission_category");
                 </span>
             </td>
 			<tr>
-			<%-- <th class="text-center" 
-				style="vertical-align:middle;">카테고리</th>
+			<th class="text-center" 
+				style="vertical-align:middle;">셔틀콕아이디</th>
 			<td>
-				<input type="text" class="form-control" 
-					style="width:100px;" name="mission_category" 
-					value="<%=mission_category %>" />
-			</td> --%>
+				<input type="text" class="form-control" name="review_hid"  value="<%=review_hid %>" readonly/>
+			</td>
 			</tr>
 		<tr>
 			<th class="text-center" 

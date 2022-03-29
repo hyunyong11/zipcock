@@ -12,6 +12,7 @@ public class MyBoardDTO {
 	private int review_point;
 	private Date review_date;
 	private String mission_category;
+	private String review_hid;
 	//getter/setter만 생성
 	//가상번호 부여를 위한 멤버변수 추가
 	private int virtualNum;

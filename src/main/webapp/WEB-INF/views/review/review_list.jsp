@@ -122,6 +122,7 @@ function deleteRow(review_num){
 				<th width="*" style="text-align: center" >리뷰내용</th>
 				<th width="10%" style="text-align: center"> 별점</th>
 				<th width="15%" style="text-align: center">작성자</th>
+				<th width="15%" style="text-align: center">헬퍼아이디</th>
 				<th width="20%" style="text-align: center">작성일</th> 
 		<c:choose>
 		<c:when test="${empty lists }">
@@ -133,13 +134,13 @@ function deleteRow(review_num){
 		</c:when>
 		<c:otherwise>
 		<c:forEach items="${lists }" var="row" varStatus="loop">
-		<c:if test="${sessionScope.siteUserInfo.member_id eq row.review_id}">
 		<!-- 리스트반복시작 -->
 			<tr>
 				<td class="text-center" style="background-color: lightgray">${row.virtualNum }</td>
 				<td class="text-center" >${row.review_content  }</td>
 				<td class="text-center">${row.review_point  }</td>
 				<td class="text-cemter"><img src="" class="media-object" style="width:70px">${row.review_id }</td>
+				<td class="text-center">${row.review_hid }</td>
 				<td class="text-center">${row.review_date }&nbsp;&nbsp;<br>
 				<!--  수정,삭제버튼 -->
 				<c:if test="${sessionScope.siteUserInfo.member_id eq row.review_id}">
@@ -154,7 +155,6 @@ function deleteRow(review_num){
 			</tr>
 		<!-- 작성자 본인에게만 수정/삭제 버튼 보임 처리 -->					 
 		<!-- 리스트반복끝 -->
-		</c:if>
 		</c:forEach>
 		</c:otherwise>
 		</c:choose>

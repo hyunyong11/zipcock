@@ -35,7 +35,7 @@ public class MybatisController {
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
 		System.out.println("Mybatis 사용준비 끝");
-	}
+	} 
 
 	/*
 	방명록 리스트 Ver01
@@ -67,6 +67,7 @@ public class MybatisController {
         //Map<String, Object> paramMap = model.asMap();
         MyBoardDTO parameterDTO = new MyBoardDTO();
         String review_id = ((MemberDTO)session.getAttribute("siteUserInfo")).getMember_id();
+       
         int totalRecordCount =
             sqlSession.getMapper(MybatisDAOImpl.class).getTotalCount(review_id);
         
@@ -218,8 +219,11 @@ public class MybatisController {
                 req.getParameter("review_id"),
                 req.getParameter("mission_num"),
                 req.getParameter("review_point"),
+                req.getParameter("review_hid"),
                 req.getParameter("review_content"));
+				
             System.out.println("입력결과:"+ result);
+         
 		//쓰기 처리를 완료한 후 리스트로 이동
 		return "redirect:review.do";
 	}
